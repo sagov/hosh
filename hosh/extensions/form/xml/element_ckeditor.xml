@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document date="2016-10-05 18:13:07">
+  <type>hosh_form</type>
+  <author>root</author>
+  <data>
+    <id>373</id>
+    <idkind>157</idkind>
+    <bpublic>1</bpublic>
+    <options></options>
+    <idclone></idclone>
+    <idstate>3</idstate>
+    <dtinsert>2016-10-05 09:35:42</dtinsert>
+    <dtupdate>2016-10-05 09:35:42</dtupdate>
+    <sname>element_ckeditor</sname>
+    <scaption>Ckeditor Element</scaption>
+    <bsystem>0</bsystem>
+    <snamestate>NORMAL</snamestate>
+    <sstate>Нормальный</sstate>
+    <snamekind>ELEMENT</snamekind>
+  </data>
+  <elements>
+    <item>
+      <id>0</id>
+      <idowner>373</idowner>
+      <name>customconfig</name>
+      <type>select</type>
+      <bpublic>1</bpublic>
+      <norder></norder>
+      <idstate>3</idstate>
+      <snamestate>NORMAL</snamestate>
+      <sstate>Нормальный</sstate>
+      <options>
+        <label>Custom config file</label>
+      </options>
+      <displaygrouptype>settings</displaygrouptype>
+      <addmultioptions>
+        <helper>Element_Ckeditor_GetListConfigFiles</helper>
+      </addmultioptions>
+    </item>
+    <item>
+      <id>1</id>
+      <idowner>373</idowner>
+      <name>uicolor</name>
+      <type>text</type>
+      <bpublic>1</bpublic>
+      <norder></norder>
+      <idstate>3</idstate>
+      <snamestate>NORMAL</snamestate>
+      <sstate>Нормальный</sstate>
+      <options>
+        <label>Color</label>
+      </options>
+      <displaygrouptype>settings</displaygrouptype>
+    </item>
+  </elements>
+</document>

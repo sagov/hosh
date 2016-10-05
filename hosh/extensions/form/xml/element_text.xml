@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document date="2016-10-05 19:13:43">
+  <type>hosh_form</type>
+  <author>root</author>
+  <data>
+    <id>102</id>
+    <idkind>157</idkind>
+    <bpublic>0</bpublic>
+    <options></options>
+    <idclone></idclone>
+    <idstate>3</idstate>
+    <dtinsert>2016-04-02 17:06:13</dtinsert>
+    <dtupdate>2016-09-15 17:52:14</dtupdate>
+    <sname>element_text</sname>
+    <scaption>Element Text</scaption>
+    <bsystem>1</bsystem>
+    <snamestate>NORMAL</snamestate>
+    <sstate>Нормальный</sstate>
+    <snamekind>ELEMENT</snamekind>
+  </data>
+  <elements>
+    <item>
+      <id>0</id>
+      <idowner>102</idowner>
+      <name>options_placeholder</name>
+      <type>text</type>
+      <bpublic>1</bpublic>
+      <norder></norder>
+      <idstate>3</idstate>
+      <snamestate>NORMAL</snamestate>
+      <sstate>Нормальный</sstate>
+      <options>
+        <label>HOSH_FORM102_ATTR_PLACEHOLDER</label>
+      </options>
+      <displaygrouptype>settings</displaygrouptype>
+    </item>
+    <item>
+      <id>1</id>
+      <idowner>102</idowner>
+      <name>options_readonly</name>
+      <type>checkbox</type>
+      <bpublic>1</bpublic>
+      <norder></norder>
+      <idstate>3</idstate>
+      <snamestate>NORMAL</snamestate>
+      <sstate>Нормальный</sstate>
+      <options>
+        <label>Readonly</label>
+      </options>
+      <displaygrouptype>settings</displaygrouptype>
+    </item>
+  </elements>
+</document>

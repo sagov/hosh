@@ -1,0 +1,99 @@
+<?php
+$config = Hosh_Config::getInstance();
+$view = Hosh_View::getInstance();
+$h_transl = Hosh_Translate::getInstance();
+$translate = $h_transl->getTranslate();
+$adapter_transl = $translate->getAdapter();
+$h_transl->load('manager/layout');
+
+$view->Font_Fontawesome();
+$view->AddScript('/manager/layouts/default/assets/js/script.js');
+$options = array();
+$options['text'] = array(
+        'list' => $translate->_('HOSH_MANAGER_LIST')
+);
+$view->AddScriptDeclaration(
+        ';(function($){$.HoshManagerLayouts_Default("body",' .
+                 Zend_Json::encode($options) . ')})(jQuery);');
+$view->AddStyleSheet('/manager/layouts/default/assets/css/stylesheet.css', 
+        array(
+                'placement' => 'prepend'
+        ));
+$view->Bootstrap(false)
+    ->remove()
+    ->addFile('prepend');
+$view->JQuery(false)
+    ->remove()
+    ->addFile('prepend');
+$view->AddStyleSheet('https://fonts.googleapis.com/css?family=Russo+One');
+$view->AddStyleSheet('https://fonts.googleapis.com/css?family=Roboto+Condensed:400,700,400italic&subset=latin,cyrillic');
+$alert = $view->Hosh_Alert();
+?>
+<?php echo $this->doctype(); ?>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<?php echo $this->headMeta()?>
+<?php echo $this->headTitle()?>
+<?php echo $this->headLink()?>
+<?php echo $this->headScript()?>
+</head>
+<body>
+	<div class="header">
+		<div class="header-wrap">
+			<div class="container">
+				<div class="row">
+					<div class="col-xs-6">
+						<div class="logo">
+							<a
+								href="<?php echo $this->Url(array('controller'=>'cabinet','action'=>'index'))?>">Hosh</a>
+						</div>
+					</div>
+					<div class="col-xs-6">
+						<div class="moduser pull-right"><?php echo $this->ModLanguage();?><?php echo $this->ModUser();?></div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="content">
+		<div class="container">
+	<?php if (isset($alert)):?>
+	<div class="alert-level">
+	<?php echo $alert;?>
+	</div>	
+	<?php endif;?>
+	<div class="row">	
+	<?php if (isset($this->layout()->leftcontent)): ?>
+	<div class="col-md-3 hidden-xs hidden-sm content-left">
+	<?php echo $this->layout()->leftcontent;?>	
+	</div>	
+	<?php endif;?>	
+	<div class="<?php echo (isset($this->layout()->leftcontent)) ?  'col-md-9'  :  'col-xs-12' ?>">
+	<?php echo $this->layout()->content; ?>
+	</div>
+			</div>
+		</div>
+	</div>
+	<div class="footer">
+		<div class="container">
+			<div class="row">
+				<div class="col-sm-6 col-sm-push-6">
+					<div class="footer-menu">
+						<ul>
+							<li><a href="#"><?php echo $adapter_transl->_('HOSH_MANAGER_SHOP');?></a></li>
+							<li><a href="#"><?php echo $adapter_transl->_('HOSH_MANAGER_DOC');?></a></li>
+						</ul>
+					</div>
+				</div>
+				<div class="col-sm-6 col-sm-pull-6">
+					<span class="logo"><a
+						href="<?php echo $this->Url(array('controller'=>'cabinet','action'=>'index'))?>">Hosh</a> &copy; <?php echo date('Y');?>, v <?php echo $config->get('version');?>
+						</span>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
