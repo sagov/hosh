@@ -1,0 +1,72 @@
+.wrap-hoshform_system_formelement .bghead-level {
+  background: #f0f0f0;
+  padding: 10px 15px;
+}
+.wrap-hoshform_system_formelement .bghead-level label {
+  font-size: 0.8em;
+  font-weight: 600;
+}
+.wrap-hoshform_system_formelement .menu-nav {
+  border-bottom: 1px solid #ddd;
+}
+.wrap-hoshform_system_formelement .menu-nav a {
+  color: #000000;
+}
+.wrap-hoshform_system_formelement .menu-nav span {
+  margin-left: 7px;
+}
+.wrap-hoshform_system_formelement .menu-nav .nav-tabs {
+  border-width: 0px;
+}
+.wrap-hoshform_system_formelement .menu-nav .nav-tabs > li > a,
+.wrap-hoshform_system_formelement .menu-nav .nav-tabs > li.active > a,
+.wrap-hoshform_system_formelement .menu-nav .nav-tabs > li.active > a:focus,
+.wrap-hoshform_system_formelement .menu-nav .nav-tabs > li.active > a:hover {
+  border-width: 0px;
+  background: transparent;
+  border-radius: 0px;
+  padding: 10px;
+}
+.wrap-hoshform_system_formelement .menu-nav .nav-tabs > li {
+  border-bottom: 3px solid transparent;
+}
+.wrap-hoshform_system_formelement .menu-nav .nav-tabs > li.active {
+  border-bottom: 3px solid #000000;
+}
+.wrap-hoshform_system_formelement .menu-nav .action-nav {
+  display: none;
+}
+.wrap-hoshform_system_formelement .top-level {
+  margin-bottom: 15px;
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 15px;
+}
+.wrap-hoshform_system_formelement .top-level h3 {
+  margin: 0px;
+  padding: 0px;
+  font-size: 1.2em;
+  font-weight: 600;
+  margin-top: 10px;
+}
+@media (max-width: 768px) {
+  .wrap-hoshform_system_formelement .top-level h3 {
+    margin-top: 0px;
+  }
+}
+.wrap-hoshform_system_formelement .top-level .action-btn {
+  text-align: right;
+}
+@media (max-width: 768px) {
+  .wrap-hoshform_system_formelement .top-level .action-btn {
+    text-align: left;
+    margin-top: 10px;
+  }
+}
+.wrap-hoshform_system_formelement .footer-level {
+  margin-top: 15px;
+  border-top: 1px solid #ddd;
+  padding-top: 15px;
+}
+.wrap-hoshform_system_formelement .footer-level .action-btn {
+  text-align: right;
+}

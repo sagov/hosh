@@ -1,0 +1,84 @@
+.leftmenu {
+  background: #f5f5f5;
+  padding: 5px 0px;
+  font-size: 0.9em;
+  border-left: 3px solid #c6c6c6;
+}
+.leftmenu ul.leftmenu-list {
+  padding: 0px;
+  margin: 0px;
+}
+.leftmenu ul.leftmenu-list li {
+  list-style: none;
+  border-top: 1px solid #f0f0f0;
+}
+.leftmenu ul.leftmenu-list li a,
+.leftmenu ul.leftmenu-list li a:hover {
+  display: block;
+  padding: 5px 5px;
+  text-decoration: none;
+  color: #000;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  padding: 10px 5px;
+}
+.leftmenu ul.leftmenu-list li .dropdown {
+  text-align: center;
+}
+.leftmenu ul.leftmenu-list li .dropdown .dropdown-toggle {
+  position: relative;
+  top: 3px;
+}
+.leftmenu ul.leftmenu-list li .dropdown li a {
+  padding: 3px 20px;
+}
+.leftmenu ul.leftmenu-list li .sm.row {
+  margin-right: -8px;
+  margin-left: -8px;
+}
+.leftmenu ul.leftmenu-list li .sm.row .colsm {
+  padding-left: 8px;
+  padding-right: 8px;
+}
+.leftmenu ul.leftmenu-list li.active,
+.leftmenu ul.leftmenu-list li:hover {
+  background: white;
+}
+.leftmenu ul.leftmenu-list li:first-child {
+  border-top: none;
+}
+.leftmenu .pagination {
+  padding: 10px;
+  border-top: 1px solid #f0f0f0;
+  display: block;
+  margin: 0px;
+  border-radius: 0px;
+}
+.left-controllers .left-controller-content {
+  min-width: 700px;
+  padding: 15px;
+  max-height: 350px;
+  overflow: auto;
+}
+.left-controllers .left-controller-content ul {
+  list-style: none;
+  margin: 0px;
+  padding: 0px;
+}
+.left-controllers .left-controller-content ul li {
+  margin-top: 10px;
+}
+.left-controllers .left-controller-content ul li a {
+  display: block;
+  color: #000;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+.left-controllers .left-controller-content ul li a i {
+  margin-right: 10px;
+}
+.left-controllers .left-controller-content ul li:first-child {
+  margin-top: 0px;
+}

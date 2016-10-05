@@ -1,0 +1,65 @@
+.dmuploader
+{
+	border: 2px dotted #d6d6d6;
+		
+	text-align: center;
+	vertical-align: middle;
+	padding: 15px 0px;	
+	cursor: default;
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+}
+.dmuploader div.text_dragdrop{
+	font-size: 2em
+}
+.dmuploader div.or {	
+	font-weight: bold;	
+	padding: 10px;
+	color:#d6d6d6
+}
+
+.dmuploader div.browser label {
+	
+	cursor: pointer;	
+	position: relative;
+	overflow: hidden;
+	display: block;
+	width: 300px;
+	margin: 0px auto 0px auto;
+
+}
+
+.dmuploader div.browser span {
+	cursor: pointer;
+}
+
+
+.dmuploader div.browser input {
+	position: absolute;
+	top: 0;
+	right: 0;
+	margin: 0;
+	border: solid transparent;
+	border-width: 0 0 100px 200px;
+	opacity: .0;
+	filter: alpha(opacity= 0);
+	-o-transform: translate(250px,-50px) scale(1);
+	-moz-transform: translate(-300px,0) scale(4);
+	direction: ltr;
+	cursor: pointer;
+}
+
+.dmuploader .uploadfiles {
+	padding:0px 15px
+}
+	.dmuploader .uploadfiles > div{
+	margin-top:10px
+	}
+
+.dmuploader .debug{
+	margin-top:15px;padding:0px 15px;font-size:0.85em;max-height:150px;overflow:auto;font-color:#d6d6d6;text-align:left
+}

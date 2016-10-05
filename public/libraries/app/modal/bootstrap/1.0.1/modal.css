@@ -1,0 +1,17 @@
+@CHARSET "UTF-8";
+
+.modal-dialog .modal-body{
+	min-height:80px
+}
+
+.modal-dialog .modal-body > .modal-loading{
+	position:absolute;text-align:center;width:100%;top:48%
+}
+	.modal-dialog .modal-body .modal-loading > .modal-loading-content{
+		margin:0px auto;font-size:140%;
+	}
+	
+.modal-dialog .modal-body .modal-iframe{
+width:100%;border:none;padding:0px;margin:0px;
+}
+		
