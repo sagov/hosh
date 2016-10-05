@@ -31,7 +31,7 @@ class HoshConfiguration
 							'path_public'=>'',
 	                        'path_libraries'=>'',	                        	        
 	                        // url paths
-	                        'url_path'=> '/content/ccc/manager.php',
+	                        'url_path'=> '/manager.php',
 	                        'url_public'=>'/public',	                        
 	                        
 	        
