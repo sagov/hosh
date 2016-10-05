@@ -44,10 +44,10 @@ class HoshManager
 	
 	protected $_route;
 	
-	public function __construct()
+	public function __construct($config = array())
 	{
 	    require_once dirName(__FILE__).'/../factory.php';
-	    HoshFactory::run();
+	    HoshFactory::run($config);
 	}
 		
 	public function run(){	   

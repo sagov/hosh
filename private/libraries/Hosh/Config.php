@@ -20,6 +20,8 @@ require_once 'Zend/Config.php';
  */
 class Hosh_Config extends Zend_Config
 {
+    
+    const SNAME = 'hosh';
 
     /**
      * @var unknown
@@ -30,11 +32,18 @@ class Hosh_Config extends Zend_Config
      *
      * @return Hosh_Config
      */
-    public static function getInstance ()
+    public static function getInstance ($config = array())
     {
         if (null === self::$_instance) {
-            self::$_instance = new self(array(), true);
+            self::$_instance = new self(array(self::SNAME=>$config), true);
         }
         return self::$_instance;
+    }
+    
+    public function get($name, $default = null)
+    {                
+        $data = parent::get(self::SNAME,array());
+        $result = $data->get($name, $default);        
+        return $result;
     }
 }

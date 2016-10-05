@@ -35,8 +35,9 @@ class Hosh_Factory
         require_once 'Zend/Loader/Autoloader.php';
         $loader = Zend_Loader_Autoloader::getInstance();
         $loader->registerNamespace('Hosh_');
-        $zconfig = new Zend_Config($config);
-        $hosh_config = Hosh_Config::getInstance();
+        
+        $zconfig = new Zend_Config(array(),true);
+        $hosh_config = Hosh_Config::getInstance($config);
         $hosh_config->merge($zconfig);
         
         return $this;

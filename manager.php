@@ -2,7 +2,9 @@
 
 require_once dirName(__FILE__).'/private/manager/manager.php';
 
-$hoshmanager = new HoshManager();
+$config = array('url_path' => '/manager.php');
+
+$hoshmanager = new HoshManager($config);
 if (isset($_GET['controller'])) {
     $hoshmanager->setController($_GET['controller']);;
 }
