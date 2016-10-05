@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<extension type="hosh_menu" version="1.0" >
+	<name>HM_SYSTEM_MENU</name>
+	<author></author>
+	<copyright></copyright>
+	<authorEmail></authorEmail>
+	<authorUrl></authorUrl>
+	<license></license>
+	<version>1.0</version>
+	<creationDate></creationDate>
+	<description></description>
+	<acl>HOSH_SYSTEM_MENU</acl>
+	<icon>fa fa-object-group</icon>
+	<controller>ref_class</controller>
+	<action>view</action>
+	<items>
+		<item bmain="1">
+			<scaption>HM_FORMS</scaption>
+			<controller>ref_form</controller>
+			<action>view</action>
+			<acl>HOSH_SYSTEM_FORM_REF</acl>	
+			<icon>fa fa-object-group</icon>			
+		</item>
+		<item bmain="1">
+			<scaption>HM_TYPES_FORM</scaption>
+			<controller>ref_form_kind</controller>
+			<action>view</action>
+			<acl>HOSH_SYSTEM_FORM_KIND_REF</acl>	
+			<icon>fa fa-object-group</icon>			
+		</item>
+		<item bmain="1">
+			<scaption>HM_EXTENSIONS</scaption>
+			<controller>ref_extension</controller>
+			<action>view</action>
+			<acl>HOSH_SYSTEM_EXTENSION_REF</acl>	
+			<icon>fa fa-thumb-tack</icon>	
+		</item>
+		<item bmain="1">
+			<scaption>HM_LANGUAGES</scaption>
+			<controller>ref_language</controller>
+			<action>view</action>
+			<acl>HOSH_SYSTEM_LANGUAGE_REF</acl>	
+			<icon>fa fa-language</icon>	
+		</item>
+		<item bmain="1">
+			<scaption>HM_USERS</scaption>
+			<controller>ref_user</controller>
+			<action>view</action>
+			<acl>HOSH_SYSTEM_USER_REF</acl>	
+			<icon>fa fa-user</icon>	
+		</item>
+		<item bmain="1">
+			<scaption>HM_USER_ROLES</scaption>
+			<controller>ref_acl_role</controller>
+			<action>view</action>
+			<acl>HOSH_SYSTEM_ACL_ROLE_REF</acl>	
+			<icon>fa fa-user-secret</icon>	
+		</item>	
+		<item bmain="1">
+			<scaption>HM_ACL_VALUES</scaption>
+			<controller>ref_acl_value</controller>
+			<action>view</action>
+			<acl>HOSH_SYSTEM_ACL_REF</acl>	
+			<icon>fa fa-unlock-alt</icon>	
+		</item>	
+		<item bmain="1">
+			<scaption>HM_CLASSES</scaption>
+			<controller>ref_class</controller>
+			<action>view</action>
+			<acl>HOSH_SYSTEM_CLASS_REF</acl>	
+			<icon>fa fa-book</icon>	
+		</item>	
+		<item bmain="1">
+			<scaption>HM_STATES</scaption>
+			<controller>ref_state</controller>
+			<action>view</action>
+			<acl>HOSH_SYSTEM_STATE_REF</acl>	
+			<icon>fa fa-tag</icon>	
+		</item>
+		<item bmain="1">
+			<scaption>HM_CATEGORIES</scaption>
+			<controller>ref_category</controller>
+			<action>view</action>
+			<acl>HOSH_SYSTEM_CATEGORY_REF</acl>	
+			<icon>fa fa-sitemap</icon>	
+		</item>
+		<item bmain="1">
+			<scaption>HM_CATEGORY_TYPES</scaption>
+			<controller>ref_category_kind</controller>
+			<action>view</action>
+			<acl>HOSH_SYSTEM_CATEGORY_TYPE_REF</acl>	
+			<icon>fa fa-sitemap</icon>	
+		</item>		
+	</items>
+</extension>

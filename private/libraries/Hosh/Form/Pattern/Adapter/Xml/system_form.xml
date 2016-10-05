@@ -1,0 +1,650 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form>
+  <data>
+    <id>9</id>
+    <idkind>155</idkind>
+    <bpublic>1</bpublic>
+    <idstate>3</idstate>
+    <dtinsert>2016-04-02 17:06:13</dtinsert>
+    <dtupdate>2016-04-02 17:50:25</dtupdate>
+    <sname>system_form</sname>
+    <scaption>Создание, редактирование формы</scaption>
+    <snamestate>NORMAL</snamestate>
+    <sstate>Обычный</sstate>
+    <snamekind>NORMAL</snamekind>
+    <options>
+      <name>hoshform</name>
+      <method>post</method>
+    </options>
+    <data>
+      <helper>Db_GetData</helper>
+    </data>
+    <insert>
+      <helper>Db_Update</helper>
+    </insert>
+    <update>
+      <helper>Db_Update</helper>
+    </update>
+    <acl>
+      <helper>Hosh_Acl</helper>
+      <bauth>1</bauth>
+      <view>
+        <value>HOSH_SYSTEM_FORM_REF</value>
+      </view>
+      <insert>
+        <value>HOSH_SYSTEM_FORM_ADD</value>
+      </insert>
+      <update>
+        <value>HOSH_SYSTEM_FORM_EDIT</value>
+      </update>
+    </acl>
+    <request>
+      <helper>Hosh_Redirect</helper>
+      <insert>
+        <url>?controller=ref_form&amp;action=view&amp;id=:id</url>
+      </insert>
+    </request>
+    <translate>
+      <helper>Hosh_Translate</helper>
+      <value>system/_,system/form</value>
+    </translate>
+    <prepend>
+      <helper>Prepend</helper>
+    </prepend>
+    <append>
+      <helper>Append</helper>
+    </append>
+    <layout>
+      <helper>Hosh_Layout</helper>
+      <insert>
+        <name>default/new</name>
+      </insert>
+      <update>
+        <name>default/normal</name>
+      </update>
+    </layout>
+    <displaygroup>
+      <items>
+        <item>
+          <label>SYS_FORM_GROUP_MAIN</label>
+          <norder>10</norder>
+        </item>
+        <item>
+          <label>SYS_FORM_DATA</label>
+          <norder>20</norder>
+        </item>
+        <item>
+          <label>SYS_FORM_SETTINGS</label>
+          <norder>30</norder>
+        </item>
+        <item>
+          <label>SYS_FORM_ACL</label>
+          <norder>40</norder>
+        </item>
+        <item>
+          <label>CSS</label>
+          <norder>50</norder>
+        </item>
+        <item>
+          <label>JavaScript</label>
+          <norder>60</norder>
+        </item>
+        <item>
+          <label>SYS_FORM_DECORATOR</label>
+          <norder>70</norder>
+        </item>
+      </items>
+    </displaygroup>
+  </data>
+  <elements>
+    <item>
+      <id>10</id>
+      <idowner>9</idowner>
+      <name>id</name>
+      <type>value</type>
+      <bpublic>1</bpublic>
+      <norder>10</norder>
+      <idstate>3</idstate>
+      <dtinsert>2016-04-02 17:06:13</dtinsert>
+      <dtupdate>2016-04-02 17:06:13</dtupdate>
+      <snamestate>NORMAL</snamestate>
+      <sstate>Обычный</sstate>
+      <notempty>0</notempty>
+      <displaygroup>1</displaygroup>
+    </item>
+    <item>
+      <id>16</id>
+      <idowner>9</idowner>
+      <name>options_name</name>
+      <type>text</type>
+      <bpublic>1</bpublic>
+      <norder>10</norder>
+      <idstate>3</idstate>
+      <dtinsert>2016-04-02 17:06:13</dtinsert>
+      <dtupdate>2016-04-02 17:06:13</dtupdate>
+      <snamestate>NORMAL</snamestate>
+      <sstate>Обычный</sstate>
+      <notempty>0</notempty>
+      <options>
+        <label>SYS_FORM_NAME</label>
+        <title>SYS_FORM_NAME_TITLE</title>
+        <placeholder>SYS_AUTOMATIC</placeholder>
+      </options>
+      <displaygroup>3</displaygroup>
+    </item>
+    <item>
+      <id>17</id>
+      <idowner>9</idowner>
+      <name>data_helper</name>
+      <type>helper</type>
+      <bpublic>1</bpublic>
+      <norder>10</norder>
+      <idstate>3</idstate>
+      <dtinsert>2016-04-02 17:06:13</dtinsert>
+      <dtupdate>2016-04-02 17:06:13</dtupdate>
+      <snamestate>NORMAL</snamestate>
+      <sstate>Обычный</sstate>
+      <displaygroup>2</displaygroup>
+      <options>
+        <label>SYS_FORM_DATA_HELPER</label>
+      </options>
+      <idcategory>214</idcategory>
+    </item>
+    <item>
+      <id>20</id>
+      <idowner>9</idowner>
+      <name>bpublic</name>
+      <type>select</type>
+      <bpublic>1</bpublic>
+      <norder>10</norder>
+      <idstate>3</idstate>
+      <dtinsert>2016-04-02 17:06:13</dtinsert>
+      <dtupdate>2016-04-02 17:06:13</dtupdate>
+      <snamestate>NORMAL</snamestate>
+      <sstate>Обычный</sstate>
+      <notempty>0</notempty>
+      <options>
+        <label>SYS_FORM_PUBLIC</label>
+      </options>
+      <displaygroup>4</displaygroup>
+      <defaultvalue>1</defaultvalue>
+      <addmultioptions>
+        <helper>Text_Toarray</helper>
+        <value>0=SYS_PUBLIC_NO &#13;
+ 1=SYS_PUBLIC_YES &#13;
+ 2=SYS_FORM_PUBLIC_NO_EDIT</value>
+      </addmultioptions>
+    </item>
+    <item>
+      <id>11</id>
+      <idowner>9</idowner>
+      <name>scaption</name>
+      <type>text</type>
+      <bpublic>1</bpublic>
+      <norder>20</norder>
+      <idstate>3</idstate>
+      <dtinsert>2016-04-02 17:06:13</dtinsert>
+      <dtupdate>2016-04-02 17:06:13</dtupdate>
+      <snamestate>NORMAL</snamestate>
+      <sstate>Обычный</sstate>
+      <notempty>0</notempty>
+      <options>
+        <label>SYS_SCAPTION</label>
+        <title>SYS_FORM_SCAPTION_TITLE</title>
+        <placeholder>SYS_AUTOMATIC</placeholder>
+      </options>
+      <displaygroup>1</displaygroup>
+    </item>
+    <item>
+      <id>19</id>
+      <idowner>9</idowner>
+      <name>insert_helper</name>
+      <type>helper</type>
+      <bpublic>1</bpublic>
+      <norder>20</norder>
+      <idstate>3</idstate>
+      <dtinsert>2016-04-02 17:06:13</dtinsert>
+      <dtupdate>2016-04-02 17:06:13</dtupdate>
+      <snamestate>NORMAL</snamestate>
+      <sstate>Обычный</sstate>
+      <displaygroup>2</displaygroup>
+      <options>
+        <label>SYS_FORM_DATA_HELPER_INSERT</label>
+      </options>
+      <idcategory>217</idcategory>
+    </item>
+    <item>
+      <id>51</id>
+      <idowner>9</idowner>
+      <name>public_helper</name>
+      <type>helper</type>
+      <bpublic>1</bpublic>
+      <norder>20</norder>
+      <idstate>3</idstate>
+      <dtinsert>2016-04-02 17:06:13</dtinsert>
+      <dtupdate>2016-04-02 17:06:13</dtupdate>
+      <snamestate>NORMAL</snamestate>
+      <sstate>Обычный</sstate>
+      <displaygroup>4</displaygroup>
+      <options>
+        <label>SYS_FORM_PUBLIC_HELPER</label>
+      </options>
+      <defaultvalue>Hosh_Public</defaultvalue>
+      <idcategory>222</idcategory>
+    </item>
+    <item>
+      <id>107</id>
+      <idowner>9</idowner>
+      <name>options_id</name>
+      <type>text</type>
+      <bpublic>1</bpublic>
+      <norder>20</norder>
+      <idstate>3</idstate>
+      <dtinsert>2016-04-02 17:06:13</dtinsert>
+      <dtupdate>2016-04-02 17:06:13</dtupdate>
+      <snamestate>NORMAL</snamestate>
+      <sstate>Обычный</sstate>
+      <notempty>0</notempty>
+      <options>
+        <label>SYS_FORM_ID</label>
+      </options>
+      <displaygroup>3</displaygroup>
+    </item>
+    <item>
+      <id>14</id>
+      <idowner>9</idowner>
+      <name>options_method</name>
+      <type>select</type>
+      <bpublic>1</bpublic>
+      <norder>30</norder>
+      <idstate>3</idstate>
+      <dtinsert>2016-04-02 17:06:13</dtinsert>
+      <dtupdate>2016-04-02 17:06:13</dtupdate>
+      <snamestate>NORMAL</snamestate>
+      <sstate>Обычный</sstate>
+      <notempty>0</notempty>
+      <options>
+        <label>SYS_FORM_METHOD</label>
+      </options>
+      <displaygroup>3</displaygroup>
+      <defaultvalue>post</defaultvalue>
+      <addmultioptions>
+        <helper>Text_Toarray</helper>
+        <value>=SYS_DEFAULT &#13;
+ post=POST &#13;
+ get=GET</value>
+      </addmultioptions>
+    </item>
+    <item>
+      <id>18</id>
+      <idowner>9</idowner>
+      <name>update_helper</name>
+      <type>helper</type>
+      <bpublic>1</bpublic>
+      <norder>30</norder>
+      <idstate>3</idstate>
+      <dtinsert>2016-04-02 17:06:13</dtinsert>
+      <dtupdate>2016-04-02 17:06:13</dtupdate>
+      <snamestate>NORMAL</snamestate>
+      <sstate>Обычный</sstate>
+      <displaygroup>2</displaygroup>
+      <options>
+        <label>SYS_FORM_DATA_HELPER_UPDATE</label>
+      </options>
+      <idcategory>217</idcategory>
+    </item>
+    <item>
+      <id>23</id>
+      <idowner>9</idowner>
+      <name>acl_helper</name>
+      <type>helper</type>
+      <bpublic>1</bpublic>
+      <norder>30</norder>
+      <idstate>3</idstate>
+      <dtinsert>2016-04-02 17:06:13</dtinsert>
+      <dtupdate>2016-04-02 17:06:13</dtupdate>
+      <snamestate>NORMAL</snamestate>
+      <sstate>Обычный</sstate>
+      <displaygroup>4</displaygroup>
+      <options>
+        <label>SYS_FORM_ACL_HELPER</label>
+      </options>
+      <defaultvalue>Hosh_Acl</defaultvalue>
+      <idcategory>223</idcategory>
+    </item>
+    <item>
+      <id>15</id>
+      <idowner>9</idowner>
+      <name>options_action</name>
+      <type>text</type>
+      <bpublic>1</bpublic>
+      <norder>40</norder>
+      <idstate>3</idstate>
+      <dtinsert>2016-04-02 17:06:13</dtinsert>
+      <dtupdate>2016-04-02 17:06:13</dtupdate>
+      <snamestate>NORMAL</snamestate>
+      <sstate>Обычный</sstate>
+      <notempty>0</notempty>
+      <options>
+        <label>SYS_FORM_ACTION</label>
+        <placeholder>SYS_FORM_ACTION_PLACEHOLDER</placeholder>
+      </options>
+      <displaygroup>3</displaygroup>
+    </item>
+    <item>
+      <id>29</id>
+      <idowner>9</idowner>
+      <name>request_helper</name>
+      <type>helper</type>
+      <bpublic>1</bpublic>
+      <norder>40</norder>
+      <idstate>3</idstate>
+      <dtinsert>2016-04-02 17:06:13</dtinsert>
+      <dtupdate>2016-04-02 17:06:13</dtupdate>
+      <snamestate>NORMAL</snamestate>
+      <sstate>Обычный</sstate>
+      <displaygroup>2</displaygroup>
+      <options>
+        <label>SYS_FORM_REQUEST_HELPER</label>
+      </options>
+      <idcategory>219</idcategory>
+    </item>
+    <item>
+      <id>13</id>
+      <idowner>9</idowner>
+      <name>options_enctype</name>
+      <type>select</type>
+      <bpublic>1</bpublic>
+      <norder>50</norder>
+      <idstate>3</idstate>
+      <dtinsert>2016-04-02 17:06:13</dtinsert>
+      <dtupdate>2016-04-02 17:06:13</dtupdate>
+      <snamestate>NORMAL</snamestate>
+      <sstate>Обычный</sstate>
+      <notempty>0</notempty>
+      <options>
+        <label>SYS_FORM_ENCTYPE</label>
+      </options>
+      <displaygroup>3</displaygroup>
+      <addmultioptions>
+        <helper>Text_Toarray</helper>
+        <value>=SYS_DEFAULT &#13;
+ application/x-www-form-urlencoded=application/x-www-form-urlencoded &#13;
+ multipart/form-data=multipart/form-data</value>
+      </addmultioptions>
+    </item>
+    <item>
+      <id>30</id>
+      <idowner>9</idowner>
+      <name>requesterror_helper</name>
+      <type>helper</type>
+      <bpublic>1</bpublic>
+      <norder>50</norder>
+      <idstate>3</idstate>
+      <dtinsert>2016-04-02 17:06:13</dtinsert>
+      <dtupdate>2016-04-02 17:06:13</dtupdate>
+      <snamestate>NORMAL</snamestate>
+      <sstate>Обычный</sstate>
+      <displaygroup>2</displaygroup>
+      <options>
+        <label>SYS_FORM_REQUESTERROR_HELPER</label>
+      </options>
+      <idcategory>220</idcategory>
+    </item>
+    <item>
+      <id>81</id>
+      <idowner>9</idowner>
+      <name>displaygroup_helper</name>
+      <type>helper</type>
+      <bpublic>1</bpublic>
+      <norder>60</norder>
+      <idstate>3</idstate>
+      <dtinsert>2016-04-02 17:06:13</dtinsert>
+      <dtupdate>2016-04-02 17:06:13</dtupdate>
+      <snamestate>NORMAL</snamestate>
+      <sstate>Обычный</sstate>
+      <options>
+        <title>SYS_FORM_NAME_TITLE</title>
+        <label>SYS_FORM_DISPLAYGROUP_HELPER</label>
+      </options>
+      <displaygroup>3</displaygroup>
+      <idcategory>218</idcategory>
+    </item>
+    <item>
+      <id>82</id>
+      <idowner>9</idowner>
+      <name>translate_helper</name>
+      <type>helper</type>
+      <bpublic>1</bpublic>
+      <norder>70</norder>
+      <idstate>3</idstate>
+      <dtinsert>2016-04-02 17:06:13</dtinsert>
+      <dtupdate>2016-04-02 17:06:13</dtupdate>
+      <snamestate>NORMAL</snamestate>
+      <sstate>Обычный</sstate>
+      <displaygroup>3</displaygroup>
+      <options>
+        <label>SYS_FORM_TRANSLATE_HELPER</label>
+      </options>
+      <defaultvalue>Hosh_Translate</defaultvalue>
+      <idcategory>212</idcategory>
+    </item>
+    <item>
+      <id>27</id>
+      <idowner>9</idowner>
+      <name>prepend_helper</name>
+      <type>helper</type>
+      <bpublic>1</bpublic>
+      <norder>80</norder>
+      <idstate>3</idstate>
+      <dtinsert>2016-04-02 17:06:13</dtinsert>
+      <dtupdate>2016-04-02 17:06:13</dtupdate>
+      <snamestate>NORMAL</snamestate>
+      <sstate>Обычный</sstate>
+      <notempty>0</notempty>
+      <options>
+        <label>SYS_FORM_PREPEND_HELPER</label>
+      </options>
+      <displaygroup>3</displaygroup>
+    </item>
+    <item>
+      <id>46</id>
+      <idowner>9</idowner>
+      <name>decorator_helper</name>
+      <type>helper</type>
+      <bpublic>1</bpublic>
+      <norder>80</norder>
+      <idstate>3</idstate>
+      <dtinsert>2016-04-02 17:06:13</dtinsert>
+      <dtupdate>2016-04-02 17:06:13</dtupdate>
+      <snamestate>NORMAL</snamestate>
+      <sstate>Обычный</sstate>
+      <displaygroup>7</displaygroup>
+      <options>
+        <label>SYS_FORM_DECORATOR_HELPER</label>
+      </options>
+      <idcategory>224</idcategory>
+    </item>
+    <item>
+      <id>28</id>
+      <idowner>9</idowner>
+      <name>append_helper</name>
+      <type>helper</type>
+      <bpublic>1</bpublic>
+      <norder>90</norder>
+      <idstate>3</idstate>
+      <dtinsert>2016-04-02 17:06:13</dtinsert>
+      <dtupdate>2016-04-02 17:06:13</dtupdate>
+      <snamestate>NORMAL</snamestate>
+      <sstate>Обычный</sstate>
+      <notempty>0</notempty>
+      <options>
+        <label>SYS_FORM_APPEND_HELPER</label>
+      </options>
+      <displaygroup>3</displaygroup>
+    </item>
+    <item>
+      <id>26</id>
+      <idowner>9</idowner>
+      <name>meta_helper</name>
+      <type>helper</type>
+      <bpublic>1</bpublic>
+      <norder>100</norder>
+      <idstate>3</idstate>
+      <dtinsert>2016-04-02 17:06:13</dtinsert>
+      <dtupdate>2016-04-02 17:06:13</dtupdate>
+      <snamestate>NORMAL</snamestate>
+      <sstate>Обычный</sstate>
+      <displaygroup>3</displaygroup>
+      <options>
+        <label>SYS_FORM_META_HELPER</label>
+      </options>
+      <defaultvalue>Hosh_Meta</defaultvalue>
+      <idcategory>221</idcategory>
+    </item>
+    <item>
+      <id>47</id>
+      <idowner>9</idowner>
+      <name>layout_helper</name>
+      <type>helper</type>
+      <bpublic>1</bpublic>
+      <norder>110</norder>
+      <idstate>3</idstate>
+      <dtinsert>2016-04-02 17:06:13</dtinsert>
+      <dtupdate>2016-04-02 17:06:13</dtupdate>
+      <snamestate>NORMAL</snamestate>
+      <sstate>Обычный</sstate>
+      <displaygroup>7</displaygroup>
+      <options>
+        <label>SYS_FORM_LAYOUT_HELPER</label>
+      </options>
+      <defaultvalue>Hosh_Layout</defaultvalue>
+      <idcategory>224</idcategory>
+    </item>
+    <item>
+      <id>140</id>
+      <idowner>9</idowner>
+      <name>sname</name>
+      <type>text</type>
+      <bpublic>1</bpublic>
+      <norder>110</norder>
+      <idstate>3</idstate>
+      <dtinsert>2016-04-02 17:06:13</dtinsert>
+      <dtupdate>2016-04-02 17:06:13</dtupdate>
+      <snamestate>NORMAL</snamestate>
+      <sstate>Обычный</sstate>
+      <notempty>0</notempty>
+      <options>
+        <label>Кастомный идентификатор</label>
+        <placeholder>Совпадает с id</placeholder>
+      </options>
+      <displaygroup>3</displaygroup>
+    </item>
+    <item>
+      <id>158</id>
+      <idowner>9</idowner>
+      <name>idkind</name>
+      <type>select</type>
+      <bpublic>1</bpublic>
+      <norder>120</norder>
+      <idstate>3</idstate>
+      <dtinsert>2016-04-02 17:06:13</dtinsert>
+      <dtupdate>2016-04-02 17:06:13</dtupdate>
+      <snamestate>NORMAL</snamestate>
+      <sstate>Обычный</sstate>
+      <notempty>1</notempty>
+      <public>
+        <helper>Hosh_Public</helper>
+        <update>
+          <bpublic>1</bpublic>
+        </update>
+      </public>
+      <options>
+        <label>Вид формы</label>
+      </options>
+      <displaygroup>3</displaygroup>
+      <addmultioptions>
+        <helper>Getlistkind</helper>
+      </addmultioptions>
+    </item>
+    <item>
+      <id>12</id>
+      <idowner>9</idowner>
+      <name>idstate</name>
+      <type>select</type>
+      <bpublic>1</bpublic>
+      <norder>130</norder>
+      <idstate>3</idstate>
+      <dtinsert>2016-04-02 17:06:13</dtinsert>
+      <dtupdate>2016-04-02 17:06:13</dtupdate>
+      <snamestate>NORMAL</snamestate>
+      <sstate>Обычный</sstate>
+      <notempty>1</notempty>
+      <options>
+        <label>SYS_STATE</label>
+      </options>
+      <displaygroup>3</displaygroup>
+      <addmultioptions>
+        <helper>Getliststate</helper>
+      </addmultioptions>
+    </item>
+    <item>
+      <id>229</id>
+      <idowner>9</idowner>
+      <name>idcategory</name>
+      <type>select</type>
+      <bpublic>1</bpublic>
+      <norder>140</norder>
+      <idstate>3</idstate>
+      <dtinsert>2016-04-02 17:06:13</dtinsert>
+      <dtupdate>2016-04-02 17:06:13</dtupdate>
+      <snamestate>NORMAL</snamestate>
+      <sstate>Обычный</sstate>
+      <displaygroup>3</displaygroup>
+      <options>
+        <label>Категория</label>
+      </options>
+      <addmultioptions>
+        <helper>GetCategoryList</helper>
+      </addmultioptions>
+    </item>
+    <item>
+      <id>24</id>
+      <idowner>9</idowner>
+      <name>css_helper</name>
+      <type>helper</type>
+      <bpublic>1</bpublic>
+      <norder>210</norder>
+      <idstate>3</idstate>
+      <dtinsert>2016-04-02 17:06:13</dtinsert>
+      <dtupdate>2016-04-02 17:06:13</dtupdate>
+      <snamestate>NORMAL</snamestate>
+      <sstate>Обычный</sstate>
+      <displaygroup>5</displaygroup>
+      <options>
+        <label>SYS_FORM_CSS_HELPER</label>
+      </options>
+      <defaultvalue>Hosh_HeadLink</defaultvalue>
+      <idcategory>215</idcategory>
+    </item>
+    <item>
+      <id>25</id>
+      <idowner>9</idowner>
+      <name>js_helper</name>
+      <type>helper</type>
+      <bpublic>1</bpublic>
+      <norder>220</norder>
+      <idstate>3</idstate>
+      <dtinsert>2016-04-02 17:06:13</dtinsert>
+      <dtupdate>2016-04-02 17:06:13</dtupdate>
+      <snamestate>NORMAL</snamestate>
+      <sstate>Обычный</sstate>
+      <displaygroup>6</displaygroup>
+      <options>
+        <label>SYS_FORM_JS_HELPER</label>
+      </options>
+      <defaultvalue>Hosh_HeadScript</defaultvalue>
+      <idcategory>216</idcategory>
+    </item>
+  </elements>
+</form>

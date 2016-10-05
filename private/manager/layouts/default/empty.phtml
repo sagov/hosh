@@ -1,0 +1,27 @@
+<?php 
+$view = Hosh_View::getInstance();
+$view->AddStyleSheet('https://fonts.googleapis.com/css?family=Roboto+Condensed:400,700,400italic&subset=latin,cyrillic');
+$view->AddStyleSheet('/manager/layouts/default/assets/css/stylesheet.css',array('placement'=>'prepend'));
+$view->Bootstrap(false)->remove()->addFile('prepend');
+$view->JQuery(false)->remove()->addFile('prepend');
+$alert = $view->Hosh_Alert();
+?>
+<?php echo $this->doctype() ?>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<?php echo $this->headMeta() ?>
+<?php echo $this->headTitle() ?>
+<?php echo $this->headLink() ?>
+<?php echo $this->headScript() ?>
+</head>
+<body class="contentpane">
+<?php if (isset($alert)):?>
+	<div class="alert-level">
+	<?php echo $alert;?>
+	</div>	
+	<?php endif;?>
+<?php echo $this->layout()->content; ?>
+</body>
+</html>

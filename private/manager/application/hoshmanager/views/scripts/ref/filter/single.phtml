@@ -1,0 +1,32 @@
+<?php 
+$view = Hosh_View::getInstance();
+$view->JQueryUi();
+$view->Hosh_Plugin_System_Form();
+$config = Hosh_Config::getInstance();
+$view->AddScript('/manager/scripts/ref/filter/js/single.js');
+
+$param = array();
+$param['url_search'] = $this->search_url;
+$script = '	;
+			(function($){
+				$(document).ready(function(){					
+					$(".filtersingle").manager_filtermenu_single('.json_encode($param).');															
+				});
+			})(jQuery);	';
+$view->AddScriptDeclaration($script);
+?>
+<div class="leftmenu filtersingle">
+	<div style="padding: 5px">
+	<form action="" method="post">
+		<div class="input-group">		
+			<input type="text" name="search" class="form-control" value="" placeholder="<?php echo $this->search_placeholder?>" />
+			<span class="input-group-btn">
+				<button type="submit" value="&nbsp;"
+					class="btn btn-default buttontopsearch">
+					&nbsp;<i class="fa fa-search"></i>&nbsp;
+				</button>
+			</span>		
+		</div>
+	</form>	
+	</div>
+</div>

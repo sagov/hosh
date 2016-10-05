@@ -1,0 +1,18 @@
+<?php
+
+foreach ($this->listcategory as $category)
+{
+    if (isset($this->list[$category['id']])){
+        echo '<h4>' . $category['scaption'] . '</h4>';
+        foreach ($this->list[$category['id']] as $val){
+            echo '<div><a href="javascript:void(0);" data-target="elementvalue"><span>' . $val['sname'] . '</span></a></div>';
+        }
+    }
+}
+
+if (isset($this->list[''])){
+    echo '<h4>Другое</h4>';
+    foreach ($this->list[''] as $val){
+        echo '<div><a href="javascript:void(0);" data-target="elementvalue"><span>' . $val['sname'] . '</span></a></div>';
+    }
+}

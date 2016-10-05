@@ -1,0 +1,81 @@
+<?php 
+$h_translate = Hosh_Translate::getInstance();
+$h_translate->load('manager/_');
+$h_translate->load('form');
+$translate = $h_translate->getTranslate();
+$user = Hosh_Manager_User_Auth::getInstance();
+$mainmenu = $this->menus[$this->typemenu]['items'];
+$overmenu = $this->menus;
+unset($overmenu[$this->typemenu]);
+?>
+<div class="row hidden-sm hidden-xs controller-level">
+<div class="col-xs-2">
+<div class="left-controllers dropdown">
+<a href="#" class="btn btn-default dropdown-toggle" data-toggle="dropdown">&nbsp;<span class="fa fa-bars"></span>&nbsp;</a>
+	<div class="dropdown-menu left-controller-content">
+	<div class="row">
+	<div class="col-xs-6">
+	<ul class="controller-menu-main">
+	<?php foreach($mainmenu as $item):?>
+	<?php if ($user->isAllowed($item['acl'])):?>
+	<li><a href="<?php echo $item['link'];?>"><i class="<?php echo $item['icon'];?>"></i><span><?php echo $translate->_($item['scaption']);?></span></a></li>
+	<?php endif;?>
+	<?php endforeach;?>
+    </ul>
+    </div>
+    
+    <div class="col-xs-6">
+    <?php if (count($overmenu) >0 ):?>
+    <ul class="controller-menu-parent">
+    <?php foreach($overmenu as $item):?>
+	<?php if ($user->isAllowed($item['acl'])):?>
+	<li><a href="<?php echo $item['link'];?>"><i class="<?php echo $item['icon'];?>"></i><span><?php echo $translate->_($item['name']);?></span></a></li>
+	<?php endif;?>
+	<?php endforeach;?>   
+    </ul>
+    <hr />
+    <?php endif;?>
+    <div class="history-level">				
+					<h5>
+						<i class="fa fa-history"></i> <?php echo $translate->_('HM_HISTORY');?>
+					</h5>				
+				<ul>
+				<?php
+                foreach ($this->listhistory as $val) :
+                ?>
+                <li><a  href="<?php echo $this->Ref_Url($val);?>"><?php echo strtolower($val['snameclass']);?> #<?php echo $val['idobject']; ?>: <?php echo $translate->_($val['scaption']);?></a></li>
+                <?php
+                endforeach;
+                ?>
+				</ul>
+	</div>
+    </div>
+    
+    </div>
+    </div> 
+</div>
+</div>
+<div class="col-xs-10">
+<?php if ($this->addbutton):?>
+<div class="addbutton-level">
+<?php if (isset($this->subaddbutton)):?>
+<div class="btn-group pull-right">
+<a href="<?php echo $this->addbutton['link'];?>" class="btn btn-default btnadd"><i class="fa fa-plus"></i>&nbsp; <?php echo $this->addbutton['scaption'];?></a>
+<a href="javascript:void(0);"  class="btn btn-default dropdown-toggle" data-toggle="dropdown" >
+                  &nbsp;<span class="fa fa-caret-down"></span>&nbsp;
+</a>
+<ul class="dropdown-menu">
+    <?php foreach ($this->subaddbutton as $val):?>
+    <li><?php echo $val?></li>
+    <?php endforeach;?>              
+</ul>
+</div>
+<?php else:?>
+<a href="<?php echo $this->addbutton['link'];?>" class="btn btn-default"><i class="fa fa-plus"></i>&nbsp; <?php echo $this->addbutton['scaption'];?></a>
+
+<?php endif;?>
+
+</div>
+<?php endif;?>
+</div>
+</div>

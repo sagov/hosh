@@ -1,0 +1,78 @@
+<?php
+$user = Hosh_Manager_User_Auth::getInstance();
+$h_translate = Hosh_Translate::getInstance();
+$h_translate->load('manager/_');
+$h_translate->load('form');
+$translate = $h_translate->getTranslate();
+?>
+<style>
+.hosh-mcabinet .nav-items a.nav-item, .hosh-mcabinet .nav-items a.nav-item:hover
+	{
+	display: block;
+	margin-right: -1px;
+	text-align: center;
+	text-decoration: none;
+	border-radius: 0px
+}
+
+.hosh-mcabinet .nav-items a.nav-item .caption {
+	display: block;
+	margin-top: 10px;
+	font-size: 1em;
+}
+
+.hosh-mcabinet .nav-items a.nav-item .icon {
+	font-size: 3em
+}
+
+.hosh-mcabinet .history-level h3 {
+	margin: 0px;
+	font-size: 1.2em;
+	font-weight: bold
+}
+
+.hosh-mcabinet .history-level .list-group a{
+border-radius: 0px
+}
+
+</style>
+<div class="hosh-mcabinet">
+	<div class="row">
+		<div class="col-sm-7">
+
+			<div class="nav-items list-group">
+		<?php foreach($this->menulist as $menu):?>
+		<?php if (isset($menu['items'])):?>
+		<?php foreach($menu['items'] as $item):?>		
+    	<?php if (!empty($item['bmain']) and $user->isAllowed($item['acl'])):?>    	
+				<a href="<?php echo $item['link'];?>"
+					class="list-group-item nav-item col-sm-6 col-md-4"> <i
+					class="icon <?php echo $item['icon'];?>"></i> <span class="caption"><?php echo $translate->_($item['scaption']);?></span>
+				</a>
+		<?php endif;?> 
+		<?php endforeach;?>   	
+    	<?php endif;?>    	
+    	<?php endforeach;?>			
+		</div>
+
+		</div>
+		<div class="col-sm-5">
+			<div class="history-level">
+				<div class="page-header">
+					<h3>
+						<i class="fa fa-history"></i> <?php echo $translate->_('HM_HISTORY');?>
+					</h3>
+				</div>
+				<div class="list-group">
+				<?php
+                foreach ($this->loglist as $log) :
+                ?>
+                <a class="list-group-item" href="<?php echo $this->Ref_Url($log);?>"><?php echo $log['snameclass'];?> #<?php echo $log['idobject']; ?>: <?php echo $translate->_($log['scaption']);?></a>
+                <?php
+                endforeach;
+                ?>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

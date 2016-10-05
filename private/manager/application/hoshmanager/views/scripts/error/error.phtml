@@ -1,0 +1,6 @@
+<div class="alert alert-danger"><?php echo $this->message;?></div>
+<?php if (isset($this->errors)){
+echo '<pre>';
+print_r($this->errors);
+echo '</pre>';
+}?>

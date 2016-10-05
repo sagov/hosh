@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form>
+  <data>
+    <id>136</id>
+    <idkind>155</idkind>
+    <bpublic>1</bpublic>
+    <idstate>3</idstate>
+    <dtinsert>2016-04-02 17:06:13</dtinsert>
+    <dtupdate>2016-04-02 17:50:25</dtupdate>
+    <sname>system_user</sname>
+    <scaption>Справочник пользователей</scaption>
+    <snamestate>NORMAL</snamestate>
+    <sstate>Обычный</sstate>
+    <snamekind>NORMAL</snamekind>
+    <data>
+      <helper>Db_GetData</helper>
+    </data>
+    <insert>
+      <helper>Db_Update</helper>
+    </insert>
+    <public>
+      <helper>Hosh_Public</helper>
+    </public>
+    <options>
+      <method>post</method>
+    </options>
+    <update>
+      <helper>Db_Update</helper>
+    </update>
+    <acl>
+      <helper>Hosh_Acl</helper>
+      <bauth>1</bauth>
+      <view>
+        <value>HOSH_SYSTEM_USER_REF</value>
+      </view>
+      <insert>
+        <value>HOSH_SYSTEM_USER_ADD</value>
+      </insert>
+      <update>
+        <value>HOSH_SYSTEM_USER_EDIT</value>
+      </update>
+    </acl>
+    <request>
+      <helper>Hosh_Redirect</helper>
+      <insert>
+        <url>?controller=ref_user&amp;action=view&amp;id=:id</url>
+      </insert>
+    </request>
+    <translate>
+      <helper>Hosh_Translate</helper>
+    </translate>
+    <meta>
+      <helper>Hosh_Meta</helper>
+      <insert>
+        <title>Новый пользователь</title>
+      </insert>
+    </meta>
+    <layout>
+      <helper>Hosh_Layout</helper>
+    </layout>
+    <css>
+      <helper>Hosh_HeadLink</helper>
+    </css>
+    <js>
+      <helper>Hosh_HeadScript</helper>
+    </js>
+    <displaygroup>
+      <items/>
+    </displaygroup>
+  </data>
+  <elements>
+    <item>
+      <id>139</id>
+      <idowner>136</idowner>
+      <name>suser</name>
+      <type>text</type>
+      <bpublic>1</bpublic>
+      <norder>10</norder>
+      <idstate>3</idstate>
+      <dtinsert>2016-04-02 17:06:13</dtinsert>
+      <dtupdate>2016-04-02 17:06:13</dtupdate>
+      <snamestate>NORMAL</snamestate>
+      <sstate>Обычный</sstate>
+      <notempty>0</notempty>
+      <options>
+        <label>Имя</label>
+      </options>
+    </item>
+    <item>
+      <id>137</id>
+      <idowner>136</idowner>
+      <name>susername</name>
+      <type>text</type>
+      <bpublic>1</bpublic>
+      <norder>20</norder>
+      <idstate>3</idstate>
+      <dtinsert>2016-04-02 17:06:13</dtinsert>
+      <dtupdate>2016-04-02 17:06:13</dtupdate>
+      <snamestate>NORMAL</snamestate>
+      <sstate>Обычный</sstate>
+      <notempty>1</notempty>
+      <options>
+        <label>Логин</label>
+      </options>
+    </item>
+    <item>
+      <id>138</id>
+      <idowner>136</idowner>
+      <name>spassw</name>
+      <type>password</type>
+      <bpublic>1</bpublic>
+      <norder>30</norder>
+      <idstate>3</idstate>
+      <dtinsert>2016-04-02 17:06:13</dtinsert>
+      <dtupdate>2016-04-02 17:06:13</dtupdate>
+      <snamestate>NORMAL</snamestate>
+      <sstate>Обычный</sstate>
+      <notempty>0</notempty>
+      <options>
+        <label>Пароль</label>
+      </options>
+    </item>
+    <item>
+      <id>143</id>
+      <idowner>136</idowner>
+      <name>idroles</name>
+      <type>multiselect</type>
+      <bpublic>1</bpublic>
+      <norder>40</norder>
+      <idstate>3</idstate>
+      <dtinsert>2016-04-02 17:06:13</dtinsert>
+      <dtupdate>2016-04-02 17:06:13</dtupdate>
+      <snamestate>NORMAL</snamestate>
+      <sstate>Обычный</sstate>
+      <notempty>0</notempty>
+      <options>
+        <label>Профиль</label>
+      </options>
+      <addmultioptions>
+        <helper>Getselectroles</helper>
+      </addmultioptions>
+    </item>
+  </elements>
+</form>

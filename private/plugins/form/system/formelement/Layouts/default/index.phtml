@@ -1,0 +1,104 @@
+:helper[Layout_Default]
+<div class="top-level">
+<div class="row">
+<div class="col-sm-6"><h3>:helper[Title]</h3></div>
+<div class="col-sm-6"><div class="action-btn">
+<button type="button" class="btn btn-primary" data-task="saveform"><i class="fa fa-floppy-o"></i>&nbsp; :_[SYS_SAVE]</button>
+<button type="button" class="btn btn-default" data-task="close" data-dismiss="modal" aria-hidden="true"><i class="fa fa-close"></i>&nbsp; :_[SYS_CLOSE]</button>
+</div></div>
+</div>
+</div>
+<div class="bghead-level">
+
+	<div class="row">
+		<div class="col-md-6">:element[type]</div>
+		<div class="col-md-6">:element[name]</div>
+		<div class="col-md-12">:element[options_label]</div>
+	</div>
+
+</div>
+
+<div class="menu-nav">	
+	<div class="pull-left">
+		<ul class="nav nav-tabs">
+			<li><a href="#data-felement" title=":_[SYS_FORM_DATA]"><i class="fa fa-database"></i><span class="hidden-xs">:_[SYS_FORM_DATA]</span></a></li>
+			<li><a href="#valid-felement" title=":_[SYS_FORM_VALID]"><i class="fa fa-check-square-o"></i><span class="hidden-xs">:_[SYS_FORM_VALID]</span></a></li>
+			<li><a href="#acl-felement" title=":_[SYS_FORM_ACL]"><i class="fa fa-unlock-alt"></i><span class="hidden-xs">:_[SYS_FORM_ACL]</span></a></li>
+			<li><a href="#settings-felement" title=":_[SYS_FORM_SETTINGS]"><i class="fa fa-cog"></i><span class="hidden-xs">:_[SYS_FORM_SETTINGS]</span></a></li>			
+			<li><a href="#css-felement" title="CSS"><i class="fa fa-css3"></i><span class="hidden-xs">CSS</span></a></li>
+			<li><a href="#js-felement" title="JavaScript"><i class="fa fa-flag"></i><span class="hidden-xs">JS</span></a></li>			
+			<li><a href="#decorator-felement" title=":_[SYS_FORM_DECORATOR]"><i class="fa fa-code"></i><span class="hidden-xs">:_[SYS_FORM_DECORATOR]</span></a></li>
+		</ul>		
+	</div>	
+	<div class="pull-right action-nav">
+	<button type="button" title=":_[SYS_SAVE]" data-task="saveform" class="btn btn-primary"><i class="fa fa-floppy-o"></i><span class="hidden-xs hidden-sm">:_[SYS_SAVE]</span></button>
+	<button type="button"  title=":_[SYS_CLOSE]" class="btn btn-default" data-task="close" data-dismiss="modal" aria-hidden="true"><i class="fa fa-close"></i><span class="hidden-xs hidden-sm">:_[SYS_CLOSE]</span></button>
+	</div>
+	<div style="clear:both"></div>
+</div>
+
+<div id="data-felement">
+<div class="page-header">
+	<h2><i class="fa fa-database"></i>&nbsp; :_[SYS_FORM_DATA]</h2>
+</div>
+:element[defaultvalue]
+:element[addmultioptions_helper] :elementhelper[addmultioptions_helper]
+:elementtype[data]
+</div>
+
+<div id="valid-felement">
+<div class="page-header">
+<h1><i class="fa fa-check-square-o"></i>&nbsp; :_[SYS_FORM_VALID]</h1>
+</div>
+:element[notempty]
+:element[validator_helper] :elementhelper[validator_helper]
+:elementtype[valid]
+</div>
+
+<div id="acl-felement">
+<div class="page-header">
+<h2><i class="fa fa-unlock-alt"></i>&nbsp; :_[SYS_FORM_ACL]</h2>
+</div>
+:element[bpublic]
+:element[public_helper] :elementhelper[public_helper]
+:element[acl_helper] :elementhelper[acl_helper]
+:elementtype[acl]
+</div>
+
+<div id="settings-felement">
+<div class="page-header">
+<h2><i class="fa fa-cog"></i>&nbsp; :_[SYS_FORM_SETTINGS]</h2>
+</div>
+:element[attribs]
+:element[options_title]
+:element[displaygroup]
+:element[prepend_helper] :elementhelper[prepend_helper]
+:element[append_helper] :elementhelper[append_helper]
+:elementtype[settings]
+:element[norder]
+</div>
+
+<div id="css-felement">
+<div class="page-header">
+<h2><i class="fa fa-css3"></i>&nbsp; CSS</h2>
+</div>
+:element[css_helper] 
+:elementhelper[css_helper]
+:elementtype[css]
+</div>
+
+<div id="js-felement">
+<div class="page-header">
+<h2><i class="fa fa-flag"></i>&nbsp; JavaScript</h2>
+</div>
+:element[js_helper] :elementhelper[js_helper]
+:elementtype[js]
+</div>
+
+<div id="decorator-felement">
+<div class="page-header">
+<h2><i class="fa fa-code"></i>&nbsp; :_[SYS_FORM_DECORATOR]</h2>
+</div>
+:element[decorator_helper] :elementhelper[decorator_helper]
+:elementtype[decorator]
+</div>

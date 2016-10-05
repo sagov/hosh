@@ -1,0 +1,45 @@
+<?php
+
+$view = Hosh_View::getInstance();
+$view->AddStyleSheet('/manager/scripts/ref/form/css/menuform.css');
+
+$menu = array(
+		array('iconclass'=>'glyphicon glyphicon-th-list','scaption'=>'new element','task'=>'new_elementform'),
+		array('iconclass'=>'glyphicon glyphicon-th','scaption'=>'new group','task'=>'new_displaygroupform'),
+		array('iconclass'=>'fa fa-database','scaption'=>'get','target'=>'.element-wrap-data_helper'),
+		array('iconclass'=>'fa fa-database','scaption'=>'insert','target'=>'.element-wrap-insert_helper'),
+		array('iconclass'=>'fa fa-database','scaption'=>'update','target'=>'.element-wrap-update_helper'),
+        array('iconclass'=>'fa fa-language','scaption'=>'lang','target'=>'.element-wrap-translate_helper'),
+        
+        array('iconclass'=>'fa fa-cog','scaption'=>'prepend','target'=>'.element-wrap-prepend_helper'),
+        array('iconclass'=>'fa fa-cog','scaption'=>'append','target'=>'.element-wrap-append_helper'),
+        array('iconclass'=>'fa fa-unlock-alt','scaption'=>'acl','target'=>'.element-wrap-acl_helper'),
+        array('iconclass'=>'fa fa-eye-slash','scaption'=>'public','target'=>'.element-wrap-bpublic'),
+        array('iconclass'=>'fa fa-code','scaption'=>'layout','target'=>'.element-wrap-layout_helper'),
+        array('iconclass'=>'fa fa-tags','scaption'=>'decorator','target'=>'.element-wrap-decorator_helper'),
+        array('iconclass'=>'fa fa-object-group','scaption'=>'displaygroup','target'=>'.element-wrap-displaygroup_helper'),
+        
+		array('iconclass'=>'fa fa-cog','scaption'=>'name','target'=>'.element-wrap-options_name'),
+		array('iconclass'=>'fa fa-hashtag','scaption'=>'id','target'=>'.element-wrap-options_id'),
+		array('iconclass'=>'fa fa-cog','scaption'=>'method','target'=>'.element-wrap-options_method'),
+		array('iconclass'=>'fa fa-cog','scaption'=>'action','target'=>'.element-wrap-options_action'),
+		array('iconclass'=>'fa fa-cog','scaption'=>'enctype','target'=>'.element-wrap-options_enctype'),
+				);
+?>
+<div class="menuform-level hidden-xs hidden-sm">
+<div class="row menuform-row">
+<?php 
+foreach ($menu as $val):?>
+<div class="col-md-6 menuform-col">
+	<div class="menuform-item">
+		<a href="#" <?php echo (isset($val['task'])) ? 'data-task="'.$val['task'].'"' : null ?> <?php echo (isset($val['target'])) ? 'data-task="element-slide" data-target="'.$val['target'].'"' : null ?>>
+		<i class="menuform-item-icon <?php echo $val['iconclass'];?>"></i><span class="menuform-item-text"><?php echo $val['scaption'];?></span>
+		</a>
+	</div>
+</div>
+<?php 
+endforeach;
+?>
+
+</div>
+</div>

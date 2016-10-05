@@ -1,0 +1,28 @@
+<?php
+$view = Hosh_View::getInstance();
+$view->JQueryUi();
+$view->Hosh_Plugin_System_Form();
+$config = Hosh_Config::getInstance();
+$view->AddScript('/manager/scripts/ref/filter/js/single.js');
+
+$param = array();
+$param['url_search'] = $this->search_url;
+$script = '	;
+			(function($){
+				$(document).ready(function(){
+					$(".filtersingle").manager_filtermenu_single('.json_encode($param).');
+				});
+			})(jQuery);	';
+$view->AddScriptDeclaration($script);
+?>
+<div class="leftmenu filtersingle">
+	<div style="padding: 5px">
+		<form action="" method="post">
+			<select name="search" class="form-control" onchange="jQuery('.filtersingle form').submit();" />
+			<?php foreach ($this->list as $key=>$val):?>			
+			<option value="<?php echo $key;?>" <?php echo ($this->selected == $key) ? ' selected' : null ?>><?php echo $val;?></option>
+			<?php endforeach;?>
+			</select>
+		</form>
+	</div>
+</div>

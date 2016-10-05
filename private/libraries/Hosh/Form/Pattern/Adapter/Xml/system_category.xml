@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form>
+  <data>
+    <id>203</id>
+    <idkind>155</idkind>
+    <bpublic>1</bpublic>
+    <idstate>3</idstate>
+    <dtinsert>2016-04-02 17:06:13</dtinsert>
+    <dtupdate>2016-04-02 17:50:25</dtupdate>
+    <sname>system_category</sname>
+    <scaption>Категории</scaption>
+    <snamestate>NORMAL</snamestate>
+    <sstate>Обычный</sstate>
+    <snamekind>NORMAL</snamekind>
+    <data>
+      <helper>Db_GetData</helper>
+    </data>
+    <insert>
+      <helper>Db_Update</helper>
+    </insert>
+    <update>
+      <helper>Db_Update</helper>
+    </update>
+    <request>
+      <helper>Hosh_Redirect</helper>
+      <insert>
+        <url>?controller=ref_category&amp;action=view&amp;id=:id</url>
+      </insert>
+    </request>
+  </data>
+  <elements>
+    <item>
+      <id>210</id>
+      <idowner>203</idowner>
+      <name>id</name>
+      <type>value</type>
+      <bpublic>2</bpublic>
+      <norder>10</norder>
+      <idstate>3</idstate>
+      <dtinsert>2016-04-02 17:06:13</dtinsert>
+      <dtupdate>2016-04-02 17:06:13</dtupdate>
+      <snamestate>NORMAL</snamestate>
+      <sstate>Обычный</sstate>
+      <public>
+        <helper>Hosh_Public</helper>
+        <insert>
+          <bpublic>0</bpublic>
+        </insert>
+      </public>
+      <options>
+        <label>ID</label>
+      </options>
+    </item>
+    <item>
+      <id>206</id>
+      <idowner>203</idowner>
+      <name>idkind</name>
+      <type>select</type>
+      <bpublic>1</bpublic>
+      <norder>20</norder>
+      <idstate>3</idstate>
+      <dtinsert>2016-04-02 17:06:13</dtinsert>
+      <dtupdate>2016-04-02 17:06:13</dtupdate>
+      <snamestate>NORMAL</snamestate>
+      <sstate>Обычный</sstate>
+      <notempty>1</notempty>
+      <public>
+        <helper>Hosh_Public</helper>
+        <update>
+          <bpublic>2</bpublic>
+        </update>
+      </public>
+      <options>
+        <label>Тип</label>
+      </options>
+      <addmultioptions>
+        <helper>GetKindList</helper>
+      </addmultioptions>
+    </item>
+    <item>
+      <id>204</id>
+      <idowner>203</idowner>
+      <name>scaption</name>
+      <type>text</type>
+      <bpublic>1</bpublic>
+      <norder>30</norder>
+      <idstate>3</idstate>
+      <dtinsert>2016-04-02 17:06:13</dtinsert>
+      <dtupdate>2016-04-02 17:06:13</dtupdate>
+      <snamestate>NORMAL</snamestate>
+      <sstate>Обычный</sstate>
+      <notempty>1</notempty>
+      <options>
+        <label>Название</label>
+      </options>
+    </item>
+    <item>
+      <id>205</id>
+      <idowner>203</idowner>
+      <name>idparent</name>
+      <type>select</type>
+      <bpublic>1</bpublic>
+      <norder>40</norder>
+      <idstate>3</idstate>
+      <dtinsert>2016-04-02 17:06:13</dtinsert>
+      <dtupdate>2016-04-02 17:06:13</dtupdate>
+      <snamestate>NORMAL</snamestate>
+      <sstate>Обычный</sstate>
+      <public>
+        <helper>Hosh_Public</helper>
+        <insert>
+          <bpublic>0</bpublic>
+        </insert>
+      </public>
+      <options>
+        <label>Родитель</label>
+      </options>
+      <addmultioptions>
+        <helper>GetParentList</helper>
+      </addmultioptions>
+    </item>
+  </elements>
+</form>

@@ -1,0 +1,19 @@
+<?php if ($this->pageCount): ?>
+<div class="paginationControl">
+<div class="row">
+<div class="col-xs-4">
+<select class="form-control">
+<?php foreach ($this->pagesInRange as $page): ?>
+  <?php $selected = ($page == $this->current) ? ' selected="selected"' : ''; ?>
+  <option value="<?php echo $page;?>"<?php echo $selected ?>>
+    <?php echo $page; ?>
+  </option>
+<?php endforeach; ?>
+</select>
+</div>
+<div class="col-xs-8">
+Total <?php echo $this->totalItemCount; ?>
+</div>
+</div>
+</div>
+<?php endif; ?>

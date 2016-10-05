@@ -1,0 +1,34 @@
+<?php 
+$_controller = Zend_Controller_Front::getInstance();
+$view = Hosh_View::getInstance();
+$view->JQueryUi();
+$view->Hosh_Plugin_System_Form();
+$view->AddScript('/manager/scripts/index/js/leftmenu.js');
+
+
+$param = array();
+$param['url'] = $this->Url(array('action'=>'list'));
+$param['url_action'] = $this->Url(array('controller'=>$_controller->getDefaultControllerName(),'id'=>$this->idactive),false);
+$param['container'] = '.leftmenu-list';
+$script = '	;
+			(function($){
+				$(document).ready(function(){
+					$(".menucontent").manager_leftmenu('.json_encode($param).');					
+				});
+			})(jQuery);	';
+$view->AddScriptDeclaration($script);
+
+
+?>
+<div class="leftmenu">
+<ul class="leftmenu-list">
+<?php 
+require_once 'leftmenulist.phtml';
+?>
+</ul>
+<?php if ($this->paginator):?>
+<div class="pagination">
+<?php echo $this->paginator;?>
+</div>
+<?php endif;?>
+</div>
