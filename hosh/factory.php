@@ -8,10 +8,9 @@ class HoshFactory
 {		
 	public static function run($config = array())
 	{
-	    require_once dirName(__FILE__).'/config.php';
-	    $hoshconfig = new HoshConfig();
-	    $config_array = $hoshconfig->get();
+	    $config_array = require_once dirName(__FILE__).'/../config/global.php'; 
 	    $config_array = array_merge($config_array,$config);
+	    
 	    require_once $config_array['path_libraries'].'Hosh/Factory.php';
 	    $hosh_factory = new Hosh_Factory();
 	    $hosh_factory->init($config_array);

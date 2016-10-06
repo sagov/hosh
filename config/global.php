@@ -18,9 +18,9 @@ return array(
             ),
             
             // path directories
-            'path' => __DIR__.'/../',
-            'path_public' => __DIR__.'/../../public/assets/',
-            'path_libraries' => __DIR__.'/../../vendor/',
+            'path' => __DIR__.'/../hosh/',
+            'path_public' => __DIR__.'/../public/assets/',
+            'path_libraries' => __DIR__.'/../vendor/',
             
             
             
@@ -32,6 +32,6 @@ return array(
             
             // form
             'form' => array(
-                    'path_patternxml' => __DIR__ . '/../extensions/form/xml/',
+                    'path_patternxml' => __DIR__ . '/../hosh/extensions/form/xml/',
              ),
     );
