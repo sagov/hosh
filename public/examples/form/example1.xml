@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document date="2016-10-07 11:20:16">
+  <type>hosh_form</type>
+  <author>root</author>
+  <data>
+    <id>375</id>
+    <idkind>155</idkind>
+    <bpublic>1</bpublic>
+    <options></options>
+    <idclone></idclone>
+    <idstate>3</idstate>
+    <dtinsert>2016-10-07 09:59:20</dtinsert>
+    <dtupdate>2016-10-07 09:59:20</dtupdate>
+    <sname>example1</sname>
+    <scaption>Example 1</scaption>
+    <bsystem>0</bsystem>
+    <snamestate>NORMAL</snamestate>
+    <sstate>Нормальный</sstate>
+    <snamekind>NORMAL</snamekind>
+  </data>
+  <elements>
+    <item>
+      <id>0</id>
+      <idowner>375</idowner>
+      <name>param1</name>
+      <type>text</type>
+      <bpublic>1</bpublic>
+      <norder>10</norder>
+      <idstate>3</idstate>
+      <snamestate>NORMAL</snamestate>
+      <sstate>Нормальный</sstate>
+      <options>
+        <label>Input 1</label>
+        <placeholder>the text ...</placeholder>
+      </options>
+    </item>
+    <item>
+      <id>1</id>
+      <idowner>375</idowner>
+      <name>param2</name>
+      <type>select</type>
+      <bpublic>1</bpublic>
+      <norder>20</norder>
+      <idstate>3</idstate>
+      <snamestate>NORMAL</snamestate>
+      <sstate>Нормальный</sstate>
+      <options>
+        <label>Select 1</label>
+      </options>
+      <addmultioptions>
+        <helper>Text_Toarray</helper>
+        <value>=-- --&#13;
+1=Text 1&#13;
+2=Text 2&#13;
+3=Text 3</value>
+      </addmultioptions>
+    </item>
+    <item>
+      <id>2</id>
+      <idowner>375</idowner>
+      <name>param3</name>
+      <type>textarea</type>
+      <bpublic>1</bpublic>
+      <norder>30</norder>
+      <idstate>3</idstate>
+      <snamestate>NORMAL</snamestate>
+      <sstate>Нормальный</sstate>
+      <options>
+        <label>Textarea 1</label>
+      </options>
+    </item>
+  </elements>
+</document>

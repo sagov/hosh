@@ -56,17 +56,25 @@ class Hosh_Form_Pattern_Adapter_Xml extends Hosh_Form_Pattern_Abstract
         if (isset($result[$idform])){
             return $result[$idform];
         }
-        $file = $idform.'.xml';
-        $config = Hosh_Config::getInstance();
-        $configform = $config->get('form');
-        $path = $configform->get('path_patternxml');
-        if (!file_exists($path . $file)){
+        $form = $this->_form;
+        $settings = $form->getSetting('pattern');
+        if (isset($settings['data'])){
+            $path_file = $settings['data'];
+        }else{
+            $file = $idform.'.xml';
+            $config = Hosh_Config::getInstance();
+            $configform = $config->get('form');
+            $path = $configform->get('path_patternxml');
+            $path_file = $path . $file;
+        }
+        
+        if (!file_exists($path_file)){
             require_once 'Zend/Form/Exception.php';
             throw new Zend_Form_Exception(
                     sprintf('Form  "%s" not exists',
                             $idform));
         }
-        $xml = new Zend_Config_Xml($path . $file);
+        $xml = new Zend_Config_Xml($path_file);
         $arr_data = $xml->toArray(); 
         $result_element = array();
         if (isset($arr_data['elements']['item'])){      

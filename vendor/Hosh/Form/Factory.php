@@ -39,7 +39,8 @@ class Hosh_Form_Factory extends Zend_Form
                     'prefix' => 'HoshPluginForm_'
             ),
             'pattern' => array(
-                    'adapter' => 'hoshmanager'
+                    'adapter' => 'hoshmanager',
+                    'data' => '',
             ),
             'prefixPath' => array(
                     'prefix' => 'Hosh_Form_',
