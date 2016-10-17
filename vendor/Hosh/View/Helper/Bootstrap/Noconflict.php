@@ -21,7 +21,7 @@ class Hosh_View_Helper_Bootstrap_Noconflict extends Zend_View_Helper_HeadScript
 	{
 		$methodjs = strtolower($placement).'File';
 		$config = Hosh_Config::getInstance();
-		$this->view->AddScript($config->get('url_public').$this->options['file'],array('placement'=>$placement),false);
+		$this->view->AddScript($config->get('public')->url.$this->options['file'],array('placement'=>$placement),false);
 		return $this;
 	}
 	
@@ -29,7 +29,7 @@ class Hosh_View_Helper_Bootstrap_Noconflict extends Zend_View_Helper_HeadScript
 	{
 		$container = $this->getContainer();		
 		$config = Hosh_Config::getInstance();
-		$src = $config->get('url_public').$this->options['file'];
+		$src = $config->get('public')->url.$this->options['file'];
 		foreach ($container as $key=>$val){
 			if (isset($val->attributes['src']) and ($val->attributes['src'] == $src)){
 				$this->__unset($key);

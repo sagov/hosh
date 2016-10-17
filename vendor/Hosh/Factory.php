@@ -36,10 +36,7 @@ class Hosh_Factory
         $loader = Zend_Loader_Autoloader::getInstance();
         $loader->registerNamespace('Hosh_');
         $loader->setFallbackAutoloader(true);
-        
-        /* $loader->registerNamespace('Hosh', __DIR__ .'/../../')
-        ->setFallbackAutoloader(true); */
-        
+                      
         $zconfig = new Zend_Config(array(),true);
         $hosh_config = Hosh_Config::getInstance($config);
         $hosh_config->merge($zconfig);

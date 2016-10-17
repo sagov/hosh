@@ -46,4 +46,9 @@ class Hosh_Config extends Zend_Config
         $result = $data->get($name, $default);        
         return $result;
     }
+    
+    public function set($name, $value)
+    {
+        $this->__set($name, array(self::SNAME=>$value));
+    }
 }

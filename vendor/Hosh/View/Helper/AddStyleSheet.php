@@ -11,12 +11,12 @@ class Hosh_View_Helper_AddStyleSheet extends Zend_View_Helper_HeadLink
 		if (empty($file)) return false;	
 		
 		$config = Hosh_Config::getInstance();
-		$file_path = $config->get('path_public') . $file;
+		$file_path = $config->get('public')->path . $file;
 		if (file_exists ( $file_path )) {			
 			require_once 'Hosh/File.php';
 			$cfile = new Hosh_File();
 			$file = $cfile->getFilePreff($file);			
-			$file = $config->get('url_public').$file;
+			$file = $config->get('public')->url.$file;
 		}
 		
 		if (isset($options['placement'])) {

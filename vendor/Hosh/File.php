@@ -29,7 +29,7 @@ class Hosh_File
     public function getFilePreff ($file)
     {
         $config = Hosh_Config::getInstance();
-        $file_path = $config->get('path_public') . $file;
+        $file_path = $config->get('public')->path . $file;
         if (file_exists($file_path)) {
             return $file . '?' . filemtime($file_path);
         }

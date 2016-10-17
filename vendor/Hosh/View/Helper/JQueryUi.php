@@ -91,9 +91,9 @@ private $file;
 	private function _getLocalFile(){
 		if (!empty($this->options['compressed'])) $min = '.min'; else $min = null;
 		$config = Hosh_Config::getInstance();
-		$result['js'] = $config->get('url_public').'/libraries/jquery/ui/'.$this->options['version'].'/jquery-ui'.$min.'.js';
-		$result['css'][] = $config->get('url_public').'/libraries/jquery/ui/themes/'.$this->options['theme'].'/jquery-ui.css';
-		$result['css'][] = $config->get('url_public').'/libraries/jquery/ui/themes/'.$this->options['theme'].'/jquery.ui.theme.css';
+		$result['js'] = $config->get('public')->url.'/libraries/jquery/ui/'.$this->options['version'].'/jquery-ui'.$min.'.js';
+		$result['css'][] = $config->get('public')->url.'/libraries/jquery/ui/themes/'.$this->options['theme'].'/jquery-ui.css';
+		$result['css'][] = $config->get('public')->url.'/libraries/jquery/ui/themes/'.$this->options['theme'].'/jquery.ui.theme.css';
 		return $result;
 	}
 

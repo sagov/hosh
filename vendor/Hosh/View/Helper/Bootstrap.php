@@ -108,9 +108,9 @@ class Hosh_View_Helper_Bootstrap extends Zend_View_Helper_HeadScript
 	private function _getLocalFile(){
 		if (!empty($this->options['compressed'])) $min = '.min'; else $min = null;
 		$config = Hosh_Config::getInstance();
-		$result['js'] = $config->get('url_public').'/libraries/bootstrap/'.$this->options['version'].'/js/bootstrap'.$min.'.js';
-		$result['css'][] = $config->get('url_public').'/libraries/bootstrap/'.$this->options['version'].'/css/bootstrap'.$min.'.css';
-		$result['css'][] = $config->get('url_public').'/libraries/bootstrap/'.$this->options['version'].'/css/bootstrap-theme'.$min.'.css';
+		$result['js'] = $config->get('public')->url.'/libraries/bootstrap/'.$this->options['version'].'/js/bootstrap'.$min.'.js';
+		$result['css'][] = $config->get('public')->url.'/libraries/bootstrap/'.$this->options['version'].'/css/bootstrap'.$min.'.css';
+		$result['css'][] = $config->get('public')->url.'/libraries/bootstrap/'.$this->options['version'].'/css/bootstrap-theme'.$min.'.css';
 		return $result;
 	}
 

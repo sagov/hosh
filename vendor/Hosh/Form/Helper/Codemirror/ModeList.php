@@ -13,7 +13,7 @@ class Hosh_Form_Helper_Codemirror_ModeList extends Hosh_Form_Helper_Abstract
 		
 		$view = Hosh_View::getInstance();
 		$config = Hosh_Config::getInstance();
-		$path = $config->get('path_public').$view->CodeMirror(false)->getPath().'/mode/';
+		$path = $config->get('public')->path.$view->CodeMirror(false)->getPath().'/mode/';
 		
 		$result = array();
 		if (!is_dir($path)) {

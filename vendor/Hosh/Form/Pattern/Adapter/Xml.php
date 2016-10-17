@@ -64,7 +64,7 @@ class Hosh_Form_Pattern_Adapter_Xml extends Hosh_Form_Pattern_Abstract
             $file = $idform.'.xml';
             $config = Hosh_Config::getInstance();
             $configform = $config->get('form');
-            $path = $configform->get('path_patternxml');
+            $path = $configform->get('pattern')->path_xml;
             $path_file = $path . $file;
         }
         

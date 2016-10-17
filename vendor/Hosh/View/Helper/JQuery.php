@@ -82,7 +82,7 @@ class Hosh_View_Helper_JQuery extends Zend_View_Helper_HeadScript
 	private function _getLocalFile(){
 		if (!empty($this->options['compressed'])) $min = '.min'; else $min = null;
 		$config = Hosh_Config::getInstance();		
-		return $config->get('url_public').'/libraries/jquery/release/'.$this->options['version'].'/jquery'.$min.'.js';
+		return $config->get('public')->url.'/libraries/jquery/release/'.$this->options['version'].'/jquery'.$min.'.js';
 	}
 
 }

@@ -41,7 +41,7 @@ class Hosh_Form_Element_Ckeditor extends Zend_Form_Element_Textarea
 
         $customconfig = $patten_element->get('customconfig',$this->_customconfig);
         if (isset($customconfig)){            
-            $param['customConfig'] = $config->get('url_public').$view->Ckeditor(false)->getPath().'/config/'.$customconfig;
+            $param['customConfig'] = $config->get('public')->url.$view->Ckeditor(false)->getPath().'/config/'.$customconfig;
         }
         
         $uicolor = $patten_element->get('uicolor',$this->_uicolor);

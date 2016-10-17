@@ -152,7 +152,10 @@ class Hosh_Form_Factory extends Zend_Form
         $config = Hosh_Config::getInstance();
         $path_source = $config->get('path');
         $settings = array();
-        $settings['path'] = $path_source . '/plugins/form/' . $path;
+        if (empty($this->_settings['plugin']['path'])){
+            $this->_settings['plugin']['path'] = $config->get('form')->get('plugin')->path;
+        }
+        $settings['path'] = $this->_settings['plugin']['path']. $path;
         $settings['prefix'] = $this->_settings['plugin']['prefix'] . $id . '_';
         return $settings;
     }
@@ -790,6 +793,7 @@ class Hosh_Form_Factory extends Zend_Form
         
         if (isset($pattern_elements)) {
             usort($pattern_elements,array("self", "_setSortElement"));
+            $i = 10;
             foreach ($pattern_elements as $key => $val) {
                 $data_element_pattern = $val->getData();
                 $public = $this->getPublic($data_element_pattern);
@@ -811,6 +815,8 @@ class Hosh_Form_Factory extends Zend_Form
                 }
                 
                 if ($access) {
+                    $val->set('norder', $i);
+                    $i += 10;
                     $this->getHelperPattern('prepend', $val->get('name'));
                     $this->addElementForm($val->get('type'), $val->get('name'), 
                             $val->getData());
@@ -843,7 +849,7 @@ class Hosh_Form_Factory extends Zend_Form
     private  function _setSortElement($f1,$f2){
         if($f1->get('norder',0) < $f2->get('norder',0)){
             return -1;
-        }elseif($f1->get('norder',0) > $f2->get('norder',0)) {
+        }elseif($f1->get('norder',0) >= $f2->get('norder',0)) {
             return 1;
         }else {
             return 0;
@@ -923,7 +929,7 @@ class Hosh_Form_Factory extends Zend_Form
         
         if (! empty($options['notempty'])) {
             $element->setAllowEmpty(false);
-            $element->addValidator('notempty', false);
+            $element->addValidator('NotEmpty', false);
         }
         
         if (isset($options['norder'])) {

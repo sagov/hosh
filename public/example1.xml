@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document date="2016-10-07 11:20:16">
+<document date="2016-10-11 16:47:13">
   <type>hosh_form</type>
   <author>root</author>
-  <data>   
+  <data>
+    <id>375</id>
+    <idkind>155</idkind>
     <bpublic>1</bpublic>
     <options></options>
     <idclone></idclone>
@@ -17,7 +19,9 @@
     <snamekind>NORMAL</snamekind>
   </data>
   <elements>
-    <item>     
+    <item>
+      <id>0</id>
+      <idowner>375</idowner>
       <name>param1</name>
       <type>text</type>
       <bpublic>1</bpublic>
@@ -30,7 +34,9 @@
         <placeholder>the text ...</placeholder>
       </options>
     </item>
-    <item>      
+    <item>
+      <id>1</id>
+      <idowner>375</idowner>
       <name>param2</name>
       <type>select</type>
       <bpublic>1</bpublic>
@@ -49,7 +55,9 @@
 3=Text 3</value>
       </addmultioptions>
     </item>
-    <item>      
+    <item>
+      <id>2</id>
+      <idowner>375</idowner>
       <name>param3</name>
       <type>textarea</type>
       <bpublic>1</bpublic>

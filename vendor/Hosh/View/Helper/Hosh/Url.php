@@ -12,7 +12,7 @@ class Hosh_View_Helper_Hosh_Url extends Zend_View_Helper_HtmlElement
         }
         $urlparam = $this->_getUrlRequest($param, $defaultparam);
         $config = Hosh_Config::getInstance();
-        $url = $config->get('url_path') . '?' . implode('&', $urlparam);
+        $url = $config->get('route') . '?' . implode('&', $urlparam);
         return $url;
     }
 

@@ -13,7 +13,7 @@ class Hosh_Form_Helper_Codemirror_ThemeList extends Hosh_Form_Helper_Abstract
 		
 		$view = Hosh_View::getInstance();
 		$config = Hosh_Config::getInstance();
-		$path = $config->get('path_public').$view->CodeMirror(false)->getPath().'/theme/';
+		$path = $config->get('public')->path.$view->CodeMirror(false)->getPath().'/theme/';
 		
 		$result = array();
 		if (!is_dir($path)) {

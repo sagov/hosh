@@ -13,7 +13,7 @@ class HoshPluginForm_System_Form_Helper_Task_ExportCommit extends HoshPluginForm
         $flag = false;
         $config = Hosh_Config::getInstance();
         $configform = $config->get('form');
-        $path = $configform->get('path_patternxml');        
+        $path = $configform->get('pattern')->path_xml;        
         $fp = fopen($path . $idform . '.xml', 'w+');
         if ($fp) {
             flock($fp, LOCK_EX);

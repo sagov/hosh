@@ -15,7 +15,7 @@ class Hosh_Form_Helper_Element_Ckeditor_GetListConfigFiles extends Hosh_Form_Hel
 		
 		$view = Hosh_View::getInstance();
 		$config = Hosh_Config::getInstance();
-		$path = $config->get('path_public').$view->Ckeditor(false)->getPath().'config/';
+		$path = $config->get('public')->path.$view->Ckeditor(false)->getPath().'config/';
 		
 		$result = array();
 		if (!is_dir($path)) {
