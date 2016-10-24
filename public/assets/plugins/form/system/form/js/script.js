@@ -12,7 +12,8 @@ $.widget( "hosh.plugin_system_form_default", $.hosh.plugin_system_form, {
 		menulevel: '.menu-nav',
 		elementmodal:'ElementFormModal',
 		url_element:'',
-		url_displaygroup:''
+		url_displaygroup:'',
+		url_preview:''
 	},
 
 	_create: function() {		
@@ -169,6 +170,12 @@ $.widget( "hosh.plugin_system_form_default", $.hosh.plugin_system_form, {
 			that._ExportCommit('xml');
 			e.stopPropagation();
 			return false;
+		}).on('click','[data-task=form-preview]',function(e){
+			$(this).stop();
+			var title = $(this).attr('data-title');
+			that._Preview({title:title});
+			e.stopPropagation();
+			return false;
 		});
 		
 		if ($('.menuform-level').length>0){
@@ -245,6 +252,21 @@ $.widget( "hosh.plugin_system_form_default", $.hosh.plugin_system_form, {
 				$('body').append('<div id="'+options.elementmodal+'Affix"></div>'); 
 			}			 
 		});
+	},
+	
+	_Preview:function(param)	{
+		var options = this.options;
+		param = $.extend({}, {
+			id:'FormPreviewModal',
+			close:true,
+			title:'&nbsp;',
+			iframe:true,
+			url:options.url_preview
+		}, {
+			
+		}, param);
+		var BootstrapModal = new $.BootstrapModal(param);
+		BootstrapModal.modal();		
 	},
 	
 	_EditDisplayGroup:function(id){

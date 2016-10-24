@@ -211,7 +211,7 @@ class HoshPluginForm_System_Form_Helper_ListElements extends Hosh_Form_Helper_Ab
 	
 	protected function SortDisplayGroup($item1,$item2){
 		if($item1['norder'] < $item2['norder']) return -1;
-		elseif($item1['norder'] > $$item2['norder']) return 1;
+		elseif($item1['norder'] > $item2['norder']) return 1;
 		else return 0;	
 	}
 }	

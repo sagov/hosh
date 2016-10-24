@@ -44,6 +44,12 @@ class HoshPluginForm_System_Form_Helper_Layout_Default extends Hosh_Form_Helper_
                         'idform' => 'system_formdisplaygroup',
                         'idowner' => $form->getData('id')
                 ));
+        $param['url_preview'] = $view->Hosh_Url(
+                array(
+                        'controller' => 'form',
+                        'action' => 'emptylayout',
+                        'idform' => $form->getData('sname')
+                ));
         $script = '
 				;
 			(function($){

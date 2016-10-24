@@ -52,7 +52,10 @@ class HoshPluginForm_System_Form_Helper_Layout_BtnAction extends Hosh_Form_Helpe
         $btn2[] = '<a href="javascript:void(0);" data-task="export-xml"><i class="fa fa-upload" aria-hidden="true"></i>&nbsp; ' .
                 $transl->_('SYS_FORM_EXPORT_XML') . '</a>';
         $btn2[] = '<a href="javascript:void(0);" data-task="export-xml-commit"><i class="fa fa-hdd-o" aria-hidden="true"></i>&nbsp; Commit</a>';
-        $actions = array($btn,$btn2);
+        
+        $btn3[] = '<a href="javascript:void(0);" data-task="form-preview" data-title="Preview Form # '.$form->getData('sname').'"><i class="fa fa-eye" aria-hidden="true"></i>&nbsp; Preview</a>';
+        
+        $actions = array($btn,$btn2,$btn3);
         
         $xhtml = null;
         $xhtml .= '<div class="btn-group pull-right">

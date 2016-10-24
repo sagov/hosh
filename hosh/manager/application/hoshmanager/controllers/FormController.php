@@ -11,8 +11,14 @@ class Hoshmanager_FormController extends Zend_Controller_Action
 
    
 
+    public function emptylayoutAction ()
+    {  
+        $this->_helper->layout->setLayout('empty');
+        $this->forward('view');
+    }
+    
     public function indexAction ()
-    {        
+    {
         $this->forward('view');
     }
 
@@ -252,6 +258,10 @@ class Hoshmanager_FormController extends Zend_Controller_Action
                 case 'json':                     
                     $this->view->xhtml = Zend_Json::encode($result);                    
                     break;
+                    
+                default:
+                    $this->view->xhtml = $result;
+                    break;    
             }
         }
     }
