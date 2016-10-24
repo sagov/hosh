@@ -1,0 +1,16 @@
+@CHARSET "UTF-8";
+
+.ms-container
+{
+	width:100%
+}
+
+.ms-container .ms-list{
+	border-radius:0px
+}
+
+.ms-container .ms-footer-btn{
+	display:block;
+	width:100%;
+	border-top:0px
+}
