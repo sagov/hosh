@@ -14,3 +14,7 @@
 	width:100%;
 	border-top:0px
 }
+
+.ms-container .search-input{
+	border-bottom:0px
+}
