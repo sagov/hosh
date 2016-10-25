@@ -53,6 +53,7 @@ class Hosh_Form_Element_Dmuploader extends Zend_Form_Element_File
                         'isdebug'=>($debug == 2) ? true : false,
                 )
         );
+        $this->loadDefaultDecorators();
         $this->addDecorators($decorator);
         $options = array('islog'=>(!empty($debug)) ? true : false, 'islog_view'=>($debug == 2) ? true : false,'');
         $data_pattern = $patten_element->getData();
