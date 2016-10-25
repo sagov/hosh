@@ -31,6 +31,9 @@ class Hosh_Form_Element_Ui_Datepicker extends Zend_Form_Element_Text
     protected $_numberofmonths;
     protected $_dateformat = 'dd.mm.yy';
     protected $_showweek = false;
+    protected $_mindate;
+    protected $_maxdate;
+    protected $_range;
     
     public function init ()
     {
@@ -80,15 +83,53 @@ class Hosh_Form_Element_Ui_Datepicker extends Zend_Form_Element_Text
         $showWeek = (boolean)($patten_element->get('showweek',$this->_showweek));
         if ($showWeek){
             $param['showWeek'] = $showWeek;
-        }       
+        }
+
+        $minDate = $patten_element->get('mindate',$this->_mindate);
+        if (!empty($minDate)){
+            $param['minDate'] = $minDate;
+        }
+        
+        $maxDate = $patten_element->get('maxdate',$this->_maxdate);
+        if (!empty($maxDate)){
+            $param['maxDate'] = $maxDate;
+        }
+
+        $range = $patten_element->get('range',$this->_range);        
+        if (isset($range['type']) and !empty($range['depend']))
+        {
+            $typeDate = ($range['type'] == 'min') ? 'minDate' : 'maxDate';
+            
+            $script_d = '$( "#'.$idelement.'" ).on("change",function(){
+                            $("input[name='.$range['depend'].']").datepicker( "option", "'.$typeDate.'", $( "#'.$idelement.'" ).val() );
+                        });
+                        $("input[name='.$range['depend'].']").datepicker( "option", "'.$typeDate.'", $( "#'.$idelement.'" ).val() );';
+            
+        }
         
         $script = '
 					;(function($) {
 					   $(document).ready(function() {
-                            $( "#'.$idelement.'" ).datepicker('.Zend_Json::encode($param).');           
+                            datepicker_'.$name.' = $( "#'.$idelement.'" ).datepicker('.Zend_Json::encode($param).');  
+                           '.$script_d.'                 
 		               });
 		            })(jQuery);';
         $view->AddScriptDeclaration($script);
-    }    
+        
+        $decorator['ViewHelper'] = array(
+                'decorator' => 'ViewHelper'
+        );
+        $decorator['Bootstrap_Inputgroup'] = array(
+                'decorator' => 'Bootstrap_Inputgroup_Addon',
+                'options' => array(
+                        'text' => array(
+                                array('content'=>'<i class="fa fa-calendar" aria-hidden="true"></i>','placement'=>'prepend'),
+                        )
+                )
+        );
+        $this->addDecorators($decorator);
+    }
+
+   
    
 }    
