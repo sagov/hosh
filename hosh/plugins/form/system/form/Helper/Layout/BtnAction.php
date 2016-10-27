@@ -30,6 +30,15 @@ class HoshPluginForm_System_Form_Helper_Layout_BtnAction extends Hosh_Form_Helpe
             }        
         }
         
+        $config = Hosh_Config::getInstance();
+        $configform = $config->get('form');
+        $path = $configform->get('pattern')->path_xml;
+        $fileperms = substr(sprintf('%o', fileperms($path)), -4);
+        $iscommit = false;
+        if (in_array($fileperms,array('0777'))){
+            $iscommit = true;
+        }
+        
         $btn = $btn2 =  array();
         
         $btn[] = '<a href="javascript:void(0);" data-task="copy"><i class="fa fa-files-o" aria-hidden="true"></i>&nbsp; ' .
@@ -51,8 +60,11 @@ class HoshPluginForm_System_Form_Helper_Layout_BtnAction extends Hosh_Form_Helpe
         }
         $btn2[] = '<a href="javascript:void(0);" data-task="export-xml"><i class="fa fa-upload" aria-hidden="true"></i>&nbsp; ' .
                 $transl->_('SYS_FORM_EXPORT_XML') . '</a>';
-        $btn2[] = '<a href="javascript:void(0);" data-task="export-xml-commit"><i class="fa fa-hdd-o" aria-hidden="true"></i>&nbsp; Commit</a>';
-        
+        if ($iscommit){
+            $btn2[] = '<a href="javascript:void(0);" data-task="export-xml-commit"><i class="fa fa-hdd-o" aria-hidden="true"></i>&nbsp; Commit</a>';
+        }else{
+            $btn2[] = '<a href="javascript:void(0);"  style="opacity:0.6;cursor:none"><i class="fa fa-hdd-o" aria-hidden="true"></i>&nbsp; Commit</a>';
+        }        
         $btn3[] = '<a href="javascript:void(0);" data-task="form-preview" data-title="Preview Form # '.$form->getData('sname').'"><i class="fa fa-eye" aria-hidden="true"></i>&nbsp; Preview</a>';
         
         $actions = array($btn,$btn2,$btn3);

@@ -1,6 +1,5 @@
 <?php
 
-
 class Hoshmanager_FormController extends Zend_Controller_Action
 {
 
@@ -9,14 +8,12 @@ class Hoshmanager_FormController extends Zend_Controller_Action
             'decoratorElementHelper' => 'Decorator_Element_Bootstrap'
     );
 
-   
-
     public function emptylayoutAction ()
-    {  
+    {
         $this->_helper->layout->setLayout('empty');
         $this->forward('view');
     }
-    
+
     public function indexAction ()
     {
         $this->forward('view');
@@ -24,16 +21,16 @@ class Hoshmanager_FormController extends Zend_Controller_Action
 
     public function viewAction ()
     {
-        
         $form = $this->_getForm();
         $form->run();
         
         if ($form->isRequest()) {
             if (! $form->setRequest()) {
-                $errors = $form->getErrorMessages();
-                $alert = Hosh_Controller_Action_Helper_Alert::getInstance();
-                foreach ($errors as $val) {
-                    $alert->add($val, 'danger');
+                $view = Hosh_View::getInstance();
+                $message_error = $view->Hosh_Form_MessageErrors($form);
+                if (! empty($message_error)) {
+                    $alert = Hosh_Controller_Action_Helper_Alert::getInstance();
+                    $alert->add($message_error, 'danger');
                 }
             } else {
                 $this->view->successfully = true;
@@ -43,57 +40,35 @@ class Hoshmanager_FormController extends Zend_Controller_Action
         // submit button
         $submit_param = $this->getParam('submit', null);
         if (isset($submit_param)) {
-            if (! is_array($submit_param)){
+            if (! is_array($submit_param)) {
                 $submit_param = array();
-            }    
-            if (empty($submit_param['label'])){
+            }
+            if (empty($submit_param['label'])) {
                 $h_transl = Hosh_Translate::getInstance();
                 $translate = $h_transl->getTranslate();
                 $adapter_transl = $translate->getAdapter();
                 $h_transl->load('form/_');
                 $submit_param['label'] = $adapter_transl->_('SYS_SAVE');
-            }    
-            if (empty($submit_param['name'])){
+            }
+            if (empty($submit_param['name'])) {
                 $submit_param['name'] = 'save';
-            }    
-            $elements = $form->getElements();
-            $aorder = array();
-            foreach ($elements as $key => $element) {
-                $norder = $element->getOrder();
-                if (isset($norder)) {
-                    $aorder[] = $norder;
-                }
             }
             
-            $form->addElement('submit', $submit_param['name'], 
+            $action = array(
                     array(
-                            'class' => 'btn btn-primary',
-                            'DisableLoadDefaultDecorators' => true
-                    ));
-            $submit = $form->getElement($submit_param['name']);
-            $submit->setLabel($submit_param['label']);
-            if (count($aorder) > 0) {
-                rsort($aorder);
-                $max_order = $aorder[0];
-                $submit->setOrder($max_order + 1);
-            }
-            $decorators = array();
-            $decorators['ViewHelper'] = array(
-                    'decorator' => 'ViewHelper'
+                            'type' => 'submit',
+                            'label' => $submit_param['label'],
+                            'name' => $submit_param['name']
+                    ),
             );
-            $decorators['HtmlTag'] = array(
-                    'decorator' => 'HtmlTag',
-                    'options' => array(
-                            'tag' => 'div',
-                            'class' => 'wrap-footer-btn'
-                    )
-            );
-            $submit->addDecorators($decorators);
+            $form->getHelper('Hosh_AddAction', array('actions'=>$action));
+            
+            
         }
         
         $title_param = $this->getParam('title', null);
         $meta = $form->getHelperPattern('meta');
-        if (!empty($meta['title'])){
+        if (! empty($meta['title'])) {
             $this->view->headTitle($meta['title']);
         }
         $this->view->meta = $meta;
@@ -111,9 +86,9 @@ class Hoshmanager_FormController extends Zend_Controller_Action
         $pattern = $form->getPattern();
         $elements = $pattern->getElements();
         $newelpattern = array();
-        if ($form->isEdit()){
+        if ($form->isEdit()) {
             $form->loadData();
-        }    
+        }
         if (isset($elements[$name])) {
             $elements[$name]->set('defaultvalue', null);
             $newelpattern[$name] = $elements[$name];
@@ -177,12 +152,12 @@ class Hoshmanager_FormController extends Zend_Controller_Action
                             'isdir' => false,
                             'ext' => '.php'
                     ));
-            if (is_array($listhelpers)){
+            if (is_array($listhelpers)) {
                 foreach ($listhelpers as $helper) {
                     $list['self'][] = str_replace('.php', null, $helper);
                 }
             }
-            if (is_array($listdir)){
+            if (is_array($listdir)) {
                 foreach ($listdir as $dirvalue) {
                     $listhelpers2 = $dir->getListScan(
                             $pluginsetting['path'] . '/' . $form::HELPER . '/' .
@@ -211,7 +186,7 @@ class Hoshmanager_FormController extends Zend_Controller_Action
         $this->render('task');
         return;
     }
-    
+
     public function getelementsAction ()
     {
         $this->_helper->layout->disableLayout();
@@ -220,7 +195,10 @@ class Hoshmanager_FormController extends Zend_Controller_Action
         $listcategory = $list = array();
         
         $hcategory = new Hosh_Manager_Category();
-        $listcategory_data = $hcategory->getList(array('skindname'=>'FORM_ELEMENT'));
+        $listcategory_data = $hcategory->getList(
+                array(
+                        'skindname' => 'FORM_ELEMENT'
+                ));
         foreach ($listcategory_data as $val) {
             $listcategory[$val['id']] = $val;
         }
@@ -235,8 +213,7 @@ class Hoshmanager_FormController extends Zend_Controller_Action
         foreach ($listext as $val) {
             $list[$val['idcategory']][] = $val;
         }
-        $this->view->list = $list;        
-        
+        $this->view->list = $list;
     }
 
     public function taskAction ()
@@ -248,20 +225,19 @@ class Hoshmanager_FormController extends Zend_Controller_Action
         if (! empty($task)) {
             $format = $this->getRequest()->getParam('format', null);
             $result = null;
-            try{
+            try {
                 $result['result'] = $form->getHelper($task);
-            }catch (Exception $e)
-            {
-               $result['error'] = $e->getMessage(); 
+            } catch (Exception $e) {
+                $result['error'] = $e->getMessage();
             }
             switch (strtolower($format)) {
-                case 'json':                     
-                    $this->view->xhtml = Zend_Json::encode($result);                    
+                case 'json':
+                    $this->view->xhtml = Zend_Json::encode($result);
                     break;
-                    
+                
                 default:
                     $this->view->xhtml = $result;
-                    break;    
+                    break;
             }
         }
     }
@@ -287,13 +263,11 @@ class Hoshmanager_FormController extends Zend_Controller_Action
             $this->options['updateparams'] = array(
                     'id' => $id
             );
-        }  
+        }
         
         $form = new Hosh_Form($idform, $this->options);
         $form->initialize();
         
         return $form;
-    } 
-
-
+    }
 }
