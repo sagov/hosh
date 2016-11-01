@@ -907,8 +907,12 @@ class Hosh_Form_Factory extends Zend_Form
         }
         if (isset($value)) {
             $element->setValue($value);
-        }
-        $this->setDecoratorFormElement($element, $options);
+        } 
+
+        if (! empty($options['notempty'])) {
+            $element->setAllowEmpty(false);
+            $element->addValidator('NotEmpty', false);
+        }        
         
         if (! empty($options['addmultioptions']['helper'])) {
             
@@ -925,16 +929,14 @@ class Hosh_Form_Factory extends Zend_Form
             if (method_exists($element, 'setSeparator')) {
                 $element->setSeparator($options['separator']);
             }
-        }
-        
-        if (! empty($options['notempty'])) {
-            $element->setAllowEmpty(false);
-            $element->addValidator('NotEmpty', false);
-        }
+        }        
         
         if (isset($options['norder'])) {
             $element->setOrder($options['norder']);
         }
+        
+        $this->setDecoratorFormElement($element, $options);
+        
         $this->getHelperPattern('validator', $element->getName());
         
         return $element;
