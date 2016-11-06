@@ -14,7 +14,7 @@ return array(
                         'dbname' => 'hoshdb',
                         'charset' => 'utf8',
                         'preff' => 'preff_'
-                )
+                ) 
         ),
         
         // path directories
