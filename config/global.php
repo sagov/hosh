@@ -11,7 +11,7 @@ return array(
                         'host' => 'localhost',
                         'username' => 'root',
                         'password' => '',
-                        'dbname' => 'sfwdb',
+                        'dbname' => 'hoshdb',
                         'charset' => 'utf8',
                         'preff' => 'preff_'
                 )
