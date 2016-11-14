@@ -28,6 +28,7 @@ class Hosh_View_Helper_Bootstrap_Modal extends Zend_View_Helper_HtmlElement
 		if (!isset($options ['title'])) $options ['title'] = '&nbsp;';
 		if (isset($options ['hidehead'])) $head = false; else $head = true;
 		if (!isset($options ['close'])) $options ['close'] = 1;
+		$options['hidebackdrop'] = (!isset($options['hidebackdrop'])) ? true : false;
 		
 		$this->view->Bootstrap();
 		

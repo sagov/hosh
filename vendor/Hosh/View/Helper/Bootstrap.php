@@ -64,15 +64,17 @@ class Hosh_View_Helper_Bootstrap extends Zend_View_Helper_HeadScript
 	
 	public function remove(){
 		$container = $this->getContainer();
-		foreach ($container as $key=>$val){
+		$acontainer = $container->getArrayCopy();
+		foreach ($acontainer as $key=>$val){
 			if (isset($val->attributes['src']) and ($val->attributes['src'] == $this->file['js'])){
 				$this->__unset($key);
 			}
 		}
 		$this->view->Bootstrap_Noconflict(false)->remove();	
 
-		$container_css = $this->view->headLink()->getContainer();		
-		foreach ($container_css as $key=>$val){
+		$container_css = $this->view->headLink()->getContainer();
+		$acontainer_css = $container_css->getArrayCopy();
+		foreach ($acontainer_css as $key=>$val){
 			if (isset($val->href) and (in_array($val->href,$this->file['css']))){
 				$this->view->headLink()->__unset($key);
 			}

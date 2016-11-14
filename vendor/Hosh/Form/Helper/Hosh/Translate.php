@@ -6,6 +6,10 @@ class Hosh_Form_Helper_Hosh_Translate extends Hosh_Form_Helper_Abstract
 
     public function render ($options)
     {
+    	if (!isset($options['value'])){
+    		return;
+    	}
+    	
         $form = $this->getObject();
         
         $valuetranslate = $options['value'];

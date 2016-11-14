@@ -48,9 +48,9 @@ class Hosh_View_Helper_JQuery extends Zend_View_Helper_HeadScript
 	}
 	
 	public function remove(){
-		$container = $this->getContainer();
-		
-		foreach ($container as $key=>$val){
+		$container = $this->getContainer();	
+		$acontainer = $container->getArrayCopy();		
+		foreach ($acontainer as $key=>$val){
 			if (isset($val->attributes['src']) and ($val->attributes['src'] == $this->file)){
 				$this->__unset($key);				
 			}

@@ -30,7 +30,7 @@ class Hoshmanager_View_Helper_ModLanguage extends Zend_View_Helper_HtmlElement
                 <ul class="dropdown-menu dropdown-menu-right dropdown-modlanguage" role="menu" aria-labelledby="dLabel">';
         foreach ($list as $key => $val) {            
             $aurl['lang'] = $val['sname'];
-            $xhtml .= '<li><a href="' . $view->Hosh_Url($aurl) . '">' . $check .
+            $xhtml .= '<li><a href="' . $view->Hosh_Url($aurl) . '">' .
                      $val['scaption'] . '</a></li>';
         }
         $xhtml .= '</ul>
