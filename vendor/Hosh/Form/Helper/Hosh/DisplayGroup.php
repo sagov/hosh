@@ -22,7 +22,9 @@ class Hosh_Form_Helper_Hosh_DisplayGroup extends Hosh_Form_Helper_Abstract
 				$data = $val->getData();
 				if (!empty($data['displaygroup'])){
 					$element = $form->getElement($val->get('name'));
-					if ($element) $arr_elements[$val->get('displaygroup')][] = $val->get('name');
+					if ($element) {
+						$arr_elements[$val->get('displaygroup')][] = $val->get('name');
+					}
 				}
 			}
 		}
@@ -31,18 +33,23 @@ class Hosh_Form_Helper_Hosh_DisplayGroup extends Hosh_Form_Helper_Abstract
 				
 			if (!empty($arr_elements[$key])){
 				$options = array();
-				if (isset($val['label'])) $options['Legend'] = $val['label'];
-				if (empty($val['sname'])) $val['sname'] = $key;
+				if (isset($val['label'])) {
+					$options['Legend'] = $val['label'];
+				}
+				if (empty($val['sname'])) {
+					$val['sname'] = $key;
+				}
 				//$options['DisableLoadDefaultDecorators'] = true;
-				if (isset($val['norder'])) $options['Order'] = $val['norder'];
-				$form->addDisplayGroup($arr_elements[$key], $val['sname'],$options);		
-		
-				/* $val['decorator']['name'] = $key;						
+				if (isset($val['norder'])) {
+					$options['Order'] = $val['norder'];
+				}
+				$form->addDisplayGroup($arr_elements[$key], $val['sname'],$options);				
+				$val['decorator']['name'] = $key;						
 				if (!empty($val['decorator']['helper'])){
-					$form->addHelper($val['decorator']['helper'],$val['decorator']);
+					$form->getHelper($val['decorator']['helper'],$val['decorator']);
 				}else{
-					$form->addHelper('Decorator_DisplayGroup',$val['decorator']);
-				} */
+					$form->getHelper('Decorator_DisplayGroup',$val['decorator']);
+				}
 			}
 		}
 		return;

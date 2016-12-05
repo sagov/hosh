@@ -95,7 +95,8 @@ class Hosh_Form_Element_Ui_Datepicker extends Zend_Form_Element_Text
             $param['maxDate'] = $maxDate;
         }
 
-        $range = $patten_element->get('range',$this->_range);        
+        $range = $patten_element->get('range',$this->_range); 
+        $script_d = null;
         if (isset($range['type']) and !empty($range['depend']))
         {
             $typeDate = ($range['type'] == 'min') ? 'minDate' : 'maxDate';
