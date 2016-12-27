@@ -30,6 +30,9 @@ class Hosh_View_Helper_Hosh_Url extends Zend_View_Helper_HtmlElement
 
     protected function _getUrlRequest ($param, $defaultparam = true)
     {
+        if (!is_array($param)){
+            $param = array();
+        }
         if ($defaultparam) {
             $controller_param = array();
             $_controller = Zend_Controller_Front::getInstance();

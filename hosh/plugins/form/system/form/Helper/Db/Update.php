@@ -118,6 +118,9 @@ class HoshPluginForm_System_Form_Helper_Db_Update extends Hosh_Form_Helper_Abstr
             }
             if ($element = $form->getElement('sname')) {
                 $bind_object['sname'] = $element->getValue();
+                if (empty($bind_object['sname'])){
+                    $bind_object['sname'] = $data['id'];
+                }
             }
             if (count($bind_object) > 0) {
                 $package_object = new Hosh_Manager_Db_Package_Hosh_Object();

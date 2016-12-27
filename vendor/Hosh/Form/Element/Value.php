@@ -28,6 +28,23 @@ class Hosh_Form_Element_Value extends Zend_Form_Element_Xhtml
      */
     public $helper = 'formNote';
 
+    /* (non-PHPdoc)
+     * @see Zend_Form_Element::init()
+    */
+    public function init ()
+    {
+        $decorator['ViewHelper'] = array(
+            'decorator' => 'ViewHelper'
+        );
+        $decorator['HtmlTag3'] = array(
+            'decorator' => 'HtmlTag3',
+            'options' => array(
+                'tag'=>'div','class'=>'value-element'
+            )
+        );
+        $this->addDecorators($decorator);
+    }
+
     /**
      *
      * @param array $array            

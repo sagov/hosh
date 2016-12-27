@@ -30,7 +30,7 @@ return array(
                 'url' => '/assets'
         ),
         
-        'log' => false,
+        'log' => true,
         
         // form
         'form' => array(

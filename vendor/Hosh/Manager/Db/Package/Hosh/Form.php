@@ -34,6 +34,7 @@ class Hosh_Manager_Db_Package_Hosh_Form extends Hosh_Manager_Db_Table_Hosh_Form
         return parent::_register('FORM', $bind);
     }
 
+
     /**
      * Get data form
      *

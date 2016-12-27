@@ -46,7 +46,8 @@ class Hosh_Form_Element_Ui_Datepicker extends Zend_Form_Element_Text
         
         $param = array();        
         $view = Hosh_View::getInstance();
-        $view->JQueryUi(); 
+        $view->JQueryUi();
+        $view->JQuery_Inputmask();
 
         $changeMonth = (boolean)($patten_element->get('changemonth',$this->_changemonth));
         if ($changeMonth){
@@ -79,6 +80,10 @@ class Hosh_Form_Element_Ui_Datepicker extends Zend_Form_Element_Text
         $dateFormat = $patten_element->get('dateformat',$this->_dateformat);
         if (!empty($dateFormat)){
             $param['dateFormat'] = $dateFormat;
+
+            $inputmask = str_replace('d','9',$dateFormat);
+            $inputmask = str_replace('m','9',$inputmask);
+            $inputmask = str_replace('y','99',$inputmask);
         }
         $showWeek = (boolean)($patten_element->get('showweek',$this->_showweek));
         if ($showWeek){
@@ -96,23 +101,26 @@ class Hosh_Form_Element_Ui_Datepicker extends Zend_Form_Element_Text
         }
 
         $range = $patten_element->get('range',$this->_range); 
-        $script_d = null;
+        $script_d = array();
         if (isset($range['type']) and !empty($range['depend']))
         {
             $typeDate = ($range['type'] == 'min') ? 'minDate' : 'maxDate';
             
-            $script_d = '$( "#'.$idelement.'" ).on("change",function(){
+            $script_d[] = '$( "#'.$idelement.'" ).on("change",function(){
                             $("input[name='.$range['depend'].']").datepicker( "option", "'.$typeDate.'", $( "#'.$idelement.'" ).val() );
                         });
                         $("input[name='.$range['depend'].']").datepicker( "option", "'.$typeDate.'", $( "#'.$idelement.'" ).val() );';
             
         }
+        if (!empty($inputmask)) {
+            $script_d[] = '$( "#'.$idelement.'" ) . inputmask("'.$inputmask.'");';
+        }
         
         $script = '
 					;(function($) {
-					   $(document).ready(function() {
+					   $(document).ready(function() {					        
                             datepicker_'.$name.' = $( "#'.$idelement.'" ).datepicker('.Zend_Json::encode($param).');  
-                           '.$script_d.'                 
+                           '.implode('',$script_d).'                 
 		               });
 		            })(jQuery);';
         $view->AddScriptDeclaration($script);

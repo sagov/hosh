@@ -3,9 +3,9 @@
 class Hosh_Manager_Object_Log
 {
 
-    const KIND_UPDATE = 'u';    
+    const KIND_UPDATE = 'update';
 
-    const KIND_VIEW = 'v';
+    const KIND_INSERT = 'insert';
 
     
 
@@ -35,6 +35,10 @@ class Hosh_Manager_Object_Log
         $data['idobject'] = $idobject;
         $data['skind'] = $skind;
         $data['iduser'] = $iduser;
-        return $tbl_log->insert($data);
+        try {
+            return $tbl_log->insert($data);
+        }catch (Zend_Db_Statement_Exception $exception){
+            return false;
+        }
     }
 }

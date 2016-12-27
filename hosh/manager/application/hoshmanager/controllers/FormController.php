@@ -267,7 +267,7 @@ class Hoshmanager_FormController extends Zend_Controller_Action
         
         $form = new Hosh_Form($idform, $this->options);
         $form->initialize();
-        
+
         return $form;
     }
 }

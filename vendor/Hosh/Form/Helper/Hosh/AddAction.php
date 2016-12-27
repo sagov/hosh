@@ -13,11 +13,16 @@ class Hosh_Form_Helper_Hosh_AddAction extends Hosh_Form_Helper_Abstract
         {
             return;
         }
+
+        if (count($options['actions']) == 0){
+            return;
+        }
         
         $placement = (isset($placement['placement'])) ? $placement['placement'] : $this->_placement;       
         
         $count = 1000000;
         $i = 0;
+        $listelements = array();
         foreach ($options['actions'] as $key=>$val)
         {
             $val['type'] = (isset($val['type'])) ? $val['type'] : 'button';
@@ -48,34 +53,20 @@ class Hosh_Form_Helper_Hosh_AddAction extends Hosh_Form_Helper_Abstract
                             'class' => 'item-action-btn'
                     )
             );
-            if ($i == 0){
-                $decorators['ExtHtmlTag'] = array(
-                        'decorator' => 'ExtHtmlTag',
-                        'options' => array(
-                                'tag' => 'div',
-                                'class' => 'wrap-action-btn',
-                                'placement'=>'prepend',
-                                'openOnly'=>true,
-                                
-                        )
-                );
-            }else if ($i == count($options['actions'])){
-                $decorators['ExtHtmlTag'] = array(
-                        'decorator' => 'ExtHtmlTag',
-                        'options' => array(
-                                'tag' => 'div',                                
-                                'placement'=>'append',
-                                'closeOnly'=>true,
-                
-                        )
-                );
-            }
             
             $element->addDecorators($decorators);
+            $listelements[] = $val['name'];
+
             ++$count;
             ++$i;
         }
-        
+        if (count($listelements)>0) {
+            $form->addDisplayGroup($listelements, 'FLAction', array('order' => 100000, 'DisableLoadDefaultDecorators' => true));
+            $displaygroup = $form->getDisplayGroup('FLAction');
+            $displaygroup->addDecorator('FormElements')
+                ->addDecorator('HtmlTag', array('tag' => 'div', 'class' => 'wrap-action-btn'));
+        }
+
         return;
     }
     

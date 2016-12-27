@@ -84,7 +84,9 @@ class Hosh_Manager_Db_Table_Abstract extends Zend_Db_Table_Abstract
         $sql = 'UPDATE `' . $this->info('name') . '` SET
 					' . implode(',', $bindsql) . '
 					WHERE id = :id';
-        $stmt = $this->getAdapter()->query($sql, $bind);                
+        $stmt = $this->getAdapter()->query($sql, $bind);
+        $user = Hosh_Manager_User_Auth::getInstance();
+        $user->addLog($idself,Hosh_Manager_Object_Log::KIND_UPDATE);
         return $stmt;
     }
     
@@ -153,7 +155,8 @@ class Hosh_Manager_Db_Table_Abstract extends Zend_Db_Table_Abstract
                     sprintf('When you create an form the error occurred'));
             return false;
         }
-    
+        $user = Hosh_Manager_User_Auth::getInstance();
+        $user->addLog($idobject,Hosh_Manager_Object_Log::KIND_INSERT);
         return $idobject;
     }
     

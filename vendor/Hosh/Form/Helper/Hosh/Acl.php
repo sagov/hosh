@@ -32,8 +32,7 @@ class Hosh_Form_Helper_Hosh_Acl extends Hosh_Form_Helper_Abstract
             }
         }
         
-        $acl = Hosh_Manager_Acl::getInstance();
-        
+
         if (! empty($options['view']['value'])) {
             if (! $userauth->isAllowed($options['view']['value'])) {
                 require_once 'Zend/Exception.php';

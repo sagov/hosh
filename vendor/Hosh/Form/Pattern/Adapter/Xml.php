@@ -75,8 +75,19 @@ class Hosh_Form_Pattern_Adapter_Xml extends Hosh_Form_Pattern_Abstract
                             $idform));
         }
         $xml = new Zend_Config_Xml($path_file);
-        $arr_data = $xml->toArray(); 
-        $result_element = array();
+        $arr_data = $xml->toArray();
+        
+        $result_element = $result_displaygroup = array();
+        if (isset($arr_data['data']['displaygroup']['items']['item'])){            
+            $form_displaygroup = $arr_data['data']['displaygroup']['items']['item'];
+            if (!isset($form_displaygroup[0])){
+            	$form_displaygroup = array($form_displaygroup);            	
+            }
+            foreach ($form_displaygroup as $val){
+            	$result_displaygroup[$val['id']] = $val;
+            }
+            $arr_data['data']['displaygroup']['items'] = $result_displaygroup;
+        }        
         if (isset($arr_data['elements']['item'])){      
             $form_elements = $arr_data['elements']['item'];
             if (!isset($form_elements[0])){

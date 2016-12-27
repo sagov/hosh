@@ -8,10 +8,16 @@ class Hosh_Manager_Db_Package_Hosh_Object_Log extends Hosh_Manager_Db_Table_Hosh
     {
         $adapter = $this->getAdapter();
         $select = $this->_getSelect($filter);
-        $select->order('log.dtinner desc');
+        $select->order('max(log.dtinner) desc');
         $select->limit($count,$offset);
-        $select->group('log.idobject');
-        $result = $adapter->fetchAll($select);
+        $select->group(array('log.idobject'));
+
+        try{
+            $result = $adapter->fetchAll($select);
+        }catch (Zend_Db_Statement_Exception $exception){
+            $result = array();
+        }
+
         return $result;
     }
 
@@ -19,8 +25,7 @@ class Hosh_Manager_Db_Package_Hosh_Object_Log extends Hosh_Manager_Db_Table_Hosh
     {
         $adapter = $this->getAdapter();
         $_table_object = new Hosh_Manager_Db_Table_Hosh_Object();
-        $_table_class = new Hosh_Manager_Db_Table_Hosh_Class();
-        
+
         $select = $adapter->select();
         $select->from(array(
                 'log' => $this->info('name')

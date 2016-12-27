@@ -19,7 +19,12 @@ class Hosh_Form_Helper_Decorator_Element extends Hosh_Form_Helper_Abstract
         if (! $element) {
             return false;
         }
-        
+        $decorator['HtmlTag2'] = array(
+            'decorator' => 'HtmlTag2',
+            'options' => array(
+                'tag'=>'div','class'=>'value-element'
+            )
+        );
         $result['HtmlTag'] = array(
                 'decorator' => 'HtmlTag',
                 'options' => array(

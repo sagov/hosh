@@ -88,6 +88,13 @@ class Hosh_Form_Factory extends Zend_Form
     protected $_isaccess = true;
 
     /**
+     * Public Form
+     *
+     * @var boolean
+     */
+    protected $_bpublic  = 0;
+
+    /**
      *
      * @var boolean
      */
@@ -238,9 +245,8 @@ class Hosh_Form_Factory extends Zend_Form
         $this->setPlugin();
         $this->getHelper('init');
         $this->_isEdit()
-            ->_isAccess()
-            ->_initTranslate();
-        
+            ->_initTranslate()
+            ->_setAccess();
         return $this;
     }
 
@@ -345,9 +351,16 @@ class Hosh_Form_Factory extends Zend_Form
      *
      * @return Hosh_Form_Factory
      */
-    protected function _isAccess ()
+    protected function _setAccess ()
     {
         $flag = 1;
+        $public = $this->_getPublic();
+        $this->setPublic($public);
+        if (empty($public)){
+            $this->setAccess($public);
+            return $this;
+        }
+
         if ($this->getSettings('acl')) {
             if (! $access = $this->getHelperPattern('acl')) {
                 $flag = 0;
@@ -366,6 +379,51 @@ class Hosh_Form_Factory extends Zend_Form
     {
         $this->_isaccess = (boolean) ($flag);
         return $this;
+    }
+
+    /**
+     *
+     * @param integer $value
+     * @return Hosh_Form_Factory
+     */
+    public function setPublic($value)
+    {
+        $this->_bpublic = $value;
+        return $this;
+    }
+
+    /**
+     *
+     * @return integer
+     */
+    public function getPublic()
+    {
+        return $this->_bpublic;
+    }
+
+    /**
+     *
+     * @param mixed $pattern_data
+     * @return Ambigous <number, boolean, unknown>
+     */
+    protected function _getPublic ($pattern_data = null)
+    {
+        $public = 0;
+        if (! isset($pattern_data)) {
+            $patternclass = $this->getPattern();
+            $pattern_data = $patternclass->getData();
+        }
+        if (isset($pattern_data['bpublic'])) {
+            $public = $pattern_data['bpublic'];
+        }
+        if (! empty($pattern_data['public']['helper'])) {
+            $public_helper = $this->getHelper($pattern_data['public']['helper'],
+                $pattern_data['public']);
+            if (isset($public_helper)) {
+                $public = $public_helper;
+            }
+        }
+        return $public;
     }
 
     /**
@@ -499,7 +557,10 @@ class Hosh_Form_Factory extends Zend_Form
                         self::HELPER,
                         self::PATTERN
                 ) as $type) {
-                    $cType = ucfirst(strtolower($type));
+                    //$cType = ucfirst(strtolower($type));
+                    $cType = str_replace(' ', '_',
+                    ucwords(str_replace('_', ' ', strtolower($type))));
+                    
                     $pluginPath = $path . DIRECTORY_SEPARATOR . $cType .
                              DIRECTORY_SEPARATOR;
                     $pluginPrefix = $prefix . $nsSeparator . $cType;                    
@@ -654,7 +715,7 @@ class Hosh_Form_Factory extends Zend_Form
      */
     public function getData ($key, $default = null)
     {
-        
+        $key = strtolower($key);
         if (isset($this->_data[$key])) {
             return $this->_data[$key];
         }        
@@ -669,7 +730,7 @@ class Hosh_Form_Factory extends Zend_Form
      */
     public function setData ($key, $value)
     {
-        $this->_data[$key] = $value;
+        $this->_data[strtolower($key)] = $value;
         return $this;
     }
 
@@ -680,7 +741,12 @@ class Hosh_Form_Factory extends Zend_Form
      */
     public function setDataAll ($value)
     {
-        $this->_data = $value;
+        if (is_array($value)){
+            $this->_data = array_change_key_case($value,CASE_LOWER);
+        }else{
+            $this->_data = $value;
+        }
+
         return $this;
     }
     
@@ -702,6 +768,9 @@ class Hosh_Form_Factory extends Zend_Form
             return $this;
         }
         $this->_data = $this->getHelperPattern('data');
+        if (is_array($this->_data)){
+            $this->_data = array_change_key_case($this->_data,CASE_LOWER);
+        }
         return $this;
     }
 
@@ -796,11 +865,11 @@ class Hosh_Form_Factory extends Zend_Form
             $i = 10;
             foreach ($pattern_elements as $key => $val) {
                 $data_element_pattern = $val->getData();
-                $public = $this->getPublic($data_element_pattern);
+                $public = $this->_getPublic($data_element_pattern);
                 if ($pattern->isDisabled()) {
                     $val->set('type', 'value');
                 }
-                if ($public == 2) {
+                if (($public == 2) or ($this->_bpublic == 2)) {
                     $val->set('type', 'value');
                 }
                 $access = true;
@@ -835,6 +904,7 @@ class Hosh_Form_Factory extends Zend_Form
             $value = $this->getIdSelf();
             $element->setValue($value);
             $element->addDecorator('ViewHelper');
+            $element->setOrder(1000000);
         }
         
         return $this;
@@ -865,6 +935,8 @@ class Hosh_Form_Factory extends Zend_Form
      */
     public function addElementForm ($type, $name, $options = array())
     {
+        $type = str_replace(' ', '_',
+        		ucwords(str_replace('_', ' ', strtolower($type))));
         
         $options['options']['prefixPath'] = $this->_settings['prefixPath'];
         if (empty($options['options']['id'])) {
@@ -934,10 +1006,21 @@ class Hosh_Form_Factory extends Zend_Form
         if (isset($options['norder'])) {
             $element->setOrder($options['norder']);
         }
+
+        // css
+        if ($this->getSettings('headlink')) {
+            $this->getHelperPattern('css',$element->getName());
+        }
+        // js
+        if ($this->getSettings('headscript')) {
+            $this->getHelperPattern('js',$element->getName());
+        }
         
         $this->setDecoratorFormElement($element, $options);
         
         $this->getHelperPattern('validator', $element->getName());
+
+
         
         return $element;
     }
@@ -993,30 +1076,7 @@ class Hosh_Form_Factory extends Zend_Form
         return $result;
     }
 
-    /**
-     *
-     * @param mixed $pattern_data            
-     * @return Ambigous <number, boolean, unknown>
-     */
-    public function getPublic ($pattern_data = null)
-    {
-        $public = 0;
-        if (! isset($pattern_data)) {
-            $patternclass = $this->getPattern();
-            $pattern_data = $patternclass->getData();
-        }
-        if (isset($pattern_data['bpublic'])) {
-            $public = $pattern_data['bpublic'];
-        }
-        if (! empty($pattern_data['public']['helper'])) {
-            $public_helper = $this->getHelper($pattern_data['public']['helper'], 
-                    $pattern_data['public']);
-            if (isset($public_helper)) {
-                $public = $public_helper;
-            }
-        }
-        return $public;
-    }
+
 
     /**
      * @return Hosh_Form_Factory
