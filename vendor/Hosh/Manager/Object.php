@@ -3,10 +3,23 @@
 class Hosh_Manager_Object
 {
     protected $id;
+
+    protected $data;
     
     public function __construct($id)
     {
         $this->id = $id;
+    }
+
+    public function getData()
+    {
+        static $result;
+        if (isset($result[$this->id])){
+            return $result[$this->id];
+        }
+        $hobject = new Hosh_Manager_Db_Package_Hosh_Object();
+        $result[$this->id] = $hobject->getObject($this->id);
+        return $result[$this->id];
     }
     
     /**
@@ -67,5 +80,17 @@ class Hosh_Manager_Object
         $iduser = $auth->getId();
         $objedit = new Hosh_Manager_Object_Edit();
         return $objedit->removeItem($this->id, $iduser);
+    }
+
+    public function getClassName()
+    {
+        $data = $this->getData();
+        return $data['snameclass'];
+    }
+
+    public function isSystem()
+    {
+        $data = $this->getData();
+        return (empty($data['bsystem'])) ? false : true;
     }
 }

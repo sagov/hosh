@@ -30,6 +30,14 @@ class Hoshmanager_Ref_ExtensionController extends Hoshmanager_Ref_Abstract
      */
     protected $acl_value = 'HOSH_SYSTEM_EXTENSION_REF';
 
+    protected $acl_value_add = 'HOSH_SYSTEM_EXTENSION_ADD';
+
+    protected $acl_value_remove = 'HOSH_SYSTEM_EXTENSION_REMOVE';
+
+    protected $acl_value_delete = 'HOSH_SYSTEM_EXTENSION_DELETE';
+
+    protected $acl_value_restore = 'HOSH_SYSTEM_EXTENSION_RESTORE';
+
     /**
      *
      * @return Hoshmanager_Ref_ExtensionController
@@ -50,7 +58,7 @@ class Hoshmanager_Ref_ExtensionController extends Hoshmanager_Ref_Abstract
                         'addbutton' => array(
                                 'link' => $this->view->Url(),
                                 'scaption' => $translate->_('HOSH_SYS_NEW_EXTENSION'),
-                                'acl' => 'HOSH_SYSTEM_EXTENSION_ADD'
+                                'acl' => $this->acl_value_add
                         )
                 ));
         
@@ -86,6 +94,7 @@ class Hoshmanager_Ref_ExtensionController extends Hoshmanager_Ref_Abstract
      */
     protected function getList ($param)
     {
+
         $m_extension = new Hosh_Manager_Extension();
         $filter = array();
         
@@ -108,11 +117,30 @@ class Hoshmanager_Ref_ExtensionController extends Hoshmanager_Ref_Abstract
                             'search' => $param['search'],
                     ));
             $list[$key]['scaption'] = '# ' . $val['id'] . ' ' . $val['sname'];
+            $list[$key]['task'] = $this->_getTaskAction($val);
         }
         $paginator = $this->_getPagination($totalcount, $param['page'],$this->countList);
         if ($paginator) {
             $this->view->paginator = $paginator->run();
         }
         return $list;
+    }
+
+    public function deleteAction()
+    {
+        $id = $this->getRequest()->getParam('target', null);
+        $this->_setStateObject($id, Hosh_Manager_STATE::STATE_DELETE, Hosh_Manager_Extension::CLASSNAME, $this->acl_value_delete);
+    }
+
+    public function restoreAction()
+    {
+        $id = $this->getRequest()->getParam('target', null);
+        $this->_setStateObject($id, Hosh_Manager_STATE::STATE_NORMAL, Hosh_Manager_Extension::CLASSNAME, $this->acl_value_restore);
+    }
+
+    public function removeAction()
+    {
+        $id = $this->getRequest()->getParam('target', null);
+        $this->_removeObject($id, Hosh_Manager_Extension::CLASSNAME, $this->acl_value_remove);
     }
 }

@@ -74,7 +74,8 @@ class Hosh_Manager_Db_Package_Hosh_Extension extends Hosh_Manager_Db_Table_Hosh_
                         'idstate',
                         'dtinsert',
                         'dtupdate',
-                        'scaption'
+                        'scaption',
+                        'bsystem',
                 ))
             ->join(
                 array(

@@ -81,7 +81,7 @@ class Hosh_Manager_Db_Package_Hosh_Acl extends Hosh_Manager_Db_Table_Hosh_Acl
         $adapter = $this->getAdapter();
         $_acl_value = new Hosh_Manager_Db_Table_Hosh_Acl_Value();
         $_table_object = new Hosh_Manager_Db_Table_Hosh_Object();
-        $_table_state = new Hosh_Manager_Db_Table_Hosh_State();
+
         
         $select = $adapter->select()
             ->from(array(
@@ -125,6 +125,11 @@ class Hosh_Manager_Db_Package_Hosh_Acl extends Hosh_Manager_Db_Table_Hosh_Acl
         if (isset($filter['sysdate'])) {
             $select->where(' acl.dtfrom < NOW() or acl.dtfrom is null');
             $select->where(' acl.dttill > NOW() or acl.dttill is null');
+        }
+
+        if (isset($filter['snamestate'])) {
+            $select->where('state.sname = :snamestate');
+            $bind['snamestate'] = $filter['snamestate'];
         }
         
         if (count($where_or) > 0) {

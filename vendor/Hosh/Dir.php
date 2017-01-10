@@ -2,7 +2,7 @@
 /**
  * Hosh Framework
  *
- * @category    Hosh  
+ * @category    Hosh
  * @package     Hosh_Dir
  * @copyright   Copyright (c) 2016 Hosh
  * @version   $Id: Dir.php 21.04.2016 17:42:50
@@ -10,11 +10,11 @@
 
 /**
  * Dir
- * 
+ *
  * @category   Hosh
  * @package     Hosh_Dir
  * @author  Vladimir Sagov <sagov.vladimir@gmail.com>
- * @copyright  Copyright (c) 2016 Hosh 
+ * @copyright  Copyright (c) 2016 Hosh
  *
  */
 class Hosh_Dir
@@ -22,14 +22,15 @@ class Hosh_Dir
 
     /**
      * Scan Dir
+     *
      * @param string $path
-     * @param array $filter
+     * @param array  $filter
      * @throws Zend_Form_Exception
-     * @return array 
+     * @return array
      */
-    public function getListScan ($path, $filter = null)
+    public function getListScan($path, $filter = null)
     {
-        if (! is_dir($path)) {
+        if (!is_dir($path)) {
             return false;
         }
         $list = scandir($path);
@@ -47,10 +48,10 @@ class Hosh_Dir
                     }
                 }
             }
-            
+
             if (isset($filter['isdir'])) {
                 if ($filter['isdir']) {
-                    if (! is_dir($path . '/' . $val)) {
+                    if (!is_dir($path . '/' . $val)) {
                         $flag = false;
                     }
                 } else {
@@ -59,7 +60,7 @@ class Hosh_Dir
                     }
                 }
             }
-            
+
             if (isset($filter['ext'])) {
                 if (is_array($filter['ext'])) {
                     foreach ($filter['ext'] as $valext) {
@@ -73,7 +74,7 @@ class Hosh_Dir
                     }
                 }
             }
-            
+
             if ($flag) {
                 $result[] = $val;
             }

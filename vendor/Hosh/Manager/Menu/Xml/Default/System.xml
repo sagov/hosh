@@ -88,7 +88,7 @@
 			<scaption>HM_CATEGORY_TYPES</scaption>
 			<controller>ref_category_kind</controller>
 			<action>view</action>
-			<acl>HOSH_SYSTEM_CATEGORY_TYPE_REF</acl>	
+			<acl>HOSH_SYSTEM_CATEGORY_KIND_REF</acl>
 			<icon>fa fa-sitemap</icon>	
 		</item>		
 	</items>

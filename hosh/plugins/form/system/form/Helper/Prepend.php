@@ -5,14 +5,7 @@ class HoshPluginForm_System_Form_Helper_Prepend extends Hosh_Form_Helper_Abstrac
 	public function render($options){
 		$form = $this->getObject();
 		
-		if ($form->isEdit()){
-		    $id = $form->getData('id');
-		    if (empty($id)){
-		      require_once 'Zend/Form/Exception.php';
-		      throw new Zend_Form_Exception(sprintf('Объект не найден'));
-		      return false;
-		    }		    
-		}
+
 		
 		$pattern = $form->getPattern();
 		$elements = $pattern->getElements();

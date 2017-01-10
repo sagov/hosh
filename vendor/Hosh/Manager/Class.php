@@ -19,6 +19,9 @@
  */
 class Hosh_Manager_Class
 {
+
+    const CLASSNAME = 'CLASS';
+
     /**
      * @param string $name
      * @throws Zend_Form_Exception

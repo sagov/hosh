@@ -11,7 +11,11 @@ class HoshPluginForm_System_Extension_Helper_Db_GetData extends Hosh_Form_Helper
         $id = $updateparams['id'];
         $package = new Hosh_Manager_Extension();
         $object = $package->getObject($id);
-        
+        if (empty($object['id'])){
+            require_once 'Zend/Form/Exception.php';
+            throw new Zend_Form_Exception(sprintf('Object "%s" not found', $id));
+            return;
+        }
         if (in_array(strtolower($object['snamekind']), 
                 array(
                         'form_helper',

@@ -2,6 +2,9 @@
 
 class Hosh_Manager_Language
 {
+
+    const CLASSNAME = 'LANGUAGE';
+
     /**
      * Adapter
      * @var string

@@ -55,7 +55,8 @@ class Hosh_Manager_Db_Package_Hosh_User extends Hosh_Manager_Db_Table_Hosh_User
         ), 'obj.id=user.id', array(
                 'idstate',
                 'dtinsert',
-                'dtupdate'
+                'dtupdate',
+                'bsystem'
         ))
             ->join(array(
                 'state' => $_table_object->info('name')

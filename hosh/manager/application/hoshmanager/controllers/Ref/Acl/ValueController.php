@@ -25,6 +25,14 @@ class Hoshmanager_Ref_Acl_ValueController extends Hoshmanager_Ref_Abstract
 
     protected $acl_value = 'HOSH_SYSTEM_ACL_REF';
 
+    protected $acl_value_add = 'HOSH_SYSTEM_ACL_ADD';
+
+    protected $acl_value_remove = 'HOSH_SYSTEM_ACL_REMOVE';
+
+    protected $acl_value_delete = 'HOSH_SYSTEM_ACL_DELETE';
+
+    protected $acl_value_restore = 'HOSH_SYSTEM_ACL_RESTORE';
+
     /**
      *
      * @return Hoshmanager_Ref_Acl_ValueController
@@ -43,7 +51,7 @@ class Hoshmanager_Ref_Acl_ValueController extends Hoshmanager_Ref_Abstract
                         'addbutton' => array(
                                 'link' => $this->view->Url(),
                                 'scaption' => $translate->_('HOSH_SYS_NEW_PERMISSION'),
-                                'acl' => 'HOSH_SYSTEM_ACL_ADD'
+                                'acl' => $this->acl_value_add
                         )
                 ));
         
@@ -78,6 +86,11 @@ class Hoshmanager_Ref_Acl_ValueController extends Hoshmanager_Ref_Abstract
 
     protected function getList ($param)
     {
+        $h_transl = Hosh_Translate::getInstance();
+        $translate = $h_transl->getTranslate();
+        $adapter_transl = $translate->getAdapter();
+        $h_transl->load('form/_');
+        $user = Hosh_Manager_User_Auth::getInstance();
         $filter = array();
         if (isset($param['search'])) {
             $filter['sname'] = $param['search'];
@@ -100,6 +113,7 @@ class Hoshmanager_Ref_Acl_ValueController extends Hoshmanager_Ref_Abstract
                             'search' => $param['search']
                     ));
             $list[$key]['scaption'] = '# ' . $val['id'] . ' ' . $val['sname'];
+            $list[$key]['task'] = $this->_getTaskAction($val);
         }
        
         $paginator = $this->_getPagination($totalcount, $param['page'], 
@@ -109,5 +123,24 @@ class Hoshmanager_Ref_Acl_ValueController extends Hoshmanager_Ref_Abstract
         }
         
         return $list;
+    }
+
+
+    public function deleteAction()
+    {
+        $id = $this->getRequest()->getParam('target', null);
+        $this->_setStateObject($id, Hosh_Manager_STATE::STATE_DELETE, Hosh_Manager_Acl_Value::CLASSNAME, $this->acl_value_delete);
+    }
+
+    public function restoreAction()
+    {
+        $id = $this->getRequest()->getParam('target', null);
+        $this->_setStateObject($id, Hosh_Manager_STATE::STATE_NORMAL, Hosh_Manager_Acl_Value::CLASSNAME, $this->acl_value_restore);
+    }
+
+    public function removeAction()
+    {
+        $id = $this->getRequest()->getParam('target', null);
+        $this->_removeObject($id, Hosh_Manager_Acl_Value::CLASSNAME, $this->acl_value_remove);
     }
 }

@@ -19,6 +19,9 @@
  */
 class Hosh_Manager_Extension
 {
+
+    const CLASSNAME = 'EXTENSION';
+
     /**
      * Get form object extension
      *

@@ -20,6 +20,11 @@
  */
 class Hosh_Manager_Category
 {
+
+    const CLASSKINDNAME = 'CATEGORY_KIND';
+
+    const CLASSNAME = 'CATEGORY';
+
     /**
      * Category data
      * @param string $id

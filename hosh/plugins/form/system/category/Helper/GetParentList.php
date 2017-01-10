@@ -8,9 +8,12 @@ class HoshPluginForm_System_Category_Helper_GetParentList extends Hosh_Form_Help
 		$form = $this->getObject();
 		$updateparams = $form->getSettings('updateparams');
 		$idselected = $updateparams['id'];
-		
+
+
+        $filter = array();
+        $filter['skindname'] = $form->getData('skindname');
 		$manager_category = new Hosh_Manager_Category();		
-		$list = $manager_category->getList();
+		$list = $manager_category->getList($filter);
 		if (count($list) == 0){
 		    return array();
 		}

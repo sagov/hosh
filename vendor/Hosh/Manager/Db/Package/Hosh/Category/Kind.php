@@ -27,7 +27,8 @@ class Hosh_Manager_Db_Package_Hosh_Category_Kind extends Hosh_Manager_Db_Table_H
                         'dtinsert',
                         'dtupdate',
                         'sname',
-                        'scaption'
+                        'scaption',
+                        'bsystem'
                 ))
             ->join(array(
                 'state' => $_table_object->info('name')

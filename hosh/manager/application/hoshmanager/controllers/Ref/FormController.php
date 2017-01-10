@@ -29,6 +29,14 @@ class Hoshmanager_Ref_FormController extends Hoshmanager_Ref_Abstract
      * @var unknown
      */
     protected $acl_value = 'HOSH_SYSTEM_FORM_REF';
+
+    protected $acl_value_add = 'HOSH_SYSTEM_FORM_ADD';
+
+    protected $acl_value_remove = 'HOSH_SYSTEM_FORM_REMOVE';
+
+    protected $acl_value_delete = 'HOSH_SYSTEM_FORM_DELETE';
+
+    protected $acl_value_restore = 'HOSH_SYSTEM_FORM_RESTORE';
     
    
 
@@ -66,7 +74,7 @@ class Hoshmanager_Ref_FormController extends Hoshmanager_Ref_Abstract
                         'addbutton' => array(
                                 'link' => $this->view->Url(),
                                 'scaption' => $adapter_transl->_('SYS_FORM_NEWFORM'),
-                                'acl' => 'HOSH_SYSTEM_FORM_ADD'
+                                'acl' => $this->acl_value_add
                         ),
                         'subaddbutton' => array('<a href="'.$this->view->Url(array('controller'=>'import','action'=>'index','layout'=>'empty')).'" title="'.$translate->_('HM_IMPORT').'" class="hosh-modal" rel=\'{"iframe":true}\'>'.$translate->_('HM_IMPORT').'</a>'),
                 ));
@@ -113,11 +121,10 @@ class Hoshmanager_Ref_FormController extends Hoshmanager_Ref_Abstract
     {
         $h_transl = Hosh_Translate::getInstance();
         $translate = $h_transl->getTranslate();
-        $adapter_transl = $translate->getAdapter();
         $h_transl->load('form');
         $h_transl->load('form/_');
         
-        $user = Hosh_Manager_User_Auth::getInstance();
+
         
         $form_manager = new Hosh_Manager_Form();
         $listkinds = $form_manager->getKinds();
@@ -154,10 +161,8 @@ class Hoshmanager_Ref_FormController extends Hoshmanager_Ref_Abstract
                             'page' => $param['page'],
                             'search' => $param['search']
                     ));
-            $list[$key]['scaption'] = '# ' . $val['id'] . ' ' . $adapter_transl->_($val['scaption']);
-            if($user->isAllowed('HOSH_SYSTEM_FORM_DELETE') and (empty($val['bsystem']))){
-                $list[$key]['task']['delete'] = array('scaption'=>$adapter_transl->_('SYS_SET_DELETE'));
-            }
+            $list[$key]['scaption'] = '# ' . $val['id'] . ' ' . $translate->_($val['scaption']);
+            $list[$key]['task'] = $this->_getTaskAction($val);
         }
         $paginator = $this->_getPagination($totalcount, $param['page'],$this->countList);
         if ($paginator) {
@@ -165,17 +170,24 @@ class Hoshmanager_Ref_FormController extends Hoshmanager_Ref_Abstract
         }
         return $list;
     }
-    
+
+
     public function deleteAction()
     {
-        $user = Hosh_Manager_User_Auth::getInstance();
-        if(!$user->isAllowed('HOSH_SYSTEM_FORM_DELETE')){
-            return false;
-        }
-        $id = $this->getRequest()->getParam('target', null);        
-        $hform = new Hosh_Manager_Form();
-        $hform->remove($id);        
-        $this->_menuRefresh();
+        $id = $this->getRequest()->getParam('target', null);
+        $this->_setStateObject($id, Hosh_Manager_STATE::STATE_DELETE, Hosh_Manager_Form::CLASSNAME, $this->acl_value_delete);
+    }
+
+    public function restoreAction()
+    {
+        $id = $this->getRequest()->getParam('target', null);
+        $this->_setStateObject($id, Hosh_Manager_STATE::STATE_NORMAL, Hosh_Manager_Form::CLASSNAME, $this->acl_value_restore);
+    }
+
+    public function removeAction()
+    {
+        $id = $this->getRequest()->getParam('target', null);
+        $this->_removeObject($id, Hosh_Manager_Form::CLASSNAME, $this->acl_value_remove);
     }
     
     

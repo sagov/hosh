@@ -1,19 +1,34 @@
 <?php
 
+
+/**
+ * Class Hosh_Form_Helper_MultiOptions_Db_Pdo_Select
+ */
 class Hosh_Form_Helper_MultiOptions_Db_Pdo_Select extends Hosh_Form_Helper_Abstract
 {
 
+    /**
+     * @var string
+     */
     protected $_field_value = 'id';
 
+    /**
+     * @var string
+     */
     protected $_field_text = 'stext';
 
-    public function render ($options)
+
+    /**
+     * @param $options
+     * @return array
+     */
+    public function render($options)
     {
-        
-        if (empty($options['sql'])){
-           return array(); 
+
+        if (empty($options['sql'])) {
+            return array();
         }
-        $sql = $options['sql'];        
+        $sql = $options['sql'];
         if (!empty($options['field']['value'])) {
             $this->_field_value = $options['field']['value'];
         }
@@ -22,11 +37,11 @@ class Hosh_Form_Helper_MultiOptions_Db_Pdo_Select extends Hosh_Form_Helper_Abstr
         }
         $result = array();
         $db = Hosh_Db::get();
-        $list = $db->fetchAll($sql);        
-        foreach ($list as $val) {           
+        $list = $db->fetchAll($sql);
+        foreach ($list as $val) {
             $result[$val[$this->_field_value]] = $val[$this->_field_text];
         }
-        
+
         return $result;
     }
 }

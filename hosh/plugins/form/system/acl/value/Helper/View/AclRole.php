@@ -65,14 +65,14 @@ class HoshPluginForm_System_Acl_Value_Helper_View_AclRole extends Hosh_Form_Help
 					$icon['remove'] = '<a href="#" data-task="removeaclrole" data-target="'.$val['id'].'" data-toggle="tooltip" data-placement="auto" title="'.$translate->_('SYS_SET_DELETE').'"><span class="glyphicon glyphicon-trash"></span></a>';
 				}
 			}
-			if ($acltreelist[$val['id']]['isset']) {
+			if (isset($acltreelist[$val['id']]['isset'])) {
 				$icon['edit'] = '<a href="#" data-task="setaclrolevalue" data-target="'.$val['id'].'"  data-toggle="tooltip" data-placement="auto" title="'.$translate->_('SYS_SET_EDIT').'"><span class="glyphicon glyphicon-edit"></span></a>';
 				$classitem = ' item-set';
 			}else{
 				$icon['edit'] = '<a href="#" data-task="setaclrolevalue" data-target="'.$val['id'].'" data-toggle="tooltip" data-placement="auto" title="'.$translate->_('HOSH_SYS_ACLV_SETTING_ACCESS').'"><span class="glyphicon glyphicon-plus"></span></a>';
 			}
 			if (!isset($icon['remove'])) $icon['remove'] = null;
-			if ($acltreelist[$val['id']]['isset']) {
+			if (isset($acltreelist[$val['id']]['isset'])) {
 				$param = array('bdeny'=>$acltreelist[$val['id']]['bdeny'],'dtfrom'=>$acltreelist[$val['id']]['dtfrom'],'dttill'=>$acltreelist[$val['id']]['dttill']);
 			}else{
 				$param = array();

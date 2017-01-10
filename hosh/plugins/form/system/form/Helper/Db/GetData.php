@@ -15,6 +15,8 @@ class HoshPluginForm_System_Form_Helper_Db_GetData extends Hosh_Form_Helper_Abst
         $form_data = $form_manager->getObject($id);
         
         if (! $form_data) {
+            require_once 'Zend/Form/Exception.php';
+            throw new Zend_Form_Exception(sprintf('Object "%s" not found', $id));
             return;
         }
         

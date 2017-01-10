@@ -25,6 +25,8 @@ class Hosh_Manager_Acl_Value
 	 * @var string
 	 */
 	protected $id;
+
+	const CLASSNAME = 'ACL_VALUE';
 	
 	/**
 	 * @param string $id

@@ -54,7 +54,8 @@ class Hosh_Manager_Db_Package_Hosh_Class extends Hosh_Manager_Db_Table_Hosh_Clas
                         'dtinsert',
                         'dtupdate',
                         'sname',
-                        'scaption'
+                        'scaption',
+                        'bsystem'
                 ))
             ->join(array(
                 'state' => $_table_object->info('name')

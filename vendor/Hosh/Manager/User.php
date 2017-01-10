@@ -22,6 +22,8 @@
 class Hosh_Manager_User
 {
 
+    const CLASSNAME = 'USER';
+
     /**
      * Adapter
      * @var string
@@ -108,7 +110,8 @@ class Hosh_Manager_User
                 array(
                         'roles' => $aroles,
                         'user' => $this->id,
-                        'sysdate' => true
+                        'sysdate' => true,
+                        'snamestate' => Hosh_Manager_State::STATE_NORMAL
                 ));
         return $list;
     }

@@ -14,7 +14,7 @@
 			content: '',
 			iframe: false,
 			url: '',
-			loading_content: '<i class="fa fa-spinner fa-spin"></i>',
+			loading_content: '<i class="fa fa-spinner fa-pulse"></i>',
 			append_load:function(object){},
 			dialog_size: 'modal-lg',
 			footer:false,

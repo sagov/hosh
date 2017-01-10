@@ -21,7 +21,16 @@ class Hoshmanager_Ref_StateController extends Hoshmanager_Ref_Abstract
 {
 	
 	protected $idform = 'system_state';
+
 	protected $acl_value = 'HOSH_SYSTEM_STATE_REF';
+
+    protected $acl_value_add = 'HOSH_SYSTEM_STATE_ADD';
+
+    protected $acl_value_remove = 'HOSH_SYSTEM_STATE_REMOVE';
+
+    protected $acl_value_delete = 'HOSH_SYSTEM_STATE_DELETE';
+
+    protected $acl_value_restore = 'HOSH_SYSTEM_STATE_RESTORE';
 	
 	/* (non-PHPdoc)
 	 * @see Hoshmanager_Ref_Abstract::viewAction()
@@ -46,7 +55,7 @@ class Hoshmanager_Ref_StateController extends Hoshmanager_Ref_Abstract
 		        array('addbutton'=> array(
 		                'link' => $this->view->Url(),
 		                'scaption' => $translate->_('HOSH_SYS_STATE_NEW'),
-		                'acl'=> 'HOSH_SYSTEM_STATE_ADD'
+		                'acl'=> $this->acl_value_add
 		        ))
 		);
 		
@@ -70,7 +79,9 @@ class Hoshmanager_Ref_StateController extends Hoshmanager_Ref_Abstract
 		return $this;
 	}
 	
-	protected function getList($param = null){
+	protected function getList($param = null)
+    {
+
 	    if (! isset($param['page']) or $param['page'] < 1) {
 	        $param['page'] = 1;
 	    }
@@ -82,6 +93,7 @@ class Hoshmanager_Ref_StateController extends Hoshmanager_Ref_Abstract
         }
 		$list = $package->getList($filter, $this->countList, $offset);
 		$totalcount = (int) ($package->getTotal($filter));
+
 		foreach ($list as $key=>$val){
 			$list[$key]['href'] = $this->view->Url(
                     array(
@@ -90,7 +102,8 @@ class Hoshmanager_Ref_StateController extends Hoshmanager_Ref_Abstract
                             'page' => $param['page'],
                             'search' => $param['search']
                     ));
-			$list[$key]['scaption'] = '# '.$val['id'].' '.$val['sname'];
+			$list[$key]['scaption'] = '# '.$val['id'].' '.$val['scaption'];
+            $list[$key]['task'] = $this->_getTaskAction($val);
 		}
 		$paginator = $this->_getPagination($totalcount, $param['page'],$this->countList);
 		if ($paginator) {
@@ -98,4 +111,26 @@ class Hoshmanager_Ref_StateController extends Hoshmanager_Ref_Abstract
 		}
 		return $list;
 	}
+
+
+    /**
+     *
+     */
+    public function deleteAction()
+    {
+        $id = $this->getRequest()->getParam('target', null);
+        $this->_setStateObject($id, Hosh_Manager_STATE::STATE_DELETE, Hosh_Manager_State::CLASSNAME, $this->acl_value_delete);
+    }
+
+    public function restoreAction()
+    {
+        $id = $this->getRequest()->getParam('target', null);
+        $this->_setStateObject($id, Hosh_Manager_STATE::STATE_NORMAL, Hosh_Manager_State::CLASSNAME, $this->acl_value_restore);
+    }
+
+    public function removeAction()
+    {
+        $id = $this->getRequest()->getParam('target', null);
+        $this->_removeObject($id, Hosh_Manager_State::CLASSNAME, $this->acl_value_remove);
+    }
 }

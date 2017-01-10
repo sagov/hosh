@@ -19,6 +19,14 @@
  */
 class Hosh_Manager_State
 {
+    const CLASSNAME = 'STATE';
+
+    const STATE_NORMAL = 'NORMAL';
+
+    const STATE_DELETE = 'DELETE';
+
+    const STATE_DRAFT = 'DRAFT';
+
     /**
      * @param string $name
      * @throws Zend_Exception

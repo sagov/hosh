@@ -1,7 +1,9 @@
 <?php
 $task_icon = array(
-        'delete' => '<i class="fa fa-trash-o fa-fw"></i>',
-        'default' => '<i class="fa fa-task fa-fw"></i>'
+    'delete' => '<i class="fa fa-trash-o fa-fw"></i>',
+    'restore' => '<i class="fa fa-share fa-fw"></i>',
+    'remove' => '<i class="fa fa-close fa-fw"></i>',
+    'default' => '<i class="fa fa-file-o fa-fw"></i>'
 );
 
 $hoshtranslate = Hosh_Translate::getInstance();
@@ -12,42 +14,45 @@ foreach ($this->list as $val) :
     if ($val['id'] === $this->idactive) {
         $classitem .= ' active';
     }
-    $classitem .= ' ' . strtolower($val['snamestate']);
+    if (!empty($val['snamestate'])) {
+        $classitem .= ' ' . strtolower($val['snamestate']);
+    }
     ?>
-<li class="leftmenu-item<?php echo $classitem;?>">
+    <li class="leftmenu-item<?php echo $classitem; ?>">
 
-<?php if (isset($val['task'])):?>
+        <?php if (isset($val['task']) and (is_array($val['task'])) and count($val['task'])>0): ?>
 
-<div class="row sm">
-		<div class="col-xs-10 colsm">
-			<a href="<?php echo $val['href']?>"
-				title="<?php echo $val['scaption']?>"><?php echo $val['scaption']?></a>
-		</div>
-		<div class="col-xs-2 colsm">
+            <div class="row sm">
+                <div class="col-xs-10 colsm">
+                    <a href="<?php echo $val['href'] ?>"
+                       title="<?php echo $val['scaption'] ?>" class="scaption-item"><?php echo $val['scaption'] ?></a>
+                </div>
+                <div class="col-xs-2 colsm">
 
-			<div class="dropdown">
-				<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i
-					class="fa fa-ellipsis-v"></i></a>
-				<ul class="dropdown-menu dropdown-menu-right">
-<?php foreach($val['task'] as $key=>$task):
+                    <div class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i
+                                    class="fa fa-ellipsis-v"></i></a>
+                        <ul class="dropdown-menu dropdown-menu-right">
+                            <?php foreach ($val['task'] as $key => $task):
 
-if (empty($task['icon'])){
-    $task['icon'] = (isset($task_icon[$key])) ? $task_icon[$key] : $task_icon['default'];
-}
+                                if (empty($task['icon'])) {
+                                    $task['icon'] = (isset($task_icon[$key])) ? $task_icon[$key] : $task_icon['default'];
+                                }
 
-?>
-<li><a href="#" data-task="action_object"
-						data-action="<?php echo $key;?>"
-						data-target="<?php echo $val['id']?>"><?php echo $task['icon'];?> <?php echo $task['scaption'];?></a></li>
-<?php endforeach;?>
-</ul>
-			</div>
+                                ?>
+                                <li><a href="#" data-task="action_object"
+                                       data-action="<?php echo $key; ?>"
+                                       data-target="<?php echo $val['id'] ?>"><?php echo $task['icon']; ?><?php echo $task['scaption']; ?></a>
+                                </li>
+                            <?php endforeach; ?>
+                        </ul>
+                    </div>
 
-		</div>
-	</div>
-<?php else:?>
-<a href="<?php echo $val['href']?>"
-	title="<?php echo $val['scaption']?>"><?php echo $val['scaption']?></a>
-<?php endif;?>
-</li>
-<?php endforeach;?>
+                </div>
+            </div>
+        <?php else: ?>
+            <a href="<?php echo $val['href'] ?>"
+               title="<?php echo $val['scaption'] ?>" class="scaption-item"><?php echo $val['scaption'] ?></a>
+        <?php endif; ?>
+    </li>
+<?php endforeach; ?>

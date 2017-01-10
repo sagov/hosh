@@ -20,6 +20,9 @@
  */
 class Hosh_Manager_Form
 {
+    const CLASSNAME = 'FORM';
+
+    const CLASSNAME_KIND = 'FORM_KIND';
 
     /**
      * Get form object
@@ -141,23 +144,7 @@ class Hosh_Manager_Form
         return $package->removeElements($idself);
     }
     
-    
-    /**
-     * @param string $idself
-     * @return boolean|Zend_Db_Adapter_Abstract
-     */
-    public function remove($idself)
-    {
-        $form = $this->getObject($idself);
-        if (empty($form['id']) or (!empty($form['bsystem']))){
-            return false;
-        }
-        $package = new Hosh_Manager_Db_Package_Hosh_Object();
-        if ($package->removeObject($idself)){
-            return true;
-        }        
-        return false;        
-    }
+
     
 
     /**

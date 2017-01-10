@@ -60,7 +60,8 @@ class Hosh_Manager_Db_Package_Hosh_Language extends Hosh_Manager_Db_Table_Hosh_L
                         'dtinsert',
                         'dtupdate',
                         'sname',
-                        'scaption'
+                        'scaption',
+                        'bsystem',
                 ))
             ->join(
                 array(

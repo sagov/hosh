@@ -11,6 +11,11 @@ class HoshPluginForm_System_User_Helper_Db_GetData extends Hosh_Form_Helper_Abst
 		
 		$usermanager = new Hosh_Manager_User($id);		
 		$data = $usermanager->getData();
+        if (empty($data['id'])){
+            require_once 'Zend/Form/Exception.php';
+            throw new Zend_Form_Exception(sprintf('Object "%s" not found', $id));
+            return;
+        }
 		$listroles = $usermanager->getAclRoles();
 		if ($listroles){
 			foreach ($listroles as $val){

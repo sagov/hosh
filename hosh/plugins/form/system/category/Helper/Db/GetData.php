@@ -10,7 +10,10 @@ class HoshPluginForm_System_Category_Helper_Db_GetData extends Hosh_Form_Helper_
 		$id = $updateparams['id'];
 		$manager_category = new Hosh_Manager_Category();		
 		$data = $manager_category->getObject($id);
-		
+		if (empty($data['id'])){
+            require_once 'Zend/Form/Exception.php';
+            throw new Zend_Form_Exception(sprintf('Object "%s" not found',$id));
+        }
 		return $data;
 	}
 }	

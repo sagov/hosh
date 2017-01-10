@@ -24,6 +24,14 @@ class Hoshmanager_Ref_ClassController extends Hoshmanager_Ref_Abstract
 
     protected $acl_value = 'HOSH_SYSTEM_CLASS_REF';
 
+    protected $acl_value_add = 'HOSH_SYSTEM_CLASS_ADD';
+
+    protected $acl_value_remove = 'HOSH_SYSTEM_CLASS_REMOVE';
+
+    protected $acl_value_delete = 'HOSH_SYSTEM_CLASS_DELETE';
+
+    protected $acl_value_restore = 'HOSH_SYSTEM_CLASS_RESTORE';
+
     /**
      *
      * @return Hoshmanager_Ref_ClassController
@@ -43,7 +51,7 @@ class Hoshmanager_Ref_ClassController extends Hoshmanager_Ref_Abstract
                         'addbutton' => array(
                                 'link' => $this->view->Url(),
                                 'scaption' => $translate->_('HOSH_SYS_CLASS_NEW'),
-                                'acl' => 'HOSH_SYSTEM_CLASS_ADD'
+                                'acl' => $this->acl_value_add
                         )
                 ));
         
@@ -99,6 +107,7 @@ class Hoshmanager_Ref_ClassController extends Hoshmanager_Ref_Abstract
                             'search' => $param['search']
                     ));
             $list[$key]['scaption'] = '# ' . $val['id'] . ' ' . $val['sname'];
+            $list[$key]['task'] = $this->_getTaskAction($val);
         }
         $modal_ref = new HoshManager_Model_Ref();
         $paginator = $modal_ref->getPagination($totalcount, $param['page']);
@@ -106,5 +115,24 @@ class Hoshmanager_Ref_ClassController extends Hoshmanager_Ref_Abstract
             $this->view->paginator = $paginator->run();
         }
         return $list;
+    }
+
+
+    public function deleteAction()
+    {
+        $id = $this->getRequest()->getParam('target', null);
+        $this->_setStateObject($id, Hosh_Manager_STATE::STATE_DELETE, Hosh_Manager_Class::CLASSNAME, $this->acl_value_delete);
+    }
+
+    public function restoreAction()
+    {
+        $id = $this->getRequest()->getParam('target', null);
+        $this->_setStateObject($id, Hosh_Manager_STATE::STATE_NORMAL, Hosh_Manager_Class::CLASSNAME, $this->acl_value_restore);
+    }
+
+    public function removeAction()
+    {
+        $id = $this->getRequest()->getParam('target', null);
+        $this->_removeObject($id, Hosh_Manager_Class::CLASSNAME, $this->acl_value_remove);
     }
 }

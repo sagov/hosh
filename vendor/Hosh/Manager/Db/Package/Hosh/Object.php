@@ -31,8 +31,76 @@ class Hosh_Manager_Db_Package_Hosh_Object extends Hosh_Manager_Db_Table_Hosh_Obj
         return $result;
     }
 
-    
+    /**
+     * Get data object
+     *
+     * @param string $idself
+     * @return mixed
+     */
+    public function getObject ($idself)
+    {
+        if (empty($idself)) {
+            return false;
+        }
+        $adapter = $this->getAdapter();
+        $select = $this->_getSelect(
+            array(
+                'id' => $idself
+            ));
+        return $adapter->fetchRow($select);
+    }
 
+    /**
+     *
+     * @param array $param
+     * @return Zend_Db_Select
+     */
+    protected function _getSelect ($filter = null)
+    {
+        $adapter = $this->getAdapter();
+
+        $select = $adapter->select()
+            ->from(
+                array(
+                    'obj' => $this->info('name')
+                ))
+            ->join(
+                array(
+                    'state' => $this->info('name')
+                ), 'state.id=obj.idstate',
+                array(
+                    'snamestate' => 'sname',
+                    'sstate' => 'scaption'
+                ))
+            ->join(
+                array(
+                    'class' => $this->info('name')
+                ), 'class.id=obj.idclass',
+                array(
+                    'snameclass' => 'sname',
+                    'sclass' => 'scaption'
+                ));
+
+        $bind = array();
+        if (! empty($filter['id'])) {
+            $select->where('obj.id = :id');
+            $bind['id'] = $filter['id'];
+        }
+
+        if (! empty($filter['sname'])) {
+            $select->where('obj.sname = :sname');
+            $bind['sname'] = $filter['sname'];
+        }
+
+        $select->bind($bind);
+        return $select;
+    }
+
+
+    /**
+     * @param string $idself
+     * @return Zend_Db_Statement_Interface
+     */
     public function removeObject ($idself)
     {
         $bind['id'] = $idself;

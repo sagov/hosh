@@ -30,6 +30,14 @@ class Hoshmanager_Ref_LanguageController extends Hoshmanager_Ref_Abstract
      */
     protected $acl_value = 'HOSH_SYSTEM_LANGUAGE_REF';
 
+    protected $acl_value_add = 'HOSH_SYSTEM_LANGUAGE_ADD';
+
+    protected $acl_value_remove = 'HOSH_SYSTEM_LANGUAGE_REMOVE';
+
+    protected $acl_value_delete = 'HOSH_SYSTEM_LANGUAGE_DELETE';
+
+    protected $acl_value_restore = 'HOSH_SYSTEM_LANGUAGE_RESTORE';
+
     /**
      *
      * @return Hoshmanager_Ref_LanguageController
@@ -48,7 +56,7 @@ class Hoshmanager_Ref_LanguageController extends Hoshmanager_Ref_Abstract
                         'addbutton' => array(
                                 'link' => $this->view->Url(),
                                 'scaption' => $translate->_('HOSH_SYS_NEW_LANG'),
-                                'acl' => 'HOSH_SYSTEM_LANGUAGE_ADD'
+                                'acl' => $this->acl_value_add
                         )
                 ));
         
@@ -75,6 +83,10 @@ class Hoshmanager_Ref_LanguageController extends Hoshmanager_Ref_Abstract
      */
     protected function getList ($param)
     {
+
+        $config = Hosh_Config::getInstance();
+        $adaptername = $config->get('adapter', 'default');
+
         if (! isset($param['page']) or $param['page'] < 1) {
             $param['page'] = 1;
         }
@@ -96,11 +108,32 @@ class Hoshmanager_Ref_LanguageController extends Hoshmanager_Ref_Abstract
                             'page' => $param['page'],                            
                     ));
             $list[$key]['scaption'] = '# ' . $val['sname'] . ' ' . $val['scaption'];
+            if (strtolower($adaptername) == 'default') {
+                $list[$key]['task'] = $this->_getTaskAction($val);
+            }
         } 
         $paginator = $this->_getPagination($totalcount, $param['page'],$this->countList);
         if ($paginator) {
             $this->view->paginator = $paginator->run();
         }      
         return $list;
+    }
+
+    public function deleteAction()
+    {
+        $id = $this->getRequest()->getParam('target', null);
+        $this->_setStateObject($id, Hosh_Manager_STATE::STATE_DELETE, Hosh_Manager_Language::CLASSNAME, $this->acl_value_delete);
+    }
+
+    public function restoreAction()
+    {
+        $id = $this->getRequest()->getParam('target', null);
+        $this->_setStateObject($id, Hosh_Manager_STATE::STATE_NORMAL, Hosh_Manager_Language::CLASSNAME, $this->acl_value_restore);
+    }
+
+    public function removeAction()
+    {
+        $id = $this->getRequest()->getParam('target', null);
+        $this->_removeObject($id, Hosh_Manager_Language::CLASSNAME, $this->acl_value_remove);
     }
 }
