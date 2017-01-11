@@ -27,6 +27,7 @@ class Hosh_Form_Decorator_Dmuploader extends Zend_Form_Decorator_HtmlTag impleme
      */
     public function render ($content)
     {
+        
         $isdebug = $this->getOption('isdebug');
         $xhtml = '<div id="dmuploader-' . $this->getOption('id') . '" class="dmuploader">
         <div class="text_dragdrop">' .

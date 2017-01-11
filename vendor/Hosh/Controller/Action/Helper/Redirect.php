@@ -35,6 +35,8 @@ class Hosh_Controller_Action_Helper_Redirect extends Zend_Controller_Action_Help
             $alert = Hosh_Controller_Action_Helper_Alert::getInstance();
             $alert->addsession($string, $code);
         }
+        $controller = $this->getFrontController();
+        $controller->setResponse(new Zend_Controller_Response_Http());
         $this->gotoUrlAndExit($url, $options);
     }
 }

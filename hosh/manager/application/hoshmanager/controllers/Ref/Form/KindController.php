@@ -105,13 +105,13 @@ class Hoshmanager_Ref_Form_KindController extends Hoshmanager_Ref_Abstract
     public function deleteAction()
     {
         $id = $this->getRequest()->getParam('target', null);
-        $this->_setStateObject($id, Hosh_Manager_STATE::STATE_DELETE, Hosh_Manager_Form::CLASSNAME_KIND, $this->acl_value_delete);
+        $this->_setStateObject($id, Hosh_Manager_State::STATE_DELETE, Hosh_Manager_Form::CLASSNAME_KIND, $this->acl_value_delete);
     }
 
     public function restoreAction()
     {
         $id = $this->getRequest()->getParam('target', null);
-        $this->_setStateObject($id, Hosh_Manager_STATE::STATE_NORMAL, Hosh_Manager_Form::CLASSNAME_KIND, $this->acl_value_restore);
+        $this->_setStateObject($id, Hosh_Manager_State::STATE_NORMAL, Hosh_Manager_Form::CLASSNAME_KIND, $this->acl_value_restore);
     }
 
     public function removeAction()
