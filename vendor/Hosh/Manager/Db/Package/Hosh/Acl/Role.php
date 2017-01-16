@@ -55,7 +55,6 @@ class Hosh_Manager_Db_Package_Hosh_Acl_Role extends Hosh_Manager_Db_Table_Hosh_A
     {
         $adapter = $this->getAdapter();
         $_table_object = new Hosh_Manager_Db_Table_Hosh_Object();
-        $_table_state = new Hosh_Manager_Db_Table_Hosh_State();
 
         $select = $adapter->select()
             ->from(
@@ -92,6 +91,7 @@ class Hosh_Manager_Db_Package_Hosh_Acl_Role extends Hosh_Manager_Db_Table_Hosh_A
             $select->where('aclrole.id = :id');
             $bind['id'] = $filter['id'];
         }
+
         $select->bind($bind);
 
         return $select;

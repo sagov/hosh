@@ -55,7 +55,7 @@ class Hosh_Manager_Db_Package_Hosh_Acl_Value extends Hosh_Manager_Db_Table_Hosh_
     {
         $adapter = $this->getAdapter();
         $_table_object = new Hosh_Manager_Db_Table_Hosh_Object();
-        $_table_state = new Hosh_Manager_Db_Table_Hosh_State();
+
         
         $select = $adapter->select()
             ->from(
@@ -88,6 +88,29 @@ class Hosh_Manager_Db_Package_Hosh_Acl_Value extends Hosh_Manager_Db_Table_Hosh_
             $select->where(
                     'obj.sname LIKE ' . $adapter->quote($filter['sname'] . '%'));
         }
+
+
+        if (! empty($filter['idowner'])) {
+            $_table_acl = new Hosh_Manager_Db_Table_Hosh_Acl();
+
+            $select_acl = $_table_acl->getAdapter()->select();
+            $select_acl->from(array('acl'=>$_table_acl->info('name')),'idvalue');
+            $select_acl->where('acl.idowner in ('.$adapter->quote($filter['idowner']).')');
+
+            if (! empty($filter['skind'])) {
+                $select_acl->where('acl.skind = :skind');
+                $bind['skind'] = $filter['skind'];
+            }
+
+            if (! empty($filter['bdeny'])) {
+                $select_acl->where('acl.bdeny = :bdeny');
+                $bind['bdeny'] = $filter['bdeny'];
+            }
+
+            $select->where('obj.id in ('.$select_acl->__toString().')');
+        }
+
+
         $select->bind($bind);
         
         return $select;
@@ -106,6 +129,7 @@ class Hosh_Manager_Db_Package_Hosh_Acl_Value extends Hosh_Manager_Db_Table_Hosh_
         if (isset($count)) {
             $select->limit($count, $offset);
         }
+        //echo $select->assemble();
         $result = $adapter->fetchAll($select);
         return $result;
     }

@@ -131,6 +131,11 @@ class Hosh_Manager_Db_Package_Hosh_Acl extends Hosh_Manager_Db_Table_Hosh_Acl
             $select->where('state.sname = :snamestate');
             $bind['snamestate'] = $filter['snamestate'];
         }
+
+        if (isset($filter['bdeny'])) {
+            $select->where('acl.bdeny = :bdeny');
+            $bind['bdeny'] = $filter['bdeny'];
+        }
         
         if (count($where_or) > 0) {
             $select->where(implode(' OR ', $where_or));

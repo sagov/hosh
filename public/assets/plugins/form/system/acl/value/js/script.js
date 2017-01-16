@@ -263,7 +263,7 @@ $.widget( "hosh.plugin_system_acl_value", $.hosh.plugin_system_form, {
 		this._setAjax(param);		
 	},
 	
-	_UpdateAclRole(){
+	_UpdateAclRole: function(){
 		var that = this;
 		$('#aclvaluerole-table').prepend('<div class="hosh-loading-table"><span class="hosh-loading-table-content"><i class="fa fa-spinner fa-pulse"></i> '+this.options.text.update_list+'</div></div>');
 		this._setTask({
@@ -277,7 +277,7 @@ $.widget( "hosh.plugin_system_acl_value", $.hosh.plugin_system_form, {
 			},			
 		});
 	},
-	_UpdateAclUser(){
+	_UpdateAclUser: function(){
 		var that = this;
 		$('#aclvalueuser-table').prepend('<div class="hosh-loading-table"><span class="hosh-loading-table-content"><i class="fa fa-spinner fa-pulse"></i> '+this.options.text.update_list+'</div></div>');
 		this._setTask({

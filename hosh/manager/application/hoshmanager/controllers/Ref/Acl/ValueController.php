@@ -86,11 +86,7 @@ class Hoshmanager_Ref_Acl_ValueController extends Hoshmanager_Ref_Abstract
 
     protected function getList ($param)
     {
-        $h_transl = Hosh_Translate::getInstance();
-        $translate = $h_transl->getTranslate();
-        $adapter_transl = $translate->getAdapter();
-        $h_transl->load('form/_');
-        $user = Hosh_Manager_User_Auth::getInstance();
+
         $filter = array();
         if (isset($param['search'])) {
             $filter['sname'] = $param['search'];
