@@ -1,4 +1,1 @@
-.list_aclvalues
-{
-    max-height:300px;overflow: auto;
-}
+.list_aclvalues{max-height:300px;overflow:auto}.list_aclvalues .item-value a{color:#000;text-decoration:none}.list_aclvalues .item-value .action-item span,.list_aclvalues .item-value .action-item i{margin-left:7px}#setRoleModal .form-control{width:auto;display:inline}#setRoleModal .form-setrole{text-align:center}#setRoleModal .form-setrole .setrole-row{margin:15px 0}#setRoleModal .form-setrole .setrole-label{font-size:.9em;font-style:italic}#setRoleModal .form-setrole .setrole-val{font-weight:bold}#setRoleModal .form-setrole .setrole-bdeny select{font-size:1.3em}
