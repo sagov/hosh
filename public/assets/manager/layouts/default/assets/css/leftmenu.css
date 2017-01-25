@@ -45,6 +45,10 @@
 .leftmenu ul.leftmenu-list li:hover {
   background: white;
 }
+.leftmenu ul.leftmenu-list li.delete .scaption-item {
+  opacity: .6;
+  text-decoration: line-through;
+}
 .leftmenu ul.leftmenu-list li:first-child {
   border-top: none;
 }

@@ -82,8 +82,7 @@ class Hosh_Manager_Db_Package_Hosh_Form extends Hosh_Manager_Db_Table_Hosh_Form
     {
         $adapter = $this->getAdapter();
         $_table_object = new Hosh_Manager_Db_Table_Hosh_Object();
-        $_table_state = new Hosh_Manager_Db_Table_Hosh_State();
-        $_table_fkind = new Hosh_Manager_Db_Table_Hosh_Form_Kind();
+
         
         $select = $adapter->select()
             ->from(
@@ -120,8 +119,12 @@ class Hosh_Manager_Db_Package_Hosh_Form extends Hosh_Manager_Db_Table_Hosh_Form
         
         $bind = array();
         if (! empty($filter['id'])) {
-            $select->where('form.id = :id');
-            $bind['id'] = $filter['id'];
+            if (is_array($filter['id'])){
+                $select->where('form.id IN (?)', $filter['id']);
+            }else {
+                $select->where('form.id = :id');
+                $bind['id'] = $filter['id'];
+            }
         }
         
         if (! empty($filter['sname'])) {

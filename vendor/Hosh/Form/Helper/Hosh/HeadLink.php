@@ -19,7 +19,7 @@ class Hosh_Form_Helper_Hosh_HeadLink extends Hosh_Form_Helper_Abstract
 		}
 		
 		if (!empty($options['style'])){		    
-		   $view->headStyle($options['style']);
+		   $view->AddStyleDeclaration($options['style']);
 		}
 		
 		return true;

@@ -103,6 +103,11 @@ class Hoshmanager_FormController extends Zend_Controller_Action
                                 'value' => $value
                         )
                 ));
+        $elements = $pattern->getElements();
+        if (isset($elements[$name])){
+            unset($elements[$name]);
+        }
+        $pattern->setElements($elements);
         $form->run();
         $elements = $form->getElements();
         $xhtml = array();
@@ -117,11 +122,14 @@ class Hoshmanager_FormController extends Zend_Controller_Action
                 }
             }
         }
-        $view = $form->getView();
-        $view->JQuery(false)->remove();
-        $view->Bootstrap(false)->remove();
-        $xhtml['js'] = $view->headScript()->toString();
-        $xhtml['css'] = $view->headLink()->toString();
+
+        if (count($xhtml) >0) {
+            $view = $form->getView();
+            $view->JQuery(false)->remove();
+            $view->Bootstrap(false)->remove();
+            $xhtml['js'] = $view->headScript()->toString();
+            $xhtml['css'] = $view->headLink()->toString();
+        }
         $this->view->xhtml = Zend_Json::encode($xhtml);
         $this->_helper->layout->disableLayout();
         $this->render('task');

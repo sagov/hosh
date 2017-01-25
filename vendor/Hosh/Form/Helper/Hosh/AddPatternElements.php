@@ -22,26 +22,36 @@ class Hosh_Form_Helper_Hosh_AddPatternElements extends Hosh_Form_Helper_Abstract
 		
 		$m_extension = new Hosh_Manager_Extension();
 		$formhelpers = $m_extension->getList(array('sname'=>$sname,'snamekind'=>'Form_Helper'));
-		
-				
+
+
 		$idaform = $ahelper = array();
 		foreach ($formhelpers as $val){
 			if (isset($val['idowner'])){
 				$idaform[$val['idowner']] = $val['idowner'];
-				$ahelper[$val['idowner']][$val['sname']] = $val;				
-				$form->addTranslation('form/'.strtolower($val['idowner']));
+				$ahelper[$val['idowner']][$val['sname']] = $val;
 			}
 		}
 		
 		$form_elements = array();
 		if (count($idaform)>0){
-		    $manager_form = new Hosh_Manager_Form();			
+		    $manager_form = new Hosh_Manager_Form();
+            $form_data = $manager_form->getList(array('id'=>$idaform));
 			$form_elements = $manager_form->getElements($idaform);			
 		}
 		
 		if (count($form_elements) == 0) {
 		    return;
 		}
+
+		foreach ($form_data as $val){
+            $form->addTranslation('form/'.strtolower($val['id']));
+            if (isset($val['options'])){
+                $options = Zend_Json::decode($val['options']);
+                if (!empty($options['translate']['helper'])){
+                    $form->getHelper($options['translate']['helper'],$options['translate']);
+                }
+            }
+        }
 		
 				
 		$list = array();
@@ -68,15 +78,15 @@ class Hosh_Form_Helper_Hosh_AddPatternElements extends Hosh_Form_Helper_Abstract
 			}
 			
 		}
-		
+
 		$i = 0;
 		foreach ($pattern_elements as $key=>$row){			
 			$row->set('order', $i);
 			++$i;
 			if (isset($list[$key])){
 				
-				foreach ($list[$key] as $keyelement=>$val_element){	
-					$val_element['order'] = $i;				
+				foreach ($list[$key] as $keyelement=>$val_element){
+					$val_element['order'] = $i;
 					$pattern->addElement($keyelement, $val_element);
 					++$i;
 				}

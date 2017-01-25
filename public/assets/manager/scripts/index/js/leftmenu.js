@@ -29,9 +29,10 @@
 			}).on('click','[data-task=action_object]',function(e){
 				var action = $(this).attr('data-action');
 				var target = $(this).attr('data-target');
-				if(confirm('Выполнить действие "'+$(this).text()+'" ?')){
-					that._requestAction(action,'target='+target);
-				}				
+				that._confirm('Выполнить действие "'+$(this).text()+'" ?',
+					function(){
+                    that._requestAction(action,'target='+target);
+				});
 				return false;
 			});
 		},

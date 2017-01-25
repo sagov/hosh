@@ -25,14 +25,14 @@ class Hosh_Form_Helper_Hosh_Redirect extends Hosh_Form_Helper_Abstract
 		}else{
 			$url = "//".$_SERVER['SERVER_NAME'].$_SERVER['REQUEST_URI'];			
 		}		
-				
+
 		if (!empty($url)){
 			if (empty($params['string'])){
 			    $params['string'] = $this->_alertmsgdefault;
 			}
 			
 			$r = new Hosh_Controller_Action_Helper_Redirect();
-			$r->redirect($url,$translate->_($params['string']),null,array('prependBase'=>false));			
+			$r->redirect($url,$translate->_($params['string']),null,array('prependBase'=>false));
 		}
 		return ;
 	}
