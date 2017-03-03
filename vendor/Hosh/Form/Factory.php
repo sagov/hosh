@@ -1076,6 +1076,26 @@ class Hosh_Form_Factory extends Zend_Form
         return $result;
     }
 
+    /**
+     *
+     * @param array $params
+     * @return Hosh_Form_Factory
+     */
+    public function setUpdateVars($params)
+    {
+        $this->setSetting('updateparams',$params);
+        return $this;
+    }
+
+
+    /**
+     * @return mixed
+     */
+    public function getUpdateVars()
+    {
+        return $this->getSetting('updateparams');
+    }
+
 
 
     /**

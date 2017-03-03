@@ -29,7 +29,44 @@ class Hosh_Manager_Db_Package_Hosh_Extension extends Hosh_Manager_Db_Table_Hosh_
      */
     public function register ($bind)
     {
-        return parent::_register('EXTENSION', $bind);
+        return $this->_register('EXTENSION', $bind);
+    }
+
+    /**
+     * @param string $snameclass
+     * @param array $data
+     * @throws Zend_Exception
+     * @return mixed
+     */
+    protected function _register ($snameclass,$data)
+    {
+        $class = new Hosh_Manager_Class();
+        $idclass = $class->NameToId($snameclass);
+        $object_package = new Hosh_Manager_Db_Package_Hosh_Object();
+        if (! isset($data['scaption'])) {
+            $data['scaption'] = null;
+        }
+
+        $idobject = $object_package->register($idclass, $data['scaption']);
+
+        if (empty($idobject)) {
+            require_once 'Zend/Exception.php';
+            throw new Zend_Exception(
+                sprintf('When you create an object the error occurred'));
+            return false;
+        }
+        $data['id'] = $idobject;
+        $cols = $this->info('cols');
+        $bind = array_intersect_key($data, array_flip($cols));
+        if (! $this->insert($bind)) {
+            require_once 'Zend/Exception.php';
+            throw new Zend_Exception(
+                sprintf('When you create an form the error occurred'));
+            return false;
+        }
+        $user = Hosh_Manager_User_Auth::getInstance();
+        $user->addLog($idobject,Hosh_Manager_Object_Log::KIND_INSERT);
+        return $idobject;
     }
 
     /**

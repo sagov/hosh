@@ -96,8 +96,7 @@ abstract class Hoshmanager_Ref_Abstract extends Hoshmanager_Abstract
      */
     public function searchAction(){
 		$this->_helper->layout->disableLayout();
-		$search = $this->getRequest()->getParam('search',null);
-		$param = array('search'=>$search);
+        $param = $this->getRequest()->getParams();
 		$list = $this->getList($param);
 		$this->view->list = $list;
 		$this->render($this->_leftmenu,null,true);
@@ -108,9 +107,8 @@ abstract class Hoshmanager_Ref_Abstract extends Hoshmanager_Abstract
      */
     public function listAction(){
 	    $this->_helper->layout->disableLayout();
-	    $search = $this->getRequest()->getParam('search',null);
-	    $page = $this->getRequest()->getParam('page', 1);
-	    $param = array('search'=>$search,'page'=>$page);
+        $param = $this->getRequest()->getParams();
+        $param['page'] = (isset($param['page'])) ? $param['page'] : 1;
 	    $list = $this->getList($param);
 	    $this->view->list = $list;
 	    $this->render($this->_leftmenulist,null,true);

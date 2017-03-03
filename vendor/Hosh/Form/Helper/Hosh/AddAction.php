@@ -29,10 +29,10 @@ class Hosh_Form_Helper_Hosh_AddAction extends Hosh_Form_Helper_Abstract
             $val['name'] = (isset($val['name'])) ? $val['name'] : 'action_'.($key+1);
             $val['class'] = (isset($val['class'])) ? $val['class'] : 'btn btn-primary';
             $val['label'] = (isset($val['label'])) ? $val['label'] : null;
-            $options = (isset($val['options'])) ? $val['options'] : array();
-            $options['class'] = $val['class'];
-            $options['DisableLoadDefaultDecorators'] = true;
-            $form->addElement($val['type'], $val['name'], $options);
+            $options_element = (isset($val['options'])) ? $val['options'] : array();
+            $options_element['class'] = $val['class'];
+            $options_element['DisableLoadDefaultDecorators'] = true;
+            $form->addElement($val['type'], $val['name'], $options_element);
             $element = $form->getElement($val['name']);
             if (isset($val['label'])){
                 $element->setLabel($val['label']);
@@ -59,10 +59,14 @@ class Hosh_Form_Helper_Hosh_AddAction extends Hosh_Form_Helper_Abstract
             ++$i;
         }
         if (count($listelements)>0) {
+            $class_wrap = 'wrap-action-btn';
+            if (!empty($options['class'])){
+                $class_wrap .= ' '. $options['class'];
+            }
             $form->addDisplayGroup($listelements, 'FLAction', array('order' => 100000, 'DisableLoadDefaultDecorators' => true));
             $displaygroup = $form->getDisplayGroup('FLAction');
             $displaygroup->addDecorator('FormElements')
-                ->addDecorator('HtmlTag', array('tag' => 'div', 'class' => 'wrap-action-btn'));
+                ->addDecorator('HtmlTag', array('tag' => 'div', 'class' => $class_wrap));
         }
 
         return;

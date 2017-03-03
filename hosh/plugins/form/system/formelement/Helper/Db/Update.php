@@ -57,7 +57,8 @@ class HoshPluginForm_System_Formelement_Helper_Db_Update extends Hosh_Form_Helpe
 			unset($bind['idowner']);			
 			if ($formdb->setObject($id, $bind))	return true;			
 		}else{
-			
+			$nmaxorder = $this->_getMaxOrder();
+            $bind['norder'] = $nmaxorder+10;
 			if ($result = $formdb->register($bind)) {
 				$form->setData('id', $result);
 				return true;
@@ -119,4 +120,18 @@ class HoshPluginForm_System_Formelement_Helper_Db_Update extends Hosh_Form_Helpe
 			$result['options'] = $arr;
 			return $result;
 	}
+
+    protected function _getMaxOrder(){
+        $form = $this->getObject();
+        $id = $form->getData('idowner');
+        $manager_form = new Hosh_Manager_Form();
+        $list = $manager_form->getElements($id);
+        $aorder = array();
+        foreach ($list as $val)
+        {
+            $aorder[] = $val['norder'];
+        }
+        rsort($aorder,SORT_NUMERIC);
+        return (isset($aorder[0])) ? $aorder[0] : 0;
+    }
 }		

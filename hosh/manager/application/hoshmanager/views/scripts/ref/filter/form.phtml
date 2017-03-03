@@ -1,0 +1,66 @@
+<?php
+$view = Hosh_View::getInstance();
+$view->JQueryUi();
+$view->Hosh_Plugin_System_Form();
+$config = Hosh_Config::getInstance();
+$view->AddScript('/manager/scripts/ref/filter/js/single.js');
+$user = Hosh_Manager_User_Auth::getInstance();
+$m_form = new Hosh_Manager_Form();
+$listkind = $m_form->getKinds();
+
+$request_http = new Zend_Controller_Request_Http;
+$idkind = $request_http->getParam('kind');
+
+
+$h_transl = Hosh_Translate::getInstance();
+$h_transl->load('form/system_form');
+$translate = $h_transl->getTranslate();
+
+$param = array();
+$param['url_search'] = $this->search_url;
+$script = '	;
+			(function($){
+				$(document).ready(function(){					
+					$(".filtersingle").manager_filtermenu_single(' . json_encode($param) . ');	
+					$(".filtersingle").on("change","select[name=kind]",function(e){
+					    $(".filtersingle").find("form").submit();
+					});														
+				});
+			})(jQuery);	';
+$view->AddScriptDeclaration($script);
+?>
+<div class="leftmenu filtersingle">
+    <div style="padding: 5px">
+        <form action="" method="post">
+            <div class="input-group">
+                <input type="text" name="search" class="form-control" value=""
+                       placeholder="<?php echo $this->search_placeholder ?>"/>
+                <span class="input-group-btn">
+				<button type="submit" value="&nbsp;"
+                        class="btn btn-default buttontopsearch">
+					&nbsp;<i class="fa fa-search"></i>&nbsp;
+				</button>
+                </span>
+            </div>
+            <div>
+                <select style="margin-top:5px"
+                        class="form-control" name="kind">
+                    &nbsp;
+                    <option value=""><?php echo $translate->_('SYS_FORM_KIND_FORM'); ?></option>
+                    <?php foreach ($listkind as $val): ?>
+                        <?php
+                        $flag = true;
+                        if (!empty($val['acl_value'])) {
+                            $flag = $user->isAllowed($val['acl_value']);
+                        }
+                        ?>
+                        <?php if ($flag) : ?>
+                            <option value="<?php echo $val['id']; ?>" <?php echo ($idkind == $val['id']) ? ' selected' : null; ?>><?php echo $translate->_($val['scaption']); ?></option>
+                        <?php endif; ?>
+                    <?php endforeach; ?>
+
+                </select>
+            </div>
+        </form>
+    </div>
+</div>

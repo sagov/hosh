@@ -59,6 +59,7 @@ class Hoshmanager_Ref_FormController extends Hoshmanager_Ref_Abstract
     protected function setModContent ()
     {
         $search = $this->getRequest()->getParam('search', null);
+        $kind = $this->getRequest()->getParam('kind', null);
         $page = $this->getRequest()->getParam('page', 1);
         $id = $this->getRequest()->getParam('id', null);
         
@@ -86,11 +87,12 @@ class Hoshmanager_Ref_FormController extends Hoshmanager_Ref_Abstract
                                         'action' => 'search'
                                 )),
                         'search_placeholder' => $translate->_('HM_SEARCH_SNAME')
-                ));
+                ),'ref/filter/form.phtml');
         
         $list = $this->getList(
                 array(
                         'search' => $search,
+                        'kind' => $kind,
                         'page' => $page
                 ));
         $menu = $this->_getContentMenu($list, 
@@ -143,6 +145,9 @@ class Hoshmanager_Ref_FormController extends Hoshmanager_Ref_Abstract
         if (count($listkinds) != count($kinds)) {
             $filter['idkind'] = $kinds;
         }
+        if (!empty($param['kind']) and in_array($param['kind'],$kinds)) {
+            $filter['idkind'] = $param['kind'];
+        }
         if (isset($param['search'])) {
             $filter['sname'] = $param['search'];
         }
@@ -150,17 +155,23 @@ class Hoshmanager_Ref_FormController extends Hoshmanager_Ref_Abstract
             $param['page'] = 1;
         }
         $offset = ($param['page'] - 1) * $this->countList;
-        
         $list = $form_manager->getList($filter, $this->countList, $offset);
         $totalcount = (int) ($form_manager->getTotal($filter));
         foreach ($list as $key => $val) {
-            $list[$key]['href'] = $this->view->Url(
-                    array(
-                            'action' => 'view',
-                            'id' => $val['id'],
-                            'page' => $param['page'],
-                            'search' => $param['search']
-                    ));
+            $urlparam = array(
+                'action' => 'view',
+                'id' => $val['id'],
+            );
+            if (!empty($param['page'])){
+                $urlparam['page'] = $param['page'];
+            }
+            if (!empty($param['search'])){
+                $urlparam['search'] = $param['search'];
+            }
+            if (!empty($param['kind'])){
+                $urlparam['kind'] = $param['kind'];
+            }
+            $list[$key]['href'] = $this->view->Url($urlparam);
             $list[$key]['scaption'] = '# ' . $val['id'] . ' ' . $translate->_($val['scaption']);
             $list[$key]['task'] = $this->_getTaskAction($val);
         }
@@ -170,6 +181,7 @@ class Hoshmanager_Ref_FormController extends Hoshmanager_Ref_Abstract
         }
         return $list;
     }
+
 
 
     public function deleteAction()

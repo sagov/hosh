@@ -129,7 +129,6 @@ class Hosh_Manager_Db_Package_Hosh_Acl_Value extends Hosh_Manager_Db_Table_Hosh_
         if (isset($count)) {
             $select->limit($count, $offset);
         }
-        //echo $select->assemble();
         $result = $adapter->fetchAll($select);
         return $result;
     }

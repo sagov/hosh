@@ -24,7 +24,8 @@
 			
 			this.element.on('change','.pagination select',function(e){
 				var val = $(this).val();
-				that._request('page='+val);
+                var paramsearch = $('.filtersingle').find('form').serialize();
+				that._request('page='+val+'&'+paramsearch);
 				return false;
 			}).on('click','[data-task=action_object]',function(e){
 				var action = $(this).attr('data-action');
