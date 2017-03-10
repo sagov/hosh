@@ -108,9 +108,10 @@ class HoshPluginForm_System_Form_Helper_ListElements extends Hosh_Form_Helper_Ab
 				} else{
 				    $result_item[$key] .= '<i class="fa fa-flag-o"></i>';
 				}
+				$label = (!empty($options_val['options']['label'])) ? $options_val['options']['label'] : null ;
 				$result_item[$key] .= '</td>';
 				$result_item[$key] .= '<td width="40%" class="elementform_name">';
-				$result_item[$key] .= '<a href="javascript:void(0);" data-task="edit_elementform" data-target="'.$val['id'].'" title="'.$translate->_($options_val['options']['label']).'">'.$val['name'].'</a>';
+				$result_item[$key] .= '<a href="javascript:void(0);" data-task="edit_elementform" data-target="'.$val['id'].'" title="'.$label.'">'.$val['name'].'</a>';
 				$result_item[$key] .= '</td>';
 				$result_item[$key] .= '<td width="30%">'.$val['type'].'</td>';
 				$result_item[$key] .= '<td class="actbutton"><div class="row">

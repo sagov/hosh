@@ -25,6 +25,8 @@ $.fn.Ex_Lib_Hosh_Element_Helper = function(options){
 			viewFormHelper($(this).attr('name'),$(this).val());
 		}
 	});
+
+
 	
 	
 	var jqxhr = '';
@@ -80,7 +82,7 @@ $.fn.Ex_Lib_Hosh_Element_Helper = function(options){
 		}
 		
 		$(e).parent().on('click','.helper-dropdown-content a[data-target=helpvalue]',function(){
-			var value = $(this).find('span').text();
+			var value = $(this).attr('data-value');
 			$(e).val(value);
 			$(e).trigger('blur');
 			
@@ -121,8 +123,27 @@ $.fn.Ex_Lib_Hosh_Element_Helper = function(options){
 		
 		if (options.helpers[category]){
 			for (i=0; i< options.helpers[category].length;i++){
-				items[i] = '<li><a href="javascript:void(0);" data-target="helpvalue" data-value="'+options.helpers[category][i]+'"><span>'+options.helpers[category][i]+'</span></a></li>';
+				var sname = '';
+				var scaption = '';
+				var sdesc = '';
+				var data_item = '';
+				if (options.helpers[category][i]['sname']){
+					sname = options.helpers[category][i]['sname'];
+                    if (options.helpers[category][i]['scaption']) {
+                        scaption = options.helpers[category][i]['scaption'];
+                    }
+                    if (options.helpers[category][i]['options']['sdesc']){
+                    	sdesc = options.helpers[category][i]['options']['sdesc'];
+					}
+					if (scaption.length > 0 && sdesc.length >0) {
+                        data_item = 'data-container="body" data-toggle="popover" data-title="' + scaption + '" data-placement="top" data-content="' + sdesc + '" data-trigger="hover"';
+                    }
+				}else{
+                    sname = scaption = options.helpers[category][i];
+				}
+				items[i] = '<li><a href="javascript:void(0);" data-target="helpvalue" data-value="'+sname+'" '+data_item+'><span>'+sname+'</span></a></li>';
 			}
+
 		}
 		
 		if (options.helpers.self){
@@ -145,6 +166,7 @@ $.fn.Ex_Lib_Hosh_Element_Helper = function(options){
 			xhtml += '<div class="container-fluid-empty">Data empty</div>';
 		}
 		$(e).parent().find('.dropdown-menu .helper-dropdown-content').html(xhtml);
+        $('[data-toggle="popover"]').popover();
 	}
 	
 	function startLoading(){

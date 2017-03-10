@@ -188,7 +188,11 @@ class Hoshmanager_FormController extends Zend_Controller_Action
                         'iscategory' => true
                 ));
         foreach ($listext as $val) {
-            $list[$val['idcategory']][] = $val['sname'];
+            $options = array();
+            if (isset($val['options'])){
+                $options = Zend_Json::decode($val['options']);
+            }
+            $list[$val['idcategory']][] = array('sname'=>$val['sname'],'scaption'=>$val['scaption'],'options'=>$options);
         }
         $this->view->xhtml = Zend_Json::encode($list);
         $this->render('task');
@@ -219,7 +223,12 @@ class Hoshmanager_FormController extends Zend_Controller_Action
                         'iscategory' => true
                 ));
         foreach ($listext as $val) {
-            $list[$val['idcategory']][] = $val;
+            $options = array();
+            if (isset($val['options'])){
+                $options = Zend_Json::decode($val['options']);
+            }
+            $list[$val['idcategory']][] = array('sname'=>$val['sname'],'scaption'=>$val['scaption'],'options'=>$options);
+
         }
         $this->view->list = $list;
     }

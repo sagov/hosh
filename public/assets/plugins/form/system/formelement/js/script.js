@@ -126,7 +126,7 @@
 			}
 			
 			$(e).parent().on('click','.element-dropdown-content a[data-target=elementvalue]',function(){
-				var value = $(this).find('span').text();
+				var value = $(this).attr('data-value');
 				$(e).val(value);
 				$(e).trigger('blur');
 				
@@ -158,6 +158,7 @@
 		_setViewElementMenu:function(e)
 		{
 			$(e).parent().find('.dropdown-menu .element-dropdown-content').html(this.options.data_elements);
+            $('[data-toggle="popover"]').popover();
 		},
 		submitForm: function(){
 			var that = this;

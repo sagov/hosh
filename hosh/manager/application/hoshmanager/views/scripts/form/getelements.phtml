@@ -5,7 +5,11 @@ foreach ($this->listcategory as $category)
     if (isset($this->list[$category['id']])){
         echo '<h4>' . $category['scaption'] . '</h4>';
         foreach ($this->list[$category['id']] as $val){
-            echo '<div><a href="javascript:void(0);" data-target="elementvalue"><span>' . $val['sname'] . '</span></a></div>';
+            $data_item = null;
+            if (!empty($val['scaption']) and !empty($val['options']['sdesc'])) {
+                $data_item = 'data-container="body" data-toggle="popover"  data-placement="top" data-trigger="hover" data-title="'.$val['scaption'].'" data-content="'.$val['options']['sdesc'].'"';
+            }
+            echo '<div><a href="javascript:void(0);" data-target="elementvalue" data-value="' . $val['sname'] . '" '.$data_item.'><span>' . $val['sname'] . '</span></a></div>';
         }
     }
 }
@@ -13,6 +17,10 @@ foreach ($this->listcategory as $category)
 if (isset($this->list[''])){
     echo '<h4>Другое</h4>';
     foreach ($this->list[''] as $val){
-        echo '<div><a href="javascript:void(0);" data-target="elementvalue"><span>' . $val['sname'] . '</span></a></div>';
+        $data_item = null;
+        if (!empty($val['scaption']) and !empty($val['options']['sdesc'])) {
+            $data_item = 'data-container="body" data-toggle="popover"  data-placement="top" data-trigger="hover" data-title="'.$val['scaption'].'" data-content="'.$val['options']['sdesc'].'"';
+        }
+        echo '<div><a href="javascript:void(0);" data-target="elementvalue" data-value="' . $val['sname'] . '" '.$data_item.'><span>' . $val['sname'] . '</span></a></div>';
     }
 }

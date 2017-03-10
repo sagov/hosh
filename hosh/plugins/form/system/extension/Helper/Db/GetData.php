@@ -16,7 +16,25 @@ class HoshPluginForm_System_Extension_Helper_Db_GetData extends Hosh_Form_Helper
             throw new Zend_Form_Exception(sprintf('Object "%s" not found', $id));
             return;
         }
-        if (in_array(strtolower($object['snamekind']), 
+
+        $result_data = $object;
+        if (isset($object['options'])) {
+            unset($result_data['options']);
+            $options = json_decode($object['options'], true);
+            $result_data = array_merge($result_data, $options);
+        }
+
+        $arr_result = $result = array();
+        foreach ($result_data as $key_1 => $val_1) {
+            if (is_array($val_1)) {
+                $this->toArray($key_1, $val_1, $arr_result);
+            } else {
+                $result[strtolower($key_1)] = $val_1;
+            }
+        }
+        $result = array_merge($result, $arr_result);
+
+        if (in_array(strtolower($result['snamekind']),
                 array(
                         'form_helper',
                         'form_element'
@@ -31,7 +49,7 @@ class HoshPluginForm_System_Extension_Helper_Db_GetData extends Hosh_Form_Helper
             ));
             $row = $adapter->fetchRow($select);
             if (! empty($row['idowner'])) {
-                $object['idform'] = $row['idowner'];
+                $result['idform'] = $row['idowner'];
             }
         }
         
@@ -39,9 +57,25 @@ class HoshPluginForm_System_Extension_Helper_Db_GetData extends Hosh_Form_Helper
         $categories = $_extctgpackage->getCategoriesObject($id);
         
         foreach ($categories as $val){
-            $object['idcategory'][] = $val['id'];
+            $result['idcategory'][] = $val['id'];
         }
         
-        return $object;
+        return $result;
+    }
+
+    protected function toArray ($keyname, $arr, & $result = array())
+    {
+        if ($keyname) {
+            $preff = $keyname . '_';
+        } else {
+            $preff = null;
+        }
+        foreach ($arr as $key => $val) {
+            if (is_array($val)) {
+                $this->toArray(strtolower($preff . $key), $val, $result);
+            } else {
+                $result[strtolower($preff . $key)] = $val;
+            }
+        }
     }
 }	
