@@ -4,10 +4,10 @@ require_once 'Hosh/Form/Helper/Abstract.php';
 
 class Hosh_Form_Helper_Hosh_AddPatternElements extends Hosh_Form_Helper_Abstract
 {
-	public function render($options){		
-		
+	public function render($options){
+
 		$sname = $fname = array();
-		foreach ($options as $val){
+		foreach ($options['helpers'] as $val){
 			$sname[$val['value']] = $val['value']; 
 			$fname[$val['value']][$val['name']] = $val;
 		}
@@ -19,9 +19,33 @@ class Hosh_Form_Helper_Hosh_AddPatternElements extends Hosh_Form_Helper_Abstract
 		$form = $this->getObject();
 		$pattern = $form->getPattern();
 		$pattern_elements = $pattern->getElements();
-		
+
+        $idowner = $options['idowner'];
+        $snamekind = null;
+        if (!empty($idowner)){
+            $hobject = new Hosh_Manager_Object($idowner);
+            $classname = $hobject->getClassName();
+
+            switch ($classname)
+            {
+                case 'LIST':
+                    $snamekind = 'List_Helper';
+                    break;
+
+                case 'FORM':
+                    $snamekind = 'Form_Helper';
+                    break;
+
+                default:
+                    $snamekind = null;
+                    break;
+
+            }
+        }
+
+
 		$m_extension = new Hosh_Manager_Extension();
-		$formhelpers = $m_extension->getList(array('sname'=>$sname,'snamekind'=>'Form_Helper'));
+		$formhelpers = $m_extension->getList(array('sname'=>$sname,'snamekind'=>$snamekind));
 
 
 		$idaform = $ahelper = array();

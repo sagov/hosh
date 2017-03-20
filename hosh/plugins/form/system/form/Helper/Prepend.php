@@ -25,7 +25,7 @@ class HoshPluginForm_System_Form_Helper_Prepend extends Hosh_Form_Helper_Abstrac
 		}
 		
 		$request_http = new Zend_Controller_Request_Http;
-		$options = array();
+		$helpers = array();
 		foreach ($elements as $val){
 			if ($val->get('type') == 'helper'){
 				$value = null;
@@ -35,13 +35,13 @@ class HoshPluginForm_System_Form_Helper_Prepend extends Hosh_Form_Helper_Abstrac
 					$value = $request_http->getPost($val->get('name'),$form->getData($val->get('name')));
 				}
 				if (!empty($value)) {
-				    $options[] = array('name'=>$val->get('name'),'value'=>$value);
+                    $helpers[] = array('name'=>$val->get('name'),'value'=>$value);
 				}
 			}
 		}		
 		
-		if (count($options)>0) {
-		    $form->getHelper('Hosh_AddPatternElements',$options);		
+		if (count($helpers)>0) {
+		    $form->getHelper('Hosh_AddPatternElements',array('helpers'=>$helpers,'idowner'=>$form->getData('id')));
 		}
 		
 		

@@ -43,7 +43,8 @@ class HoshPluginForm_System_Formelement_Helper_Layout_Default extends Hosh_Form_
         $param['url_loadelements'] = $view->Hosh_Url(
                 array(
                         'controller' => 'form',
-                        'action' => 'getelements',                        
+                        'action' => 'getelements',
+                        'idowner' => $form->getData('idowner')
                 )
         );
         $script = '

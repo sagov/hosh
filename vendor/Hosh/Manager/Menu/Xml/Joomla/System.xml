@@ -29,6 +29,13 @@
 			<icon>fa fa-object-group</icon>			
 		</item>
 		<item bmain="1">
+			<scaption>HM_LISTS</scaption>
+			<controller>ref_list</controller>
+			<action>view</action>
+			<acl>HOSH_SYSTEM_LIST_REF</acl>
+			<icon>glyphicon glyphicon-th-list</icon>
+		</item>
+		<item bmain="1">
 			<scaption>HM_EXTENSIONS</scaption>
 			<controller>ref_extension</controller>
 			<action>view</action>

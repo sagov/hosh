@@ -70,8 +70,8 @@ class Hosh_Form_Element_Helper extends Zend_Form_Element_Text
         $sname = $form->getData('sname');
         $idowner = $form->getData('idowner');
         if (empty($sname) and (! empty($idowner))) {
-            $m_form = new Hosh_Manager_Form();
-            $formdata = $m_form->getObject($idowner);
+            $m_form = new Hosh_Manager_Object($idowner);
+            $formdata = $m_form->getData();
             $sname = $formdata['sname'];
         }
         $result[$idform] = true;

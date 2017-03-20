@@ -1,0 +1,19 @@
+.wrap-hoshform_system_formdisplaygroup .top-level {
+  margin-bottom: 15px;
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 15px;
+}
+.wrap-hoshform_system_formdisplaygroup .top-level h3 {
+  margin: 0px;
+  padding: 0px;
+  font-size: 1.2em;
+  font-weight: 600;
+}
+.wrap-hoshform_system_formdisplaygroup .footer-level {
+  margin-top: 15px;
+  border-top: 1px solid #ddd;
+  padding-top: 15px;
+}
+.wrap-hoshform_system_formdisplaygroup .footer-level .action-btn {
+  text-align: right;
+}

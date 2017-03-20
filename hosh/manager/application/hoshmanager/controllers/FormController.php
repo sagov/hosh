@@ -98,10 +98,13 @@ class Hoshmanager_FormController extends Zend_Controller_Action
         
         $form->getHelper('Hosh_AddPatternElements', 
                 array(
-                        array(
+                        'helpers' => array(
+                                array(
                                 'name' => $name,
                                 'value' => $value
-                        )
+                                ),
+                        ),
+                        'idowner' => $form->getData('id')
                 ));
         $elements = $pattern->getElements();
         if (isset($elements[$name])){
@@ -140,6 +143,30 @@ class Hoshmanager_FormController extends Zend_Controller_Action
     {
         $this->_helper->layout->disableLayout();
         $this->options['is_layout'] = false;
+
+        $idform = $this->getRequest()->getParam('idform', null);
+
+        if (!empty($idform)){
+            $hobject = new Hosh_Manager_Object($idform);
+            $classname = $hobject->getClassName();
+
+            switch ($classname)
+            {
+                case 'LIST':
+                    $snamekind = 'LIST_HELPER';
+                    break;
+
+                case 'FORM':
+                    $snamekind = 'FORM_HELPER';
+                    break;
+
+                default:
+                    $snamekind = null;
+                    break;
+
+            }
+        }
+
         $form = $this->_getForm();
         $list = array();
         if ($form) {
@@ -184,7 +211,7 @@ class Hoshmanager_FormController extends Zend_Controller_Action
         $packext = new Hosh_Manager_Db_Package_Hosh_Extension();
         $listext = $packext->getList(
                 array(
-                        'snamekind' => 'FORM_HELPER',
+                        'snamekind' => $snamekind,
                         'iscategory' => true
                 ));
         foreach ($listext as $val) {
@@ -203,6 +230,28 @@ class Hoshmanager_FormController extends Zend_Controller_Action
     {
         $this->_helper->layout->disableLayout();
         $this->options['is_layout'] = false;
+        $idowner = $this->getRequest()->getParam('idowner', null);
+
+        if (!empty($idowner)){
+            $hobject = new Hosh_Manager_Object($idowner);
+            $classname = $hobject->getClassName();
+
+            switch ($classname)
+            {
+                case 'LIST':
+                    $snamekind = 'LIST_ELEMENT';
+                    break;
+
+                case 'FORM':
+                    $snamekind = 'FORM_ELEMENT';
+                    break;
+
+                default:
+                    $snamekind = null;
+                    break;
+
+            }
+        }
         
         $listcategory = $list = array();
         
@@ -219,7 +268,7 @@ class Hoshmanager_FormController extends Zend_Controller_Action
         $packext = new Hosh_Manager_Db_Package_Hosh_Extension();
         $listext = $packext->getList(
                 array(
-                        'snamekind' => 'FORM_ELEMENT',
+                        'snamekind' => $snamekind,
                         'iscategory' => true
                 ));
         foreach ($listext as $val) {

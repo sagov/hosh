@@ -37,7 +37,9 @@ class HoshPluginForm_System_Extension_Helper_Db_GetData extends Hosh_Form_Helper
         if (in_array(strtolower($result['snamekind']),
                 array(
                         'form_helper',
-                        'form_element'
+                        'form_element',
+                        'list_helper',
+                        'list_element',
                 ))) {
             $_formtable = new Hosh_Manager_Db_Table_Hosh_Form_Extension();
             $adapter = $_formtable->getAdapter();
@@ -59,7 +61,7 @@ class HoshPluginForm_System_Extension_Helper_Db_GetData extends Hosh_Form_Helper
         foreach ($categories as $val){
             $result['idcategory'][] = $val['id'];
         }
-        
+
         return $result;
     }
 

@@ -13,7 +13,7 @@ class HoshPluginForm_System_Form_Helper_Title extends Hosh_Form_Helper_Abstract
 	$title = $xhtml = null;
 		if ($form->isEdit()){
 		    $title = 'Form # '.$form->getData('id');
-			$xhtml =  '<h1>
+			$xhtml =  '<h1><i class="fa fa-object-group"></i>&nbsp; 
 			        <a href="javascript:void(0);"  data-toggle="modal" data-target="#FormInfoModal">'.$title.'</a>';			
 			$idclone = $form->getData('idclone');
 			if (!empty($idclone)){
@@ -35,7 +35,7 @@ class HoshPluginForm_System_Form_Helper_Title extends Hosh_Form_Helper_Abstract
 			
 		}else{
 		    $title = $translate->_('SYS_FORM_NEWFORM');
-			$xhtml =  '<h1>'.$title.'</h1>';			
+			$xhtml =  '<h1><i class="fa fa-object-group"></i>&nbsp; '.$title.'</h1>';
 		}
 		if (!empty($title)){
 		    $view->headTitle($title);

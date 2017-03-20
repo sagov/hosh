@@ -147,7 +147,9 @@ class Hosh_Manager_Db_Package_Hosh_Extension extends Hosh_Manager_Db_Table_Hosh_
             if (in_array(strtolower($filter['snamekind']), 
                     array(
                             'form_helper',
-                            'form_element'
+                            'form_element',
+                            'list_helper',
+                            'list_element'
                     ))) {
                 $_table_formtable = new Hosh_Manager_Db_Table_Hosh_Form_Extension();
                 $select->joinLeft(

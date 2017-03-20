@@ -6,7 +6,9 @@ class HoshPluginForm_System_Extension_Helper_GetCategoryList extends Hosh_Form_H
 
     protected $_snamekind = array(
             'FORM_HELPER' => 'FORM_HELPER',
-            'FORM_ELEMENT' => 'FORM_ELEMENT'
+            'FORM_ELEMENT' => 'FORM_ELEMENT',
+            'LIST_HELPER' => 'FORM_HELPER',
+            'LIST_ELEMENT' => 'FORM_ELEMENT',
     );
 
     public function render ($options)

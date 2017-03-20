@@ -1,0 +1,102 @@
+:helper[Layout_Default]
+<div class="top-level">
+    <div class="row">
+        <div class="col-xs-7">:helper[Title]</div>
+        <div class="col-xs-5">
+            <div class="action-btn pull-right">
+                :helper[Layout_BtnAction]
+            </div>
+        </div>
+    </div>
+</div>
+:helper[Layout_AlertObject]
+<div class="options-level">
+    <div class="row">
+        <div class="col-sm-8">:element[scaption]</div>
+        <div class="col-sm-4">:element[sname]</div>
+    </div>
+</div>
+
+<div class="menu-nav" >
+    <div class="menu-nav-container">
+        <div class="pull-left">
+            <ul class="nav nav-tabs">
+                <li><a href="#elements" title=":_[SYS_LIST_ELEMENTS]"><i class="fa fa-list"></i><span class="hidden-xs">:_[SYS_LIST_ELEMENTS]</span></a></li>
+                <li><a href="#data" title=":_[SYS_LIST_DATA]"><i class="fa fa-database"></i><span class="hidden-xs">:_[SYS_LIST_DATA]</span></a></li>
+                <li><a href="#settings" title=":_[SYS_LIST_SETTINGS]"><i class="fa fa-cog"></i><span class="hidden-xs">:_[SYS_LIST_SETTINGS]</span></a></li>
+                <li><a href="#acl" title=":_[SYS_LIST_ACL]"><i class="fa fa-unlock-alt"></i><span class="hidden-xs">:_[SYS_LIST_ACL]</span></a></li>
+                <li><a href="#css" title="CSS"><i class="fa fa-css3"></i><span class="hidden-xs">CSS</span></a></li>
+                <li><a href="#js" title="JavaScript"><i class="fa fa-flag"></i><span class="hidden-xs">JS</span></a></li>
+                <li><a href="#decorator" title=":_[SYS_LIST_DECORATOR]"><i class="fa fa-code"></i><span class="hidden-xs">:_[SYS_LIST_DECORATOR]</span></a></li>
+            </ul>
+        </div>
+        <div class="pull-right action-nav"><button title=":_[SYS_SAVE]" class="btn btn-primary"><span class="hidden-sm"><i class="fa fa-floppy-o"></i></span><span class="hidden-xs">:_[SYS_SAVE]</span></button></div>
+        <div style="clear:both"></div>
+    </div>
+</div>
+
+<div >
+    <div id="elements">
+        <div class="page-header">
+            <h2><i class="fa fa-list"></i>&nbsp; :_[SYS_LIST_ELEMENTS]</h2>
+        </div>
+        <div class="element-group">
+            :helper[ListElements]
+        </div>
+    </div>
+    <div id="data">
+        <div class="page-header"><h2><i class="fa fa-database"></i>&nbsp; :_[SYS_LIST_DATA]</h2></div>
+        <div class="element-group">
+            :element[data_helper]
+            :elementhelper[data_helper]
+
+        </div>
+    </div>
+    <div id="settings">
+        <div class="page-header"><h2><i class="fa fa-cog"></i>&nbsp; :_[SYS_LIST_SETTINGS]</h2></div>
+        <div class="element-group">
+
+            :element[translate_helper]   :elementhelper[translate_helper]
+            :element[meta_helper]  :elementhelper[meta_helper]
+            :element[prepend_helper]  :elementhelper[prepend_helper]
+            :element[append_helper]  :elementhelper[append_helper]
+            :element[idstate]
+        </div>
+    </div>
+
+    <div id="acl">
+        <div class="page-header"><h2><i class="fa fa-unlock-alt"></i>&nbsp; :_[SYS_LIST_ACL]</h2></div>
+        <div class="element-group">
+            :element[bpublic]
+            :element[public_helper]
+            :elementhelper[public_helper]
+            <hr />
+            :element[acl_helper]
+            :elementhelper[acl_helper]
+
+
+        </div>
+    </div>
+    <div id="css">
+        <div class="page-header"><h2><i class="fa fa-css3"></i>&nbsp; CSS</h2></div>
+        <div class="element-group">
+            :element[css_helper]
+            :elementhelper[css_helper]
+        </div>
+    </div>
+    <div id="js">
+        <div class="page-header"><h2><i class="fa fa-flag"></i>&nbsp; JS</h2></div>
+        <div class="element-group">
+            :element[js_helper]
+            :elementhelper[js_helper]
+        </div>
+    </div>
+    <div id="decorator">
+        <div class="page-header"><h2><i class="fa fa-code"></i>&nbsp; :_[SYS_LIST_DECORATOR]</h2></div>
+        <div class="element-group">
+            :element[decorator_helper]
+            :elementhelper[decorator_helper]
+
+        </div>
+    </div>
+</div>
